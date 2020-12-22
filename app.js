@@ -2,15 +2,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var helmet = require('helmet') ;
+var helmet = require('helmet');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+const db = require('./db/db')
 
 var app = express();
 
-app.use(helmet()) ;
+app.use(helmet());
 
 
 
@@ -29,14 +29,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
-app.use('/static',express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 
 // error handler
-app.use(function(err, req, res, next) {
- 
+app.use(function (err, req, res, next) {
+
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.status(err.status || 500);
@@ -45,7 +45,7 @@ app.use(function(err, req, res, next) {
 
 
 
-app.listen(3000,()=>{
+app.listen(3000, () => {
   console.log(`http://localhost:3000`)
 })
 
