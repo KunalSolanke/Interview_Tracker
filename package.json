@@ -4,14 +4,20 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon appp.js"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
+    "ejs-layouts": "0.0.1",
     "express": "~4.16.1",
+    "express-ejs-layouts": "^2.5.0",
     "helmet": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.8",
     "morgan": "~1.9.1"
   },

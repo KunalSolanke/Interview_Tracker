@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
- res.render('test.ejs',{"names":["Kunal","daksh","akash","pushkar"]})
+ res.render('test.ejs')
 });
+
+
 
 module.exports = router;
