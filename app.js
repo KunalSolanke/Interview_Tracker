@@ -6,10 +6,11 @@ var helmet = require('helmet');
 const expressLayouts = require('express-ejs-layouts')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+require('dotenv').config()
 const db = require('./db/db');
 const User = require('./models/User');
 const jwt = require('jsonwebtoken')
-require('dotenv').config()
+
 
 var app = express();
 
