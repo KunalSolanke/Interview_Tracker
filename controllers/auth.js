@@ -30,12 +30,11 @@ const signup = async (req,res)=>{
 
 const login = async (req, res) => {
     const { email, password } = req.body
-    
     try {
         const user = await User.findByCredentials(email,password) ;
         let accessToken = await user.generateAuthToken();
         res.setHeader('Cache-control', 'private')
-        res.cookie("token",accessToken, { httOnly: true, maxAge: 24 * 60 * 60 * 1000 })
+        res.cookie("token",accessToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
         res.redirect("/")
     }
     catch (err) {
