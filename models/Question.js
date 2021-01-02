@@ -19,14 +19,17 @@ const questionSchema = mongoose.Schema(
     submissions: {
       type: Number,
       default: 0,
-    },
-    success_rate: {
-      type: Number,
-      default: 0,
+      min:[0,'Submissions can not be negative']
     },
     accepted_submssions: {
       type: Number,
       default: 0,
+      min:[0,'Submissions can not be negative'],
+      validate:[
+        function(val){
+          return this.submissions<=val;
+        },'Accepted submissions can not exceed total submissions'
+      ]
     },
     difficulty:{
         type:String,
@@ -46,6 +49,12 @@ questionSchema.path("discussion_url").validate((val) => {
   urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
   return urlRegex.test(val);
 }, "Invalid URL.");
+
+questionSchema.methods.SuccessRate = async function(){
+  return (this.accepted_submssions/this.submissions)*100;
+}
+
+
 const Question = mongoose.model("Question", questionSchema);
 
 module.exports = Question;

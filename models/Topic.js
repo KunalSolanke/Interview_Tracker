@@ -7,12 +7,6 @@ const topicSchema = mongoose.Schema(
         required:true,
         unique:false
     },
-    questions:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Question"
-        }
-    ]
   },
   {
     timestamps: true,
