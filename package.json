@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon appp.js"
+    "dev": "nodemon app.js"
   },
   "dependencies": {
     "@admin-bro/express": "^3.0.1",
