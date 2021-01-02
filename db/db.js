@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const mongoURI = "mongodb+srv://daksh:daksh1234@cluster0.ondvs.mongodb.net/interview_tracker?retryWrites=true&w=majority"
+const mongoURI = process.env.MONGO_URI
 
 mongoose.connect(mongoURI, {
     useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true,

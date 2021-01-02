@@ -6,10 +6,10 @@ var helmet = require('helmet');
 const expressLayouts = require('express-ejs-layouts')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+require('dotenv').config()
 const db = require('./db/db');
 const User = require('./models/User');
 const jwt = require('jsonwebtoken')
-require('dotenv').config()
 
 var app = express();
 
@@ -17,7 +17,7 @@ app.use(helmet({
   contentSecurityPolicy: {
   directives: {
     defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "*", "'unsafe-inline'"],
+    scriptSrc: ["'self'", "*", "'unsafe-inline'"],
     connectSrc: ["'self'", "https://some-domain.com", "https://some.other.domain.com"],
     styleSrc: ["'self'", "fonts.googleapis.com","*", "'unsafe-inline'","*"],
     fontSrc: ["'self'", "*"],
@@ -77,7 +77,6 @@ app.use(function (err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   console.log(err)
   res.status(err.status || 500);
-   res.send("Error")
 });
 
 /// testing
