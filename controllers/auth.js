@@ -39,7 +39,7 @@ const login = async (req, res) => {
     }
     catch (err) {
         console.log(err)
-        res.status(404)
+        res.status(400)
         res.send('failed')
     }
 }
