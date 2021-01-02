@@ -4,12 +4,12 @@ const jwt = require('jsonwebtoken') ;
 
 const signup = async (req,res)=>{
     const {username,email,password} = req.body
-    const user = await new User({
-        username:username,
-        email:email,
-        password:password
-    })
     try{
+        const user = await new User({
+            username:username,
+            email:email,
+            password:password
+        })
         await user.save()
         console.log(user)
         let accessToken =await user.generateAuthToken() ;

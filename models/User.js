@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const bycrpt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
+
 const userSchema = mongoose.Schema({
     username: {
         type: String,
@@ -17,10 +18,11 @@ const userSchema = mongoose.Schema({
         required: true,
         minLength: 6
     }
-
 }, {
     timestamps: true
 })
+
+
 
 
 userSchema.pre('save',async function (next){
@@ -30,6 +32,7 @@ userSchema.pre('save',async function (next){
   }
   next()
 })
+
 
 
 
