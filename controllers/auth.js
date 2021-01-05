@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const bycrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken') ;
+const { Topic } = require("../models");
 
 const signup = async (req,res)=>{
     const {username,email,password} = req.body

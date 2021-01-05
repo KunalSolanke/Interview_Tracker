@@ -7,12 +7,6 @@ const topicSchema = mongoose.Schema(
         required:true,
         unique:false
     },
-    questions:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Question"
-        }
-    ]
   },
   {
     timestamps: true,
@@ -20,6 +14,10 @@ const topicSchema = mongoose.Schema(
 );
 
 
+
 const  Topic = mongoose.model("Topic", topicSchema);
 
 module.exports = Topic;
+
+
+

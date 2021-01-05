@@ -9,11 +9,11 @@ const questionSchema = mongoose.Schema(
     },
     title: String,
     website: String,
-    topics: [
+    topics:[
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Topic",
-      },
+      }
     ],
     description: String,
     submissions: {
