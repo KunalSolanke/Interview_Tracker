@@ -1,10 +1,14 @@
+import React from 'react'
+import Nav from './pages/homepage/Home'
+import Login from './pages/auth/Login'
 
 function App() {
   return (
-    <div >
-      <h1>Hello World !!</h1>
-     
-    </div>
+    <>
+      <Nav/>
+      <Login/>
+    
+    </>
   );
 }
 
