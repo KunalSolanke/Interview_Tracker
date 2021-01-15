@@ -1,6 +1,7 @@
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
+const cors = require('cors')
 var logger = require("morgan");
 var helmet = require("helmet");
 const expressLayouts = require("express-ejs-layouts");
@@ -13,6 +14,8 @@ const AdminBroExpress = require("@admin-bro/express");
 const AdminBroMongoose = require("@admin-bro/mongoose");
 const mongoose = require("mongoose");
 const mongoURI = process.env.MONGO_URI;
+
+
 
 
 (async () => {
@@ -58,6 +61,7 @@ const mongoURI = process.env.MONGO_URI;
 
   app.use("/admin", router);
   app.use(express.json());
+  app.use(cors());
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
   //console.log(listEndpoints(app));

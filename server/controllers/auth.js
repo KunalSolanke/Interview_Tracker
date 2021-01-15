@@ -61,6 +61,7 @@ const logout = async(req,res)=>{
     res.clearCookie("token")
     res.redirect("/")
 }
+
 module.exports = {
     signup,signupform,loginform,login,logout
 }
