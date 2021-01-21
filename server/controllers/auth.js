@@ -13,11 +13,9 @@ const signup = async (req,res)=>{
         })
         await user.save()
         console.log(user)
-        let accessToken =await user.generateAuthToken() ;
+        let accessToken =await user.generateAuthToken();
         console.log("token",accessToken)
-        res.setHeader('Cache-control','private')
-        res.cookie("token",accessToken,{httOnly:true,maxAge : 24*60*60*1000})
-        res.redirect("/")
+        res.status(200).send({token:accessToken})
     }
     catch(err){
         console.log(err)

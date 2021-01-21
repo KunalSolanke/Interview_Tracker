@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
 import {useEffect,useState} from 'react'
+import {BrowserRouter,Route,Switch} from 'react-router-dom'
+import Register from './components/Registration/Registration'
 
 const useStyles = makeStyles({
   root:{
@@ -13,7 +15,10 @@ const useStyles = makeStyles({
     marginLeft:'auto',
     marginRight:'auto',
     marginTop:'60px',
-    minWidth:'300px'
+    minWidth:'300px',
+  },
+  app:{
+    backgroundColor:'#F4F7F6'
   }
 })
 
@@ -32,12 +37,16 @@ function App() {
     .catch(err=>console.log(err.messsge))
 },[])
   return (
-    <div className="App">
+    <div className={`App ${classes.app}`}>
+      <BrowserRouter>
       <Nav/>
-      <Grid className={classes.root} container alignContent='center' alignItems='center' spacing = {3}>
+      <Switch>
+        <Route exact path = '/topics'>
+        <Grid className={classes.root} container alignContent='center' alignItems='center' spacing = {3}>
         {
           Topics.map(topic=>{
             return (
+
               <Grid className={classes.item} item xs={12} sm={6} lg={4}>
                 <Card topic={topic} className={classes.item}/>
               </Grid>
@@ -45,6 +54,12 @@ function App() {
           })
         }
       </Grid>
+      </Route>
+      <Route exact path = '/accounts/login'>
+        <Register/>
+      </Route>
+      </Switch>
+      </BrowserRouter>
     </div>
   );
 }
