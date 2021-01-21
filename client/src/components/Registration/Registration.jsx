@@ -14,11 +14,10 @@ import IconButton from "@material-ui/core/IconButton";
 import ErrorIcon from "@material-ui/icons/Error";
 import VisibilityTwoToneIcon from "@material-ui/icons/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@material-ui/icons/VisibilityOffTwoTone";
-import axios from 'axios'
 import {connect} from 'react-redux'
 import {authRegister} from '../../store/actions/auth'
-import './animation.js'
-import './styles.css'
+// import './animation.js'
+// import './styles.css'
 
 
 
