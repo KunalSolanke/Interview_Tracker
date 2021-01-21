@@ -5,6 +5,6 @@ var controller= require("../controllers/problems");
 
 router.route("/topics").get(controller.getTopics)
 router.route("/topics/:topicName").get(controller.getTopicQuestions)
-
+router.route("").get(controller.getProblems)
 
 module.exports = router;
