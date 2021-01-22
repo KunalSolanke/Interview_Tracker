@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     minWidth:'300px',
   },
   app:{
-    backgroundColor:'#F4F7F6'
+    
   }
 })
 
