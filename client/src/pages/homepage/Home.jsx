@@ -3,28 +3,27 @@ import {Grid} from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import {makeStyles} from '@material-ui/core/styles'
 import {Link} from 'react-router-dom' ;
+import landingBottom from "../../assets/landing_bottom.svg";
 import herobg from '../../assets/hero_bg.png'
-import BaseLayout from '../../layouts/BaseLayout'
 
 const useStyles = makeStyles({
   container :{
       maxWidth : "1500px",
       margin : "10px auto"
-
   },
   bannerImage :{
-      backgroundImage:`url(${herobg})`,
-      width:"100%",
-      backgroundRepeat :"no-repeat",
-      position : "relative",
-      right : "-30%",
-      top:"20%",
+      position:"absolute",
+      bottom : 0,
+      right : 0,
+      height : '80vh',
+      objectFit :"cover"
   },
   landingSection :{
       minHeight : '90vh',
-      marginTop:"15px",
+      marginTop : "-20px",
       padding:"1rem",
-      postion : 'relative'
+      position : 'relative',
+      OverflowY:"hidden"
   },
   landingBottom :{
       position :"absolute",
@@ -62,33 +61,45 @@ export default function Home() {
     const classes = useStyles() ;
     
     return (
-        <>
-              <div className={`${classes.landingSection} ${classes.container}`}>
-                  <Grid container spacing={4}direction="row" justify="center" alignItems="center" style={{height:"90vh"}}>
-                       <Grid container item xs={12} md={6} lg={6}>
-                           <div className={classes.heroTitle}>
-                               INTERVIEW<span>TRACK</span>
-                           </div>
-                           <div className={classes.heroContent}>
-                             <p>
-                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                             </p>
-                           </div>
-                           <div className={classes.CTA}>
-                               <Link>Start Right Now</Link>
-                           </div>
-                       </Grid>
-                       <Grid container item xs={12} md={6} lg={6} style={{height:"100%"}}>
-                           <div class={classes.bannerImage}>
-                           </div>
-                       </Grid>
+        <div>
+              <div className={classes.landingSection}>
+                  <img src={landingBottom} className={classes.landingBottom} />
+                    <div className={`${classes.landingSection} ${classes.container}`} >
+                        
+                        <Grid container spacing={4}direction="row" justify="center" alignItems="center" style={{height:"90vh"}}>
+                            <Grid container item xs={12} md={6} lg={6}>
+                                <div className={classes.heroTitle}>
+                                    INTERVIEW<span>TRACK</span>
+                                </div>
+                                <div className={classes.heroContent}>
+                                    <p>
+                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                                    </p>
+                                </div>
+                                <div className={classes.CTA}>
+                                    <Link>Start Right Now</Link>
+                                </div>
+                            </Grid>
+                            <Grid container item xs={12} md={6} lg={6} style={{height:"100%"}}>
+                                
+                            </Grid>
 
-                  </Grid>   
+                        </Grid>   
+                    </div>
+                    <img src={herobg} className = {classes.bannerImage} alt="landing" />
               </div>
               <div className ={classes.interViewSection}>
+                <div className = {classes.ihead}>
+                    <span>I</span>
+                    <h1>Experiences</h1>
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an un.
+                    </p>
+                </div>
+                <div className ={classes.icarousel}>
 
-              </div>
-           
-      </>
+                </div>
+              </div>   
+      </div>
     )
 }

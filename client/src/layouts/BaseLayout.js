@@ -1,5 +1,4 @@
-import React from 'react'
-import landingBottom from "../assets/landing_bottom.svg";
+import React from "react";
 import navbarImg from "../assets/navbar_image.svg";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -37,12 +36,12 @@ const useStyles = makeStyles({
   },
   landingBottom: {
     position: "absolute",
-    bottom: 0,
+    bottom: 50,
     left: 5,
   },
   navImg: {
     position: "absolute",
-    top: 0,
+    top: "-10px",
     right: 0,
   },
   logo: {
@@ -54,15 +53,13 @@ const useStyles = makeStyles({
     color: "#2272FF",
   },
 });
-function BaseLayout(props) {
+function BaseLayout() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
   const classes = useStyles();
 
-
   return (
-    <header style={{ position: "relative", overflow: "hidden" }}>
-      <img src={landingBottom} className={classes.landingBottom} />
+    <div style={{ position: "relative" }}>
       <img src={navbarImg} className={classes.navImg} />
       <div className={classes.container}>
         <nav className={classes.navBar}>
@@ -96,9 +93,8 @@ function BaseLayout(props) {
           </div>
         </nav>
       </div>
-      {props.children}
-    </header>
+    </div>
   );
 }
 
-export default BaseLayout
+export default BaseLayout;

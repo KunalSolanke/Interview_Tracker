@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Register from "./components/Registration/Registration";
 import BaseLayout from "./layouts/BaseLayout";
+import Home from "./pages/homepage/Home";
 
 const useStyles = makeStyles({
   root: {
@@ -36,35 +37,34 @@ function App() {
       .catch((err) => console.log(err.messsge));
   }, []);
   return (
-    <BaseLayout>
-      <div className={`App ${classes.app}`}>
-        <BrowserRouter>
-          <Nav />
-          <Switch>
-            <Route exact path="/topics">
-              <Grid
-                className={classes.root}
-                container
-                alignContent="center"
-                alignItems="center"
-                spacing={3}
-              >
-                {Topics.map((topic) => {
-                  return (
-                    <Grid className={classes.item} item xs={12} sm={6} lg={4}>
-                      <Card topic={topic} className={classes.item} />
-                    </Grid>
-                  );
-                })}
-              </Grid>
-            </Route>
-            <Route exact path="/accounts/login">
-              <Register />
-            </Route>
-          </Switch>
-        </BrowserRouter>
-      </div>
-    </BaseLayout>
+    <div className={`App ${classes.app}`}>
+      <BrowserRouter>
+        <BaseLayout />
+        <Switch>
+          <Route exact path="/topics">
+            <Grid
+              className={classes.root}
+              container
+              alignContent="center"
+              alignItems="center"
+              spacing={3}
+            >
+              {Topics.map((topic) => {
+                return (
+                  <Grid className={classes.item} item xs={12} sm={6} lg={4}>
+                    <Card topic={topic} className={classes.item} />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Route>
+          <Route exact path="/" component={Home}></Route>
+          <Route exact path="/accounts/login">
+            <Register />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 }
 
