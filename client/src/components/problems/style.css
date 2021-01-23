@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
+  
+  
+body {
+    background-color: #fff;
+    margin: 0;
+}
+
+h4, p, span {
+  margin: 5px 0;
+}
+.card {
+  padding: 10px 30px 20px;
+    margin: 50px 50px 0 ;
+    box-shadow: 0 2px 4px 2px rgba(0,0,0,0.2);
+  font-family: "Montserrat";
+}
+
+.top-container {
+    
+}
+.top-head {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+
+.lvl {
+  font-weight: 500;
+}
+
+.flex-container {
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  
+}
+
+.left-item {
+  font-size: 15px;
+  font-family: "M Plus 1p";
+  width: 50%;
+}
+
+@media (max-width: 800px) {
+    .flex-container {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 15px;
+    }
+    
+    .btn {
+        margin-top: 8px;
+        width: 100%;
+    }
+    
+    .btn-container {
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    .left-item {
+        width: 100%;
+    }
+}

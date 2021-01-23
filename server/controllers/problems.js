@@ -1,29 +1,31 @@
-const {Topic, Question}  =require('../models')
-const mongoose = require('mongoose') ;
+const { Topic, Question } = require("../models");
+const mongoose = require("mongoose");
+
+const getTopics = async (req, res) => {
+  try {
+    const topics = await Topic.find({});
+    res.status(200).send({ topic_list: topics });
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+};
+
+const getTopicQuestions = async (req, res) => {
+  const { topicName } = req.params;
+  console.log(topicName);
+  try {
+    const topic = await Topic.findOne({ title: topicName });
+    const questions = await Question.find({
+      topics: mongoose.Types.ObjectId(topic._id),
+    });
+    res.status(200).send({ question_list: questions });
+  } catch (err) {
+    res.status(400).send({ error: err.message });
+  }
+};
 
 
 
-const getTopics = async(req,res)=>{
-    try{
-    const topics = await Topic.find({}) ;
-    res.status(200).send({topic_list:topics})
-    }catch(err){
-        res.status(400).send(err.message)
-    }
-}
-
-const getTopicQuestions = async (req,res)=>{
-    const {topicName} = req.params ;
-    console.log(topicName)
-    try{
-      const topic = await Topic.findOne({title:topicName}) ;
-      console.log(topic)
-	    const questions = await Question.find({topics:mongoose.Types.ObjectId(topic._id)});
-      res.status(200).send({question_list:questions})
-    }catch(err){
-          res.status(400).send({error:err.message});
-    }
-}
 
 const getProblems = async (req,res)=>{
     let topics = req.query.topics
@@ -37,7 +39,7 @@ const getProblems = async (req,res)=>{
         return mongoose.Types.ObjectId(completeTopic._id)
     }))
     console.log(topics)
-    const questions = await Question.find().where('topics').all(topics).exec()
+    const questions = await Question.find().where('topics').in(topics).exec()
     res.status(200).send({data:questions})
     return;
     }
