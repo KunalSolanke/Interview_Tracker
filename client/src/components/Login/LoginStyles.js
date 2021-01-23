@@ -5,7 +5,7 @@ const textLight = "#eaf2f4";
 const textDark = "#0D0D0D";
 const borderLight = "rgba(206,212,218, .993)";
 
-export const register = theme => ({
+export const login = theme => ({
   main: {
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(4),

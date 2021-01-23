@@ -1,6 +1,6 @@
 import React from 'react'
 import Nav from './pages/homepage/Home'
-import Login from './pages/auth/Login'
+import Login from './components/Login/Login'
 import Card from './components/Card/Card'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     minWidth:'300px',
   },
   app:{
-    backgroundColor:'#F4F7F6'
+    backgroundColor:'white'
   }
 })
 
@@ -55,8 +55,11 @@ function App() {
         }
       </Grid>
       </Route>
-      <Route exact path = '/accounts/login'>
+      <Route exact path = '/accounts/signup'>
         <Register/>
+      </Route>
+      <Route exact path = '/accounts/login'>
+        <Login/>
       </Route>
       </Switch>
       </BrowserRouter>
