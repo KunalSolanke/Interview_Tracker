@@ -5,7 +5,7 @@ const textLight = "#eaf2f4";
 const textDark = "#0D0D0D";
 const borderLight = "rgba(206,212,218, .993)";
 
-export const register = theme => ({
+export const login = theme => ({
   main: {
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(4),
@@ -14,7 +14,7 @@ export const register = theme => ({
     display: "block",
     width: "auto",
     [theme.breakpoints.up(400 + theme.spacing(2))]: {
-      width: 400,
+      width: 500,
       marginLeft: "auto",
       marginRight: "auto"
     }
@@ -22,43 +22,43 @@ export const register = theme => ({
   paper: {
     position: "relative",
     marginTop: theme.spacing(2),
-    padding: `${theme.spacing(2)}px ${theme.spacing(1)}px`,
+    padding: `${theme.spacing(3)}px ${theme.spacing(3)}px`,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     background:'white',
-    boxShadow: ".2px 12px 18px rgba(131,153,167,0.6)",
-    "&:hover": {
-      boxShadow: "0px 24px 36px rgba(131,153,167,0.99)"
-    },
+    border:'1px solid #ededed',
+    // "&:hover": {
+    //   boxShadow: "0px 24px 36px rgba(131,153,167,0.99)"
+    // },
     zIndex:100
   },
   avatar: {
     marginTop: 20,
     position: "relative",
-    background: "rgba(255,255,255,0.85)",
+    background: "white",
     width: "100px",
     height: "100px",
-    boxShadow: "0px 0px 12px rgba(131,153,167,0.99)"
+    boxShadow: "0px 0px 12px rgba(131,153,167,0.19)"
   },
 
   icon: {
     width: "80px",
     height: "80px",
-    color: "rgba(131,153,167,0.79)"
+    color: "#22A6F1"
   },
 
   form: {
-    margin: theme.spacing(4)
+    margin: theme.spacing(2)
   },
   labels: {
     padding: `${theme.spacing(1)}px ${theme.spacing(4)}px`,
     fontSize: "10px",
     lineHeight: "5px",
     fontFamily: "PT Mono, monospace",
-    fontWeight: 300,
-    opacity: 0.45,
-    color: `${textDark} !important`
+    fontWeight: 800,
+    opacity: 1,
+    color: `black`
   },
 
   inputs: {
@@ -72,7 +72,8 @@ export const register = theme => ({
     borderRadius: "8px",
     border: "2.4px solid black",
     boxShadow: "1px 2px 20px rgba(169,198,217,0.29457423) ",
-    borderColor: borderLight,
+    borderColor: 'grey',
+    backgroundColor:'#F3F7F7',
 
     "&:hover": {
       background: "rgba(169,198,217,0.36457423) "
@@ -80,8 +81,8 @@ export const register = theme => ({
   },
 
   button: {
-    color: textDark,
-    background: "rgba(255,255,255,.45)",
+    color: 'green',
+    background: "#2272FF",
     position: "relative",
     fontWeight: 400,
     fontFamily: "Raleway, sans-serif",
@@ -144,5 +145,8 @@ export const register = theme => ({
   passwordEye: {
     color: "rgba(131,153,167,0.9)",
     opacity: 0.7
+  },
+  MuiButtonLabel:{
+    color:'green',
   }
 });

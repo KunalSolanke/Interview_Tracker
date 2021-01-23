@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     "&:hover": {
       color: "#2272FF",
     },
-    transition: "all .5s ease-in",
+    transition: "all .2s ease-in",
     outline: "none",
   },
   landingBottom: {
@@ -81,10 +81,17 @@ function BaseLayout() {
             >
               Interviews
             </NavLink>
+            <NavLink
+              activeClassName={classes.activeLink}
+              to="/accounts/register"
+              className={classes.navLink}
+            >
+              Register
+            </NavLink>
             {authState.token ? null : (
               <NavLink
                 activeClassName={classes.activeLink}
-                to="/login"
+                to="/accounts/login"
                 className={classes.navLink}
               >
                 Login
