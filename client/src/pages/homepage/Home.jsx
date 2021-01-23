@@ -1,44 +1,16 @@
 import React from 'react'
-import {Container, Grid,Button} from '@material-ui/core'
-import {NavLink} from 'react-router-dom'
+import {Grid} from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import {makeStyles} from '@material-ui/core/styles'
 import {Link} from 'react-router-dom' ;
 import herobg from '../../assets/hero_bg.png'
-import landingBottom from '../../assets/landing_bottom.svg'
-import navbarImg from '../../assets/navbar_image.svg'
+import BaseLayout from '../../layouts/BaseLayout'
 
 const useStyles = makeStyles({
-  navLinks:{
-      display:'flex',
-      justifyContent : 'space-between',
-      alignItems :'center',
-  },
   container :{
       maxWidth : "1500px",
       margin : "10px auto"
 
-  },
-
-   navBar:{
-      display:'flex',
-      justifyContent : 'space-between',
-      alignItems :'center',
-      padding:"1rem"
-  },
-   navLinks:{
-      display:'flex',
-      justifyContent : 'space-between',
-      alignItems :'center',
-      fontSize : "18px"
-  },
-  navLink:{
-      marginLeft : "30px",
-      "&:hover":{
-          color : "#2272FF",
-      },
-      transition : "all .5s ease-in",
-      outline : "none"
   },
   bannerImage :{
       backgroundImage:`url(${herobg})`,
@@ -51,22 +23,13 @@ const useStyles = makeStyles({
   landingSection :{
       minHeight : '90vh',
       marginTop:"15px",
-      padding:"1rem"
+      padding:"1rem",
+      postion : 'relative'
   },
   landingBottom :{
       position :"absolute",
           bottom : 0 ,
           left : 5
-  },
-  navImg :{
-      position :"absolute",
-          top : 0 ,
-          right : 0
-  },
-  logo :{
-      fontWeight : "700",
-      color : "#2272FF",
-      fontSize : "26px"
   },
   heroTitle :{
       fontWeight : "900",
@@ -91,9 +54,6 @@ const useStyles = makeStyles({
       },
       transition : "all .3s ease-in"
   },
-  activeLink :{
-      color : "#2272FF"
-  }
 });
 
 export default function Home() {
@@ -102,24 +62,7 @@ export default function Home() {
     const classes = useStyles() ;
     
     return (
-        <React.Fragment>
-            <header style={{position:"relative" ,overflow : "hidden"}}>
-                <img src={landingBottom} className={classes.landingBottom}/>
-                <img src={navbarImg} className={classes.navImg} />
-              <div className={classes.container}>
-                  <nav className={classes.navBar}>
-                      <div className={classes.logoDiv}>
-                          <h1 className={classes.logo}>InterviewTrack</h1>
-                      </div>
-                      <div className={classes.navLinks}>
-                          <NavLink activeClassName={classes.activeLink} to="/problems" className={classes.navLink}>practice</NavLink>
-                          <NavLink activeClassName={classes.activeLink} to="/interviews" className={classes.navLink}>Interviews</NavLink>
-                          {
-                              authState.token ? null : <NavLink activeClassName={classes.activeLink} to="/login" className={classes.navLink}>Login</NavLink>
-                          }
-                      </div>
-                  </nav> 
-              </div>
+        <BaseLayout>
               <div className={`${classes.landingSection} ${classes.container}`}>
                   <Grid container spacing={4}direction="row" justify="center" alignItems="center" style={{height:"90vh"}}>
                        <Grid container item xs={12} md={6} lg={6}>
@@ -137,14 +80,12 @@ export default function Home() {
                        </Grid>
                        <Grid container item xs={12} md={6} lg={6} style={{height:"100%"}}>
                            <div class={classes.bannerImage}>
-
                            </div>
-
                        </Grid>
 
                   </Grid>   
               </div>
-            </header>
-        </React.Fragment>
+           
+        </BaseLayout>
     )
 }
