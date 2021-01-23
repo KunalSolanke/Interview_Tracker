@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import './Button.css';
 
-export default function Button(props) {
+export default function Button( {data}) {
     return (
         <>
-            <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit">{props.data}</button>
+            <div>
+                <button class="btn" type="button">{ data }</button>
+            </div>
+            
         </>
     )
 }

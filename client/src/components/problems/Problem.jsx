@@ -1,5 +1,7 @@
 import React from 'react';
+import Button from '../button/Button';
 import './style.css';
+
 
 export default function Problem( {title, level, topics, maxScore, description, buttonContent} ) {
     return (
@@ -20,9 +22,7 @@ export default function Problem( {title, level, topics, maxScore, description, b
                 </div>
                 <div className="flex-container">
                     <div className="left-item">{ description }</div>
-                    <div>
-                        <button className="btn" type="button">{ buttonContent }</button>
-                    </div>
+                    <Button data={buttonContent} />
                 </div>
             </div>
         </>

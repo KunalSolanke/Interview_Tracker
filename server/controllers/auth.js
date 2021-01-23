@@ -5,6 +5,7 @@ const { Topic } = require("../models");
 
 const signup = async (req,res)=>{
     const {username,email,password} = req.body
+    console.log(req.body);
     try{
         const user = await new User({
             username:username,
