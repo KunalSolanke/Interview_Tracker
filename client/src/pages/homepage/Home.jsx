@@ -62,7 +62,7 @@ export default function Home() {
     const classes = useStyles() ;
     
     return (
-        <BaseLayout>
+        <>
               <div className={`${classes.landingSection} ${classes.container}`}>
                   <Grid container spacing={4}direction="row" justify="center" alignItems="center" style={{height:"90vh"}}>
                        <Grid container item xs={12} md={6} lg={6}>
@@ -85,7 +85,10 @@ export default function Home() {
 
                   </Grid>   
               </div>
+              <div className ={classes.interViewSection}>
+
+              </div>
            
-        </BaseLayout>
+      </>
     )
 }
