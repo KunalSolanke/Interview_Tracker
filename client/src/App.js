@@ -1,13 +1,13 @@
 import React from "react";
 import Nav from "./pages/homepage/Home";
-import Login from "./pages/auth/Login";
+import Login from "./pages/auth/Login/Login";
+import Register from './pages/auth/Registration/Registration'
 import Card from "./components/Card/Card";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Register from "./components/Registration/Registration";
 import BaseLayout from "./layouts/BaseLayout";
 import Home from "./pages/homepage/Home";
 
@@ -61,8 +61,11 @@ function App() {
             </Grid>
           </Route>
           <Route exact path="/" component={Home}></Route>
-          <Route exact path="/accounts/login">
+          <Route exact path="/accounts/register">
             <Register />
+          </Route>
+          <Route exact path="/accounts/login">
+            <Login/>
           </Route>
         </Switch>
       </BrowserRouter>

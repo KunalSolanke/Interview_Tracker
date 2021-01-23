@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { register } from "./RegistrationStyles";
+import { login } from "./LoginStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -22,11 +22,11 @@ import VisibilityTwoToneIcon from "@material-ui/icons/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@material-ui/icons/VisibilityOffTwoTone";
 import axios from "axios";
 import { connect } from "react-redux";
-import { authRegister } from "../../store/actions/auth";
+import { authLogin } from "../../../store/actions/auth";
 import "./animation.js";
 import "./styles.css";
-import BasicInput from "../Input/Input";
-import Separator from "../Separator/Separator";
+import BasicInput from "../../../components/Input/Input";
+import Separator from "../../../components/Separator/Separator";
 import { GoogleLogin } from "react-google-login";
 import GitHubLogin from "react-github-login";
 import MicrosoftLogin from "react-microsoft-login";
@@ -44,12 +44,10 @@ const responseGoogle = (response) => {
   console.log(response);
 };
 
-class Registration extends Component {
+class Login extends Component {
   state = {
-    username: "",
     email: "",
     password: "",
-    passwordConfirm: "",
     hidePassword: true,
     error: null,
     errorOpen: false,
@@ -67,15 +65,11 @@ class Registration extends Component {
     });
   };
 
- 
-
   validateEmail(str) {
-    var pattern = "^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$";
-      str = "azamsharp@gmail.com";      
-      return str.match(pattern);    
+    var pattern = "^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$";
+    str = "azamsharp@gmail.com";
+    return str.match(pattern);
   }
-
-  passwordMatch = () => this.state.password == this.state.passwordConfirm;
 
   showPassword = () => {
     this.setState((prevState) => ({ hidePassword: !prevState.hidePassword }));
@@ -89,13 +83,7 @@ class Registration extends Component {
   };
 
   formValidation = () => {
-    if (this.state.username.length < 5) {
-      this.setState({
-        errorOpen: true,
-        error: "Userame must be of atleast 5 characters",
-      });
-      return false;
-    } else if (!this.validateEmail(this.state.email)) {
+    if (!this.validateEmail(this.state.email)) {
       this.setState({
         errorOpen: true,
         error: "Invalid email formay",
@@ -108,18 +96,12 @@ class Registration extends Component {
         error: "Password length must be atleast 6",
       });
       return false;
-    } else if (!this.passwordMatch()) {
-      this.setState({
-        errorOpen: true,
-        error: "Passwords don't match",
-      });
-      return false;
-    }
+    } 
     return true;
   };
 
   submitRegistration = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     console.log("Aa gya mai");
     if (!this.formValidation()) {
       console.log("hjk,mbgyuikmnbvgfhjk");
@@ -132,10 +114,10 @@ class Registration extends Component {
       };
       console.log("this.props.newUserCredentials", newUserCredentials);
       //dispath to userActions
-      const { username, email, password } = this.state;
+      const { email, password } = this.state;
       try {
-        const { RegisterUser } = this.props;
-        RegisterUser({ username, email, password });
+        const { Login } = this.props;
+        Login({ email, password });
       } catch (err) {
         console.log(err.message);
       }
@@ -150,31 +132,13 @@ class Registration extends Component {
         <CssBaseline />
         <Paper className={classes.paper}>
           <h1 align="center" style={{ fontSize: "30px", color: "" }}>
-            Register Here
+            Login to continue
           </h1>
           <form
             id="form"
             className={classes.form}
             onSubmit={this.submitRegistration}
           >
-            <FormControl required fullWidth margin="normal">
-              <BasicInput
-                name="username"
-                type="text"
-                onChange={this.handleChange("username")}
-                label="Username"
-              >
-                Username
-              </BasicInput>
-              {/* <Input
-                name="username"
-                type="text"
-                className={classes.inputs}
-                disableUnderline={true}
-                onChange={this.handleChange("username")}
-              /> */}
-            </FormControl>
-
             <FormControl required fullWidth margin="normal">
               <BasicInput
                 name="email"
@@ -184,25 +148,14 @@ class Registration extends Component {
               >
                 Email
               </BasicInput>
-              {/* <InputLabel htmlFor="email" className={classes.labels}>
-                e-mail
-              </InputLabel> */}
-              {/* <Input
-                name="email"
-                type="email"
-                autoComplete="email"
-                className={classes.inputs}
-                disableUnderline={true}
-                onChange={this.handleChange("email")}
-              /> */}
             </FormControl>
 
             <FormControl required fullWidth margin="normal">
               <BasicInput
                 endAdorment
-                name="passowrd"
                 showPassword={this.showPassword}
                 hidePassword={this.state.hidePassword}
+                name="passowrd"
                 type={this.state.hidePassword ? "password" : "text"}
                 onChange={this.handleChange("password")}
                 label="Password"
@@ -210,82 +163,6 @@ class Registration extends Component {
               >
                 Password
               </BasicInput>
-              {/* <InputLabel htmlFor="password" className={classes.labels}>
-                password
-              </InputLabel> */}
-              {/* <Input
-                name="password"
-                autoComplete="password"
-                className={classes.inputs}
-                disableUnderline={true}
-                onChange={this.handleChange("password")}
-                type={this.state.hidePassword ? "password" : "input"}
-                endAdornment={
-                  this.state.hidePassword ? (
-                    <InputAdornment position="end">
-                      <VisibilityOffTwoToneIcon
-                        fontSize="default"
-                        className={classes.passwordEye}
-                        onClick={this.showPassword}
-                      />
-                    </InputAdornment>
-                  ) : (
-                    <InputAdornment position="end">
-                      <VisibilityTwoToneIcon
-                        fontSize="default"
-                        className={classes.passwordEye}
-                        onClick={this.showPassword}
-                      />
-                    </InputAdornment>
-                  )
-                }
-              /> */}
-            </FormControl>
-
-            <FormControl required fullWidth margin="normal">
-              <BasicInput
-                name="passowrdConfirm"
-                type={this.state.hidePassword ? "password" : "text"}
-                showPassword={this.showPassword}
-                hidePassword={this.state.hidePassword}
-                onChange={this.handleChange("passwordConfirm")}
-                endAdorment
-                label="Confirm Password"
-                htmlFor="email"
-              >
-                Confirm Password
-              </BasicInput>
-              {/* <InputLabel htmlFor="passwordConfirm" className={classes.labels}>
-                Confirm password
-              </InputLabel> */}
-              {/* <Input
-                name="passwordConfirm"
-                autoComplete="passwordConfirm"
-                className={classes.inputs}
-                disableUnderline={true}
-                onClick={this.state.showPassword}
-                onChange={this.handleChange("passwordConfirm")}
-                type={this.state.hidePassword ? "password" : "input"}
-                endAdornment={
-                  this.state.hidePassword ? (
-                    <InputAdornment position="end">
-                      <VisibilityOffTwoToneIcon
-                        fontSize="default"
-                        className={classes.passwordEye}
-                        onClick={this.showPassword}
-                      />
-                    </InputAdornment>
-                  ) : (
-                    <InputAdornment position="end">
-                      <VisibilityTwoToneIcon
-                        fontSize="default"
-                        className={classes.passwordEye}
-                        onClick={this.showPassword}
-                      />
-                    </InputAdornment>
-                  )
-                }
-              /> */}
             </FormControl>
             <Button
               disableRipple
@@ -295,7 +172,7 @@ class Registration extends Component {
               type="submit"
             >
               <span style={{ color: "white", fontWeight: "bold" }}>
-                Sign up
+                Log in
               </span>
             </Button>
           </form>
@@ -372,11 +249,9 @@ class Registration extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    RegisterUser: (user) => dispatch(authRegister(user)),
+    Login: (user) => dispatch(authLogin(user)),
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(withStyles(register)(Registration));
+export default connect(null, mapDispatchToProps)(withStyles(login)(Login));
+

@@ -81,14 +81,21 @@ function BaseLayout() {
             >
               Interviews
             </NavLink>
+            <NavLink
+              activeClassName={classes.activeLink}
+              to="/accounts/register"
+              className={classes.navLink}
+            >
+              Register
+            </NavLink>
             {authState.token ? null : (
               <NavLink
                 activeClassName={classes.activeLink}
-                to="/login"
+                to="/accounts/login"
                 className={classes.navLink}
               >
                 Login
-              </NavLink>
+              </NavLink>  
             )}
           </div>
         </nav>
