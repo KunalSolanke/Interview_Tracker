@@ -1,7 +1,7 @@
 import React from "react";
-import Sidebar from "../../components/Sidebar.jsx/Sidebar";
 import "./Profile.css";
 import {makeStyles} from '@material-ui/core/styles'
+import ProfileLayout from "../../layouts/ProfileLayout";
 
 const mystyles = makeStyles({
     input:{
@@ -47,9 +47,7 @@ const mystyles = makeStyles({
 function Profile() {
     const classes = mystyles();
   return (
-    <div className="profile-container">
-      <Sidebar />
-      <div className="profile-area">
+    <ProfileLayout>
         <div className="form-container">
           <div className={classes.form}>
           <h1 style={{fontSize:'30px'}} className="text">Update Profile</h1>
@@ -101,8 +99,8 @@ function Profile() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+  </ProfileLayout>
+     
   );
 }
 
