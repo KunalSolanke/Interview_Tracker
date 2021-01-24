@@ -5,11 +5,12 @@ import Register from './pages/auth/Registration/Registration'
 import Card from "./components/Card/Card";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-
+import Sidebar from './components/Sidebar.jsx/Sidebar'
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import BaseLayout from "./layouts/BaseLayout";
 import Home from "./pages/homepage/Home";
+import Profile from './pages/ProfilePage/Profile'
 
 const useStyles = makeStyles({
   root: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles({
     marginRight: "auto",
     marginTop: "60px",
     minWidth: "300px",
+    overflowX:'hidden'
   },
   app:{
     backgroundColor:'white'
@@ -66,6 +68,9 @@ function App() {
           </Route>
           <Route exact path="/accounts/login">
             <Login/>
+          </Route>
+          <Route exact path = "/profile">
+            <Profile/>
           </Route>
         </Switch>
       </BrowserRouter>

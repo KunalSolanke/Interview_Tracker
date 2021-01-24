@@ -1,0 +1,27 @@
+.profile-area{
+    width:85%;
+    height:85.6vh;
+}
+.profile-container{
+    display:flex;
+}
+
+.profile-area{
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.form-container{
+    width: 50%;
+    background-color:#F0F4FA;
+    height:76%;
+    margin-top:100px
+}
+
+.profile-card{
+    width:20%;
+    background-color: #F0F4FA;
+    height: 40%;
+    margin-top: 100px;
+    width:30%;
+}

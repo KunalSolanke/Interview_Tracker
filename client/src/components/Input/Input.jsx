@@ -14,11 +14,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BasicInput({label,type,endAdorment,showPassword,hidePassword,mystyles,...otherprops}) {
+export default function BasicInput({label,type,endAdorment,showPassword,hidePassword,mystyles,large,...otherprops}) {
   const classes = useStyles();
 
   return (
-    <TextField className={mystyles?'styledInput':''} id="outlined-basic" type={type} label={label} password variant="outlined"  InputProps={{
+    <TextField className={`{mystyles?'styledInput':''} {large?'large':''}`} id="outlined-basic" type={type} label={label} password variant="outlined"  InputProps={{
         endAdornment:
             <InputAdornment position="end">
                 {endAdorment?<InputAdornment position="end">
