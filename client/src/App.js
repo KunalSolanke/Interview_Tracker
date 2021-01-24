@@ -11,6 +11,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import BaseLayout from "./layouts/BaseLayout";
 import Home from "./pages/homepage/Home";
 import Profile from './pages/ProfilePage/Profile'
+import QuestionForm from "./pages/QuestionPage/QuestionForm";
 
 const useStyles = makeStyles({
   root: {
@@ -71,6 +72,9 @@ function App() {
           </Route>
           <Route exact path = "/profile">
             <Profile/>
+          </Route>
+          <Route exact path = "/create">
+            <QuestionForm/>
           </Route>
         </Switch>
       </BrowserRouter>

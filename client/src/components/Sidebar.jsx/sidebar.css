@@ -1,6 +1,6 @@
 .sidebar{
     width:15%;
-    height:85.6vh;
+    min-height:85.6vh;
     background-color:#508DF9;
     display: flex;
     justify-content: center;

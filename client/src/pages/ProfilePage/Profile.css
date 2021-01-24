@@ -1,7 +1,4 @@
-.profile-area{
-    width:85%;
-    height:85.6vh;
-}
+
 .profile-container{
     display:flex;
 }
@@ -9,12 +6,13 @@
 .profile-area{
     display:flex;
     justify-content: space-evenly;
+    padding: 20px;
+    width:85%;
 }
 
 .form-container{
     width: 50%;
     background-color:#F0F4FA;
-    height:76%;
     margin-top:100px
 }
 

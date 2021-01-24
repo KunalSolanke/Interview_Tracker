@@ -17,7 +17,8 @@ const mystyles = makeStyles({
     row:{
         marginTop:'20px',
         display:'flex',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        flexWrap:'wrap'
     },
     form:{
         width:'95%',
@@ -51,6 +52,7 @@ function Profile() {
     const classes = mystyles();
   return (
     <ProfileLayout>
+      <div className="profile-area">
         <div className="form-container">
           <div className={classes.form}>
           <h1 style={{fontSize:'30px'}} className="text">Update Profile</h1>
@@ -87,6 +89,9 @@ function Profile() {
                     <textarea style={{width:'100%'}} className={classes.input} rows={4} cols={70} />
                 </div>
               </div>
+              <div style={{width:'10%',margin:'0 auto'}} >
+              <button style={{margin:'20px auto',color:'#508DF9',fontSize:'24px',outline:'none'}} type="button">Save</button>
+              </div>
             </form>
           </div>
         </div>
@@ -110,6 +115,7 @@ function Profile() {
             </div>
           </div>
         </div>
+    </div>
   </ProfileLayout>
      
   );
