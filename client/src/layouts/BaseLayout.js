@@ -41,8 +41,8 @@ const useStyles = makeStyles({
   },
   navImg: {
     position: "absolute",
-    top: "-10px",
-    right: 0,
+    top: "-40px",
+    right: '-30px',
   },
   logo: {
     fontWeight: "700",
@@ -59,7 +59,7 @@ function BaseLayout() {
   const classes = useStyles();
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative",OverflowX:'hidden' }}>
       <img src={navbarImg} className={classes.navImg} />
       <div className={classes.container}>
         <nav className={classes.navBar}>
@@ -99,6 +99,8 @@ function BaseLayout() {
             )}
           </div>
         </nav>
+      </div>
+      <div style={{backgroundColor:'#508DF9',width:'100%',height:'3px',marginTop:'53px'}}>
       </div>
     </div>
   );
