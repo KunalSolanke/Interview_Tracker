@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     "&:hover": {
       color: "#2272FF",
     },
-    transition: "all .5s ease-in",
+    transition: "all .2s ease-in",
     outline: "none",
   },
   landingBottom: {
@@ -95,7 +95,7 @@ function BaseLayout() {
                 className={classes.navLink}
               >
                 Login
-              </NavLink>  
+              </NavLink>
             )}
           </div>
         </nav>

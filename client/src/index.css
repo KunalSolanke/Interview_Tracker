@@ -1,11 +1,13 @@
-*{
-  margin : 0 ;
-  padding:  0;
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
   overflow-x: hidden;
+<<<<<<< HEAD
   margin-right: -20px;
+=======
+>>>>>>> e82d7e2f9c802178684e92318ab39adbe3a83229
 }
-
