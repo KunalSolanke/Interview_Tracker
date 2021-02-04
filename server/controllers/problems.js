@@ -27,7 +27,6 @@ const getTopicQuestions = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
 
 
 /* And filtering */
@@ -79,7 +78,6 @@ const OrgetProblems = async (req,res)=>{
 }
 /* Or filtering*/
 
-=======
 const getProblems = async (req, res) => {
   let topics = req.query.topics;
   if (topics) {
@@ -101,7 +99,6 @@ const getProblems = async (req, res) => {
   const problems = await Question.find({});
   res.status(200).send({ data: problems });
 };
->>>>>>> 37fc89bdcc4667dfaf95189c0e997273d24bc60b
 
 const getProbelmsFromTopics = async (req, res) => {
   const topic = req.query.topics;
@@ -109,7 +106,6 @@ const getProbelmsFromTopics = async (req, res) => {
   res.send("Hi there");
 };
 
-<<<<<<< HEAD
 module.exports ={
     getTopics,
     getTopicQuestions,
@@ -117,11 +113,3 @@ module.exports ={
     AndgetProblems,
     OrgetProblems
 }
-=======
-module.exports = {
-  getTopics,
-  getTopicQuestions,
-  getProblems,
-  getProbelmsFromTopics,
-};
->>>>>>> 37fc89bdcc4667dfaf95189c0e997273d24bc60b
