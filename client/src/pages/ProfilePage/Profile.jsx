@@ -48,6 +48,7 @@ function Profile() {
     const classes = mystyles();
   return (
     <ProfileLayout>
+      <div className="profile-area">
         <div className="form-container">
           <div className={classes.form}>
           <h1 style={{fontSize:'30px'}} className="text">Update Profile</h1>
@@ -98,6 +99,7 @@ function Profile() {
               instaed of writing my bio Thank yo for wasting your ti on me
             </div>
           </div>
+        </div>
         </div>
   </ProfileLayout>
      

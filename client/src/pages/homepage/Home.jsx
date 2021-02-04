@@ -9,7 +9,8 @@ import quotes from "../../assets/quotes.png";
 import herobg from '../../assets/hero_bg.png'
 import Carousel from '../../components/Carousel/Carousel';
 import InterViewTile from './InterViewTile';
-import BasicInput from '../../components/Input/Input'
+
+
 const useStyles = makeStyles({
   container :{
       maxWidth : "1500px",
