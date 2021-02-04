@@ -43,7 +43,7 @@ const useStyles = makeStyles({
   navImg: {
     position: "absolute",
     top: "-40px",
-    right: '-30px',
+    right: "-30px",
   },
   logo: {
     fontWeight: "700",
@@ -54,23 +54,26 @@ const useStyles = makeStyles({
     color: "#2272FF",
   },
 });
+
 function BaseLayout() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
   const classes = useStyles();
 
   return (
-    <div style={{ position: "relative",OverflowX:'hidden' }}>
+    <div style={{ position: "relative", OverflowX: "hidden" }}>
       <img src={navbarImg} className={classes.navImg} />
       <div className={classes.container}>
         <nav className={classes.navBar}>
           <div className={classes.logoDiv}>
-            <h1 className={classes.logo}>InterviewTrack</h1>
+            <NavLink to="/">
+              <h1 className={classes.logo}>InterviewTrack</h1>
+            </NavLink>
           </div>
           <div className={classes.navLinks}>
             <NavLink
               activeClassName={classes.activeLink}
-              to="/problems"
+              to="/practice"
               className={classes.navLink}
             >
               practice
@@ -122,8 +125,14 @@ function BaseLayout() {
           </div>
         </nav>
       </div>
-      <div style={{backgroundColor:'#508DF9',width:'100%',height:'3px',marginTop:'53px'}}>
-      </div>
+      <div
+        style={{
+          backgroundColor: "#508DF9",
+          width: "100%",
+          height: "3px",
+          marginTop: "53px",
+        }}
+      ></div>
     </div>
   );
 }

@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const questionSchema = mongoose.Schema(
   {
     url: {
@@ -9,31 +8,32 @@ const questionSchema = mongoose.Schema(
     },
     title: String,
     website: String,
-    topics:[
+    topics: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Topic",
-      }
+      },
     ],
     description: String,
     submissions: {
       type: Number,
       default: 0,
-      min:[0,'Submissions can not be negative']
+      min: [0, "Submissions can not be negative"],
     },
     accepted_submssions: {
       type: Number,
       default: 0,
-      min:[0,'Submissions can not be negative'],
-      validate:[
-        function(val){
-          return this.submissions<=val;
-        },'Accepted submissions can not exceed total submissions'
-      ]
+      min: [0, "Submissions can not be negative"],
+      validate: [
+        function (val) {
+          return this.submissions <= val;
+        },
+        "Accepted submissions can not exceed total submissions",
+      ],
     },
-    difficulty:{
-        type:String,
-        default:"Easy"
+    difficulty: {
+      type: String,
+      default: "Easy",
     },
     discussion_url: String,
   },
@@ -50,10 +50,9 @@ questionSchema.path("discussion_url").validate((val) => {
   return urlRegex.test(val);
 }, "Invalid URL.");
 
-questionSchema.methods.SuccessRate = async function(){
-  return (this.accepted_submssions/this.submissions)*100;
-}
-
+questionSchema.methods.SuccessRate = async function () {
+  return (this.accepted_submssions / this.submissions) * 100;
+};
 
 const Question = mongoose.model("Question", questionSchema);
 

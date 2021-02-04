@@ -5,42 +5,50 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import {useEffect} from 'react'
 import './Card.css'
+import { Link } from 'react-router-dom';
+import { deepPurple } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
     maxWidth: 400,
-    backgroundColor:'#D1D5DB',
-    height: '128px'
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    backgroundColor:'#FFF3D3',
+    minheight: '128px',
+    color : "black",
+    padding : "1rem 2rem",
+    borderRadius:"10px"
   },
   title: {
-    fontSize: 14,
+    fontSize: 32,
+    fontWeight : 700,
+    "&>span" :{
+      color : "#2272FF",
+      fontSize: 34
+    },
+    marginBottom : ".3rem"
   },
-  pos: {
-    marginBottom: 12,
+  subtitle: {
+    fontSize: 16,
   },
 });
 
-export default function SimpleCard({topic}) {
+export default function SimpleCard({topic,problems}) {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} elevation={0}>
       <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-            {topic}
+        <Typography className={classes.title}>
+            <span>{topic.charAt(0)}</span>{topic.slice(1,topic.length)}
+        </Typography>
+        <Typography className={classes.subtitle} >
+            Problems {problems}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Click Here</Button>
+      <CardActions style={{display:"flex",flexDirection:"row-reverse"}}>
+        <Link to={`/practice/${topic}`} ><p style={{color :'#508DF9'}}>Click Here</p></Link>
       </CardActions>
     </Card>
   );
 }
+

@@ -115,7 +115,11 @@ function Profile() {
             </div>
           </div>
         </div>
+<<<<<<< HEAD
+        </div>
+=======
     </div>
+>>>>>>> cdb027ac8ae3646a330a7115790e701adcdea0e7
   </ProfileLayout>
      
   );

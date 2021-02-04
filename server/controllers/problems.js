@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 
 const getTopics = async (req, res) => {
   try {
-    const topics = await Topic.find({});
+    let topics = await Topic.find({});
+
     res.status(200).send({ topic_list: topics });
   } catch (err) {
     res.status(400).send(err.message);
@@ -26,6 +27,7 @@ const getTopicQuestions = async (req, res) => {
   }
 };
 
+<<<<<<< HEAD
 
 
 /* And filtering */
@@ -77,13 +79,37 @@ const OrgetProblems = async (req,res)=>{
 }
 /* Or filtering*/
 
+=======
+const getProblems = async (req, res) => {
+  let topics = req.query.topics;
+  if (topics) {
+    topics = topics.split(",");
+    console.log(topics);
+    topics = await Promise.all(
+      topics.map(async (topic) => {
+        console.log("entered");
+        console.log("topic is ", topic);
+        const completeTopic = await Topic.findOne({ title: topic });
+        return mongoose.Types.ObjectId(completeTopic._id);
+      })
+    );
+    console.log(topics);
+    const questions = await Question.find().where("topics").in(topics).exec();
+    res.status(200).send({ data: questions });
+    return;
+  }
+  const problems = await Question.find({});
+  res.status(200).send({ data: problems });
+};
+>>>>>>> 37fc89bdcc4667dfaf95189c0e997273d24bc60b
 
-const getProbelmsFromTopics = async (req,res)=>{
-    const topic = req.query.topics
-    console.log(topic)
-    res.send('Hi there')
-}
+const getProbelmsFromTopics = async (req, res) => {
+  const topic = req.query.topics;
+  console.log(topic);
+  res.send("Hi there");
+};
 
+<<<<<<< HEAD
 module.exports ={
     getTopics,
     getTopicQuestions,
@@ -91,3 +117,11 @@ module.exports ={
     AndgetProblems,
     OrgetProblems
 }
+=======
+module.exports = {
+  getTopics,
+  getTopicQuestions,
+  getProblems,
+  getProbelmsFromTopics,
+};
+>>>>>>> 37fc89bdcc4667dfaf95189c0e997273d24bc60b
