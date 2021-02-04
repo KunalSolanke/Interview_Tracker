@@ -33,20 +33,20 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard({topic,problems}) {
+export default function SimpleCard({topic}) {
   const classes = useStyles();
   return (
     <Card className={classes.root} elevation={0}>
       <CardContent>
         <Typography className={classes.title}>
-            <span>{topic.charAt(0)}</span>{topic.slice(1,topic.length)}
+            <span>{topic.title.charAt(0)}</span>{topic.title.slice(1,topic.title.length)}
         </Typography>
         <Typography className={classes.subtitle} >
-            Problems {problems}
+            Problems {topic.problems}
         </Typography>
       </CardContent>
       <CardActions style={{display:"flex",flexDirection:"row-reverse"}}>
-        <Link to={`/practice/${topic}`} ><p style={{color :'#508DF9'}}>Click Here</p></Link>
+        <Link to={`/practice/${topic.title}`} ><p style={{color :'#508DF9'}}>Click Here</p></Link>
       </CardActions>
     </Card>
   );

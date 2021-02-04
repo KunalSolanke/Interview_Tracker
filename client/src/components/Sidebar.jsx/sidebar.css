@@ -1,18 +1,9 @@
-<<<<<<< HEAD
 .sidebar {
   width: 15%;
   min-height: 85.6vh;
   background-color: #508df9;
   display: flex;
   justify-content: center;
-=======
-.sidebar{
-    width:15%;
-    min-height:85.6vh;
-    background-color:#508DF9;
-    display: flex;
-    justify-content: center;
->>>>>>> cdb027ac8ae3646a330a7115790e701adcdea0e7
 }
 
 .content {

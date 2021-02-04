@@ -1,7 +1,10 @@
-import React,{useState} from 'react'
+import React,{useEffect} from 'react'
 import { makeStyles } from "@material-ui/core/styles";
 import Card from '../../components/Card/Card'
 import { Grid } from '@material-ui/core';
+import {getTopics} from '../../store/actions/topics'
+import {useDispatch,useSelector} from 'react-redux' ;
+
 
 const useStyles = makeStyles({
     ihead:{
@@ -27,7 +30,13 @@ const useStyles = makeStyles({
 })
 function Practice() {
     const classes = useStyles()  ;
-    const [topics, settopics] = useState(["1","2","3","4"])
+    const topics = useSelector(state => state.topics) ;
+    const dispatch = useDispatch()
+    useEffect(()=>{
+      dispatch(getTopics())
+    },[]) ;
+
+
     return (
         <div className={classes.container}>
             <div className = {classes.ihead}>
@@ -40,8 +49,9 @@ function Practice() {
                 <Grid container spacing={100}> 
                     {
                         
-                        topics.map(el=>{
-                                return (<Grid item xs={12} sm={6} md={4} style={{marginBottom : "3rem"}}><Card topic="Arrays" problems={11} /></Grid>)
+                        topics?.topics?.map(el=>{
+                
+                                return (<Grid item xs={12} sm={6} md={4} style={{marginBottom : "3rem"}}><Card topic={el}  /></Grid>)
                         })
                     }
                  </Grid>
