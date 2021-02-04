@@ -6,7 +6,7 @@ function ProfileLayout(props) {
     <>
       <div className="profile-container">
         <Sidebar />
-        {props.children}
+       {props.children}
       </div>
     </>
   );

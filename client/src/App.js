@@ -8,6 +8,7 @@ import Home from "./pages/homepage/Home";
 import Profile from "./pages/ProfilePage/Profile";
 import AddInterView from "./pages/AddInterView/AddInterView";
 import Practice from "./pages/Practice/Practice";
+import QuestionForm from "./pages/QuestionPage/QuestionForm";
 
 const useStyles = makeStyles({
   root: {
@@ -46,6 +47,9 @@ function App() {
             path="/profile/interviews/create"
             component={AddInterView}
           ></Route>
+          <Route exact path = "/create">
+            <QuestionForm/>
+          </Route>
         </Switch>
       </BrowserRouter>
     </div>

@@ -1,0 +1,20 @@
+
+.question-container{
+    display:flex;
+}
+
+.question-area{
+    padding: 70px;
+    width:85%;
+}
+
+.ques-form-container{
+    width: 44%;
+    background-color:#F0F4FA;
+    margin-top:40px;
+}
+
+.title{
+    font-size: 26px;
+    font-weight:500;
+}
