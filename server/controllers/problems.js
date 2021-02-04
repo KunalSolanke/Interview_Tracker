@@ -10,6 +10,8 @@ const getTopics = async (req, res) => {
   }
 };
 
+
+
 const getTopicQuestions = async (req, res) => {
   const { topicName } = req.params;
   console.log(topicName);
@@ -26,8 +28,8 @@ const getTopicQuestions = async (req, res) => {
 
 
 
-
-const getProblems = async (req,res)=>{
+/* And filtering */
+const AndgetProblems = async (req,res)=>{
     let topics = req.query.topics
     if(topics){
         topics = topics.split(",")
@@ -46,6 +48,35 @@ const getProblems = async (req,res)=>{
     const problems = await Question.find({})
     res.status(200).send({data:problems})
 }
+/* And filtering */
+
+/* Or filtering*/
+const OrgetProblems = async (req,res)=>{
+  const {level,topics,solved} = req.query 
+  console.log(level);
+  let topiclist = []
+  try{
+    if(topics){
+      topiclist = topics.split(",");
+    }
+    console.log(topiclist)
+    let topiclistRef = []
+    topiclistRef = await Topic.find({
+      title:{"$in":topiclist},
+    })
+    const questionlist = await Question.find({
+      topics:{"$in":topiclistRef},
+    })
+    console.log(questionlist)
+    res.status(201).send(questionlist)
+  }
+  catch(err){
+    console.log(err.message);
+    res.status(401).send("can't get problems")
+  }
+}
+/* Or filtering*/
+
 
 const getProbelmsFromTopics = async (req,res)=>{
     const topic = req.query.topics
@@ -54,5 +85,9 @@ const getProbelmsFromTopics = async (req,res)=>{
 }
 
 module.exports ={
-    getTopics,getTopicQuestions,getProblems,getProbelmsFromTopics
+    getTopics,
+    getTopicQuestions,
+    getProbelmsFromTopics,
+    AndgetProblems,
+    OrgetProblems
 }

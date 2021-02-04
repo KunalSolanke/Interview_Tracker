@@ -120,36 +120,3 @@ const multer = require('multer');
     console.log(`http://localhost:3001`);
   });
 })();
-
-
-// app.use(
-//   helmet({
-//     contentSecurityPolicy: {
-//       directives: {
-//         defaultSrc: ["'self'"],
-//         scriptSrc: ["'self'", "*", "'unsafe-inline'","*"],
-//         connectSrc: [
-//           "'self'",
-//           "https://some-domain.com",
-//           "https://some.other.domain.com",
-//         ],
-//         styleSrc: [
-//           "'self'",
-//           "fonts.googleapis.com",
-//           "*",
-//           "'unsafe-inline'",
-//           "*",
-//         ],
-//         fontSrc: ["'self'", "*"],
-//         imgSrc: [
-//           "'self'",
-//           "https://maps.gstatic.com",
-//           "https://maps.googleapis.com",
-//           "data:",
-//           "https://another-domain.com",
-//         ],
-//         frameSrc: ["'self'", "https://www.google.com"],
-//       },
-//     },
-//   })
-// );

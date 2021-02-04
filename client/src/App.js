@@ -12,6 +12,7 @@ import BaseLayout from "./layouts/BaseLayout";
 import Home from "./pages/homepage/Home";
 import Profile from './pages/ProfilePage/Profile'
 import QuestionForm from "./pages/QuestionPage/QuestionForm";
+import InterviewPage from './pages/InterviewPage/InterviewPage'
 
 const useStyles = makeStyles({
   root: {
@@ -75,6 +76,9 @@ function App() {
           </Route>
           <Route exact path = "/create">
             <QuestionForm/>
+          </Route>
+          <Route exact path = "/interviews">
+            <InterviewPage/>
           </Route>
         </Switch>
       </BrowserRouter>
