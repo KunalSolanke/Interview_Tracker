@@ -30,6 +30,7 @@ import Separator from "../../../components/Separator/Separator";
 import { GoogleLogin } from "react-google-login";
 import GitHubLogin from "react-github-login";
 import MicrosoftLogin from "react-microsoft-login";
+import {withRouter} from 'react-router-dom'
 
 export const authHandler = (props) => {
   const authHandler = (err, data) => {
@@ -66,9 +67,12 @@ class Login extends Component {
   };
 
   validateEmail(str) {
-    var pattern = "^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$";
-    str = "azamsharp@gmail.com";
-    return str.match(pattern);
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(str))
+    {
+      return (true)
+    }
+    //alert("You have entered an invalid email address!")
+    return (false) 
   }
 
   showPassword = () => {
@@ -117,7 +121,8 @@ class Login extends Component {
       const { email, password } = this.state;
       try {
         const { Login } = this.props;
-        Login({ email, password });
+        await Login({ email, password });
+        this.props.history.push('/');
       } catch (err) {
         console.log(err.message);
       }
@@ -253,5 +258,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(withStyles(login)(Login));
+export default withRouter(connect(null, mapDispatchToProps)(withStyles(login)(Login)));
 

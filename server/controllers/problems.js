@@ -11,6 +11,8 @@ const getTopics = async (req, res) => {
   }
 };
 
+
+
 const getTopicQuestions = async (req, res) => {
   const { topicName } = req.params;
   console.log(topicName);
@@ -25,6 +27,59 @@ const getTopicQuestions = async (req, res) => {
   }
 };
 
+<<<<<<< HEAD
+
+
+/* And filtering */
+const AndgetProblems = async (req,res)=>{
+    let topics = req.query.topics
+    if(topics){
+        topics = topics.split(",")
+        console.log(topics)
+        topics = await Promise.all(topics.map(async (topic)=>{
+        console.log('entered')
+        console.log('topic is ',topic)
+        const completeTopic = await Topic.findOne({title:topic})
+        return mongoose.Types.ObjectId(completeTopic._id)
+    }))
+    console.log(topics)
+    const questions = await Question.find().where('topics').in(topics).exec()
+    res.status(200).send({data:questions})
+    return;
+    }
+    const problems = await Question.find({})
+    res.status(200).send({data:problems})
+}
+/* And filtering */
+
+/* Or filtering*/
+const OrgetProblems = async (req,res)=>{
+  const {level,topics,solved} = req.query 
+  console.log(level);
+  let topiclist = []
+  try{
+    if(topics){
+      topiclist = topics.split(",");
+    }
+    console.log(topiclist)
+    let topiclistRef = []
+    topiclistRef = await Topic.find({
+      title:{"$in":topiclist},
+    })
+    const questionlist = await Question.find({
+      topics:{"$in":topiclistRef},
+    })
+    console.log(questionlist)
+    res.status(201).send(questionlist)
+  }
+  catch(err){
+    console.log(err.message);
+    res.status(401).send("can't get problems")
+  }
+}
+/* Or filtering*/
+
+=======
 const getProblems = async (req, res) => {
   let topics = req.query.topics;
   if (topics) {
@@ -46,6 +101,7 @@ const getProblems = async (req, res) => {
   const problems = await Question.find({});
   res.status(200).send({ data: problems });
 };
+>>>>>>> 37fc89bdcc4667dfaf95189c0e997273d24bc60b
 
 const getProbelmsFromTopics = async (req, res) => {
   const topic = req.query.topics;
@@ -53,9 +109,19 @@ const getProbelmsFromTopics = async (req, res) => {
   res.send("Hi there");
 };
 
+<<<<<<< HEAD
+module.exports ={
+    getTopics,
+    getTopicQuestions,
+    getProbelmsFromTopics,
+    AndgetProblems,
+    OrgetProblems
+}
+=======
 module.exports = {
   getTopics,
   getTopicQuestions,
   getProblems,
   getProbelmsFromTopics,
 };
+>>>>>>> 37fc89bdcc4667dfaf95189c0e997273d24bc60b

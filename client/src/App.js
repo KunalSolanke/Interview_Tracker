@@ -9,6 +9,7 @@ import Profile from "./pages/ProfilePage/Profile";
 import AddInterView from "./pages/AddInterView/AddInterView";
 import Practice from "./pages/Practice/Practice";
 import QuestionForm from "./pages/QuestionPage/QuestionForm";
+import InterviewPage from './pages/InterviewPage/InterviewPage'
 
 const useStyles = makeStyles({
   root: {
@@ -49,6 +50,9 @@ function App() {
           ></Route>
           <Route exact path = "/create">
             <QuestionForm/>
+          </Route>
+          <Route exact path = "/interviews">
+            <InterviewPage/>
           </Route>
         </Switch>
       </BrowserRouter>
