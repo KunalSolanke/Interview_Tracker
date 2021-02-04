@@ -17,11 +17,12 @@ const authStart = (state ,action) => {
 }
 
 const authSucces = (state,action) => {
+    console.log("in authsuccess action",action.payload)
     return UpdatedObj (state,{
         token: action.payload.token,
         loading : false ,
         error : null ,
-        username : action.username
+        username : action.payload.username
     })
 }
 
@@ -37,7 +38,8 @@ const authLogout = (state,action) => {
     
     return UpdatedObj(state,{
         token : null ,
-
+        username : null,
+        email : null
     })
 }
 
@@ -45,7 +47,7 @@ const authLogout = (state,action) => {
 
 
 const reducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch(action.type) {  
         case actionTypes.AUTH_START: return authStart(state,action)
         case actionTypes.AUTH_SUCCESS : return authSucces(state,action)
         case actionTypes.AUTH_FAIL: return authFail(state,action)

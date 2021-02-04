@@ -3,6 +3,7 @@ import navbarImg from "../assets/navbar_image.svg";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
+import {authLogout} from '../store/actions/auth'
 
 const useStyles = makeStyles({
   navLinks: {
@@ -81,14 +82,26 @@ function BaseLayout() {
             >
               Interviews
             </NavLink>
-            <NavLink
-              activeClassName={classes.activeLink}
-              to="/accounts/register"
-              className={classes.navLink}
-            >
-              Register
-            </NavLink>
-            {authState.token ? null : (
+            {authState.token ? (
+              <>
+              <NavLink
+                activeClassName={classes.activeLink}
+                to="/profile"
+                className={classes.navLink}
+              >
+                {authState.username}
+              </NavLink>
+              <NavLink
+                activeClassName={classes.activeLink}
+                className={classes.navLink}
+                to="#"
+                onClick = {()=>{dispatch(authLogout())}}
+              >
+                Logout
+              </NavLink>
+              </>
+            ) : (
+              <>
               <NavLink
                 activeClassName={classes.activeLink}
                 to="/accounts/login"
@@ -96,7 +109,16 @@ function BaseLayout() {
               >
                 Login
               </NavLink>
+              <NavLink
+                activeClassName={classes.activeLink}
+                to="/accounts/register"
+                className={classes.navLink}
+              >
+                Register
+              </NavLink>
+              </>
             )}
+
           </div>
         </nav>
       </div>

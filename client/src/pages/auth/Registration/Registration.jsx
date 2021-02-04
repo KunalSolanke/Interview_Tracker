@@ -30,6 +30,8 @@ import Separator from "../../../components/Separator/Separator";
 import { GoogleLogin } from "react-google-login";
 import GitHubLogin from "react-github-login";
 import MicrosoftLogin from "react-microsoft-login";
+import {useDispatch} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
 export const authHandler = (props) => {
   const authHandler = (err, data) => {
@@ -43,6 +45,8 @@ const onFailure = (response) => console.error(response);
 const responseGoogle = (response) => {
   console.log(response);
 };
+
+
 
 class Registration extends Component {
   state = {
@@ -70,9 +74,12 @@ class Registration extends Component {
  
 
   validateEmail(str) {
-    var pattern = "^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$";
-      str = "azamsharp@gmail.com";      
-      return str.match(pattern);    
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(str))
+    {
+      return (true)
+    }
+    //alert("You have entered an invalid email address!")
+    return (false)   
   }
 
   passwordMatch = () => this.state.password == this.state.passwordConfirm;
@@ -98,7 +105,7 @@ class Registration extends Component {
     } else if (!this.validateEmail(this.state.email)) {
       this.setState({
         errorOpen: true,
-        error: "Invalid email formay",
+        error: "Invalid email format",
       });
       return false;
     } else if (this.state.password.length < 6) {
@@ -135,7 +142,8 @@ class Registration extends Component {
       const { username, email, password } = this.state;
       try {
         const { RegisterUser } = this.props;
-        RegisterUser({ username, email, password });
+        await RegisterUser({ username, email, password });
+        this.props.history.push('/');
       } catch (err) {
         console.log(err.message);
       }
@@ -376,7 +384,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(
+export default withRouter(connect(
   null,
   mapDispatchToProps
-)(withStyles(register)(Registration));
+)(withStyles(register)(Registration)));
