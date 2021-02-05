@@ -1,0 +1,18 @@
+.sidebar {
+  width: 15%;
+  min-height: 85.6vh;
+  background-color: #508df9;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  margin-top: 50px;
+  width: 75%;
+}
+
+.value {
+  font-size: 22px;
+  color: white;
+  margin-top: 33px;
+}

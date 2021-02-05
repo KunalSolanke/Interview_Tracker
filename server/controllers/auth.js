@@ -30,12 +30,13 @@ const signup = async (req,res)=>{
 
 const login = async (req, res) => {
     const { email, password } = req.body
+    console.log('email,passowrd on server are...',email,password);
     try {
         const user = await User.findByCredentials(email,password) ;
         let accessToken = await user.generateAuthToken();
         res.setHeader('Cache-control', 'private')
         res.cookie("token",accessToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
-        res.redirect("/")
+        res.status(200).send({token:accessToken,username:user.username,email:user.email})
     }
     catch (err) {
         console.log(err)

@@ -1,0 +1,25 @@
+
+.profile-container{
+    display:flex;
+}
+
+.profile-area{
+    display:flex;
+    justify-content: space-evenly;
+    padding: 20px;
+    width:85%;
+}
+
+.form-container{
+    width: 50%;
+    background-color:#F0F4FA;
+    margin-top:100px
+}
+
+.profile-card{
+    width:20%;
+    background-color: #F0F4FA;
+    height: 50%;
+    margin-top: 100px;
+    width:30%;
+}

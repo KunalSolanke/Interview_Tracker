@@ -21,7 +21,7 @@ export const authFail = (data) => {
     }
 }
 
-const authLogout = (state,action) => {
+export const authLogout = (state,action) => {
     localStorage.removeItem("token")
     return {
         type: authActions.AUTH_LOGOUT,
@@ -31,13 +31,13 @@ const authLogout = (state,action) => {
 
 
 
-export const authLogin = ({username,password})=>{
+export const authLogin = ({password,email})=>{
     return (dispatch) =>{
             dispatch(authStart()) ;
-            axios.post("http://localhost:3001/accounts/login",{username,password}).then(response=>{
-                   let token = response.data.token;
+            axios.post("http://localhost:3001/accounts/login",{email,password}).then(response=>{
+                let token = response.data.token;
                 localStorage.setItem("token",token)
-                dispatch(authSuccess(response)) ;
+                dispatch(authSuccess(response.data));   
             }).catch(err=>{
                 console.log(err.response.data) ;
                 dispatch(authFail(err.response.data))
@@ -46,14 +46,18 @@ export const authLogin = ({username,password})=>{
 }
 
 
-export const authRegister = ({username,email,password})=>{
 
+export const authRegister = ({username,email,password})=>{
     return (dispatch) =>{
             dispatch(authStart()) ;
             axios.post("http://localhost:3001/accounts/signup",{username,email,password}).then(response=>{
                    let token = response.data.token;
+                   console.log("sennding post req....",response.data)
                 localStorage.setItem("token",token)
-                dispatch(authSuccess(response)) ;
+                const data = {
+                    username,email,token
+                }
+                dispatch(authSuccess(data)) ;   
             }).catch(err=>{
                 console.log(err.response.data) ;
                 dispatch(authFail(err.response.data))
