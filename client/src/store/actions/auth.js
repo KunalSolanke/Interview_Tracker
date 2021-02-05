@@ -28,6 +28,17 @@ export const authLogout = (state,action) => {
     }
 }
 
+export const getProfileRequest = (state,action) => {
+    return {
+        type: authActions.GET_PROFILE_REQUEST,
+    }
+}
+
+export const getProfileSuccess = (state,action) => {
+    return {
+        type: authActions.GET_PROFILE_SUCCESS,
+    }
+}
 
 
 
@@ -58,6 +69,25 @@ export const authRegister = ({username,email,password})=>{
                     username,email,token
                 }
                 dispatch(authSuccess(data)) ;   
+            }).catch(err=>{
+                console.log(err.response.data) ;
+                dispatch(authFail(err.response.data))
+            })
+    }
+}
+
+
+
+export const getProfile = ()=>{
+    return (dispatch) =>{
+            dispatch(getProfileRequest()) ;
+            const token = localStorage.getItem("token")
+            if(!token){
+                return ;
+            }
+            axios.defaults.headers["Authorization"]=token ;
+            axios.get("http://localhost:3001/acco").then(response=>{
+                g
             }).catch(err=>{
                 console.log(err.response.data) ;
                 dispatch(authFail(err.response.data))

@@ -115,11 +115,7 @@ function Profile() {
             </div>
           </div>
         </div>
-<<<<<<< HEAD
         </div>
-=======
-    </div>
->>>>>>> 3adc29cb3a18bbc9c1f9fa25e930c1e5cec34968
   </ProfileLayout>
      
   );
