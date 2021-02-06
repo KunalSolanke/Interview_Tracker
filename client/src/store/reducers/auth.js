@@ -33,7 +33,21 @@ const getProfileRequest = (state,action) => {
     })
 }
 
+const updateProfileRequest = (state,action) => {
+    return UpdatedObj (state,{
+        loading : true ,
+        error : null ,
+    })
+}
+
+const updateProfileSuccess = (state,action) => {
+    return UpdatedObj (state,{
+        profile : action.payload
+    })
+}
+
 const getProfileSuccess = (state,action) => {
+    console.log(action.payload)
     return UpdatedObj (state,{
         loading : false ,
         error : null ,
@@ -54,7 +68,8 @@ const authLogout = (state,action) => {
     
     return UpdatedObj(state,{
         token : null ,
-        email : null
+        profile : null,
+        token : null
     })
 }
 
@@ -69,6 +84,8 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_LOGOUT : return authLogout(state,action)
         case actionTypes.GET_PROFILE_REQUEST : return getProfileRequest(state,action)
         case actionTypes.GET_PROFILE_SUCCESS : return getProfileSuccess(state,action)
+        case actionTypes.PROFILE_UPDATE_REQUEST: return updateProfileRequest(state,action)
+        case actionTypes.PROFILE_UPDATE_SUCCESS: return updateProfileSuccess(state,action)
         default  : return state
     }
 }

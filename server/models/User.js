@@ -8,22 +8,37 @@ const userSchema = mongoose.Schema({
         type: String,
         minLength: 4
     },
-    email: {
+    last_name: {
         type: String,
-        required: true,
-        unique :true
+    },
+    first_name: {
+        type: String,
+    },
+    image: {
+        data: Buffer,
+        contentType: String,
+    },
+    bio: {
+        type: String,
     },
     password: {
         type: String,
         required: true,
         minLength: 6
     },
+
     role: {
         type:String,
         enum:['admin','member'],
         required:true,
         default:'member'
-    }
+    },
+    questions: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Questions",
+      },
+    ]
 }, {
     timestamps: true
 })
@@ -73,16 +88,6 @@ userSchema.statics.findByCredentials = async function(email,password){
 }
 
 
-userSchema.statics.findBytoken = async function(token){
-    const pk = jwt.verify(token,process.env.JWT_REFRESH_KEY);
-    const user = await this.findById(pk._id) ;
-    if(!user){
-        throw new Error({"error":{
-            "message" :"No user with given token"
-        }})
-    }
-    return user;
-}
 
 const User = mongoose.model('User', userSchema)
 

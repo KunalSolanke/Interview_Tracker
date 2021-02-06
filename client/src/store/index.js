@@ -1,5 +1,6 @@
 import authreducer from "./reducers/auth";
 import topicsReducer from "./reducers/topics";
+import dashboardreducer from "./reducers/dashboard";
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 
@@ -9,6 +10,7 @@ const configureStore = () => {
   const rootReducer = combineReducers({
     auth: authreducer,
     topics: topicsReducer,
+    dashboard: dashboardreducer,
   });
   const store = createStore(
     rootReducer,

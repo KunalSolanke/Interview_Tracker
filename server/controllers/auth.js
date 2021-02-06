@@ -14,13 +14,13 @@ const signup = async (req,res)=>{
         })
         await user.save()
         console.log(user)
-        let accessToken =await user.generateAuthToken();
+        let accessToken = await user.generateAuthToken();
         console.log("token",accessToken)
         res.status(200).send({token:accessToken})
     }
     catch(err){
         console.log(err)
-        res.status(404)
+        res.status(401)
         res.send('failed')
     }
 }
@@ -33,6 +33,7 @@ const login = async (req, res) => {
     console.log('email,passowrd on server are...',email,password);
     try {
         const user = await User.findByCredentials(email,password) ;
+        console.log(user)
         let accessToken = await user.generateAuthToken();
         res.setHeader('Cache-control', 'private')
         res.cookie("token",accessToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })

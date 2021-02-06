@@ -69,6 +69,8 @@ function BaseLayout() {
     
   }, [])
 
+
+
   return (
     <div style={{ position: "relative", OverflowX: "hidden" }}>
       <img src={navbarImg} className={classes.navImg} />

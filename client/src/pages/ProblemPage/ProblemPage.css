@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,900&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Roboto';
+}
+
+h1 {
+    margin: 0;
+    font-weight: 500;
+}
+
+h2 {
+    margin: 50px 0 30px;
+    font-weight: 500;
+}
+
+p {
+    margin: 10px 0;
+    font-weight: 400;
+}
+
+.main{
+    background-color: #F8FDFF;
+    padding-bottom: 5%;
+}
+.img-container {
+    background-image: url("images/aurora.jpg");
+    width: 100%;
+    height: 350px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container-2 {
+    padding: 0 13%;
+    position: relative;
+    margin-top: -100px;
+}
+
+.cnt-content {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Roboto';
+    background-color: #fff;
+    border-radius: 20px;
+    z-index: 100;
+    padding-top: 20px;
+    box-shadow: 0 4px 6px 4px rgb(0, 0, 0, 0.2);
+}
+
+.content-img {
+    width: 10%;
+    padding: 20px;
+}
+
+.content-text {
+    width: 95%;
+    padding: 22px 0;
+}
+
+.profile {
+    border-radius: 100%;
+    width: 90px;
+    height: 90px;
+}
+
+.divs {
+    margin: 0 120px 0 0;
+}
+
+.Experience {
+    padding: 300px 0;
+    margin-right: 120px;
+}
+
+.container-3 {
+    margin: 5% 1% 0;
+    border-radius: 20px;
+    background-color: #fff;
+}
+
+.comment-sub {
+    display: flex;
+    flex-direction: column;
+    padding: 1% 20%;
+    width: 852px;
+}
+
+.Add-comment {
+    height: 100px;
+    background: #FAFAFA;
+    border-radius: 7px;
+    padding: 15px;
+}
+
+.demo-cmt {
+    font-size: 20px;
+}
+
+.button-div {
+    text-align: right;
+    margin: 10px 0;
+}
+
+.btn {
+    border-radius: 6px;
+    line-height: 0;
+    color: #FFFFFF;
+    font-weight: 700;
+    width: 170px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 300;
+    padding: 2px 18px;
+    background-color: #508DF9;
+    /* -webkit-box-shadow: 3px 3px 10px 0 #9198A2;
+    -moz-box-shadow: 3px 3px 10px 0 #9198A2;
+    box-shadow: 3px 3px 10px 0 #9198A2; */
+    border: inset #000000 0;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+ }
+
+ .comments {
+    padding: 2px 90px;
+ }
+
+ .comment-heading {
+     margin: 0;
+     font-size: 32px;
+ }
+ 
+ .comment-list {
+    padding: 40px 160px 20px;
+    display: flex;
+    flex-direction: column;
+ }
+
+ .single-comment {
+     margin-bottom: 35px;
+     display: flex;
+     align-items: flex-start;
+ }
+
+ h3 {
+     margin: 8px 0 0;
+     font-weight: 400;
+     font-size: 20px;
+ }
+
+ .cmt {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+ }
+
+ .cmt-name {
+     margin: 0;
+     font-size: 12px;
+ }

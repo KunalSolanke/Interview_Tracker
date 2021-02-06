@@ -40,25 +40,25 @@ const useStyles = makeStyles({
     }
 })
 
-function Interview() {
+function Interview({interview}) {
     const classes = useStyles()
     return (
         <div className={classes.root}>
             <div className={classes.top}>
                 <div className={classes.image}>
-                    <img className={classes.img} src="https://heraldjournalism.com/wp-content/uploads/2020/03/a2dd8772-36d4-4df6-a704-c38c053ef222.jpg"/>
+                    <img className={classes.img} src={interview.image.contentType}/>
                 </div>
                 <div className={classes.description}>
                     <h1 className={classes.title}>
-                        SDE profile interview at amazon
+                        {interview.title}
                     </h1>
                     <p className={classes.content}>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+                     {interview.description}
                     </p>
                 </div>
             </div>
             <div className={classes.bottom}>
-                <pre><h1 align="center">likes 100       comments 24</h1></pre>
+                <pre><h1 align="center">likes 10      comments 24</h1></pre>
             </div>
         </div>
     )

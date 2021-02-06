@@ -11,6 +11,7 @@ router.get("/list", controller.findInterviews);
 router.post("/listByUsers", controller.findInterviewByUser);
 router.post("/listByCompany", controller.findInterviewByCompany);
 router.post("/Update", controller.UpdateInterview);
-router.get("/:id", controller.getInterviewById);
+router.get("/mine",controller.findMyInterviews)
+//router.get("/:id", controller.getInterviewById);
 
 module.exports = router;

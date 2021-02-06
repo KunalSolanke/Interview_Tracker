@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {useRef,useState,useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ProfileLayout from "../../layouts/ProfileLayout";
 import Editor from "../../components/Editor/Editor";
+import {createInterview} from '../../store/actions/dashoard'
+import {useSelector,useDispatch} from "react-redux"
 const useStyles = makeStyles({
   sectionHead: {
     fontSize: "18px",
@@ -42,8 +44,16 @@ const useStyles = makeStyles({
 function AddInterView() {
   const classes = useStyles();
   const [editorData, seteditorData] = useState(null);
-  useEffect(() => {}, [editorData]);
-
+  const form = useRef(null) ;
+  const profile = useSelector(state => state.auth.profile)
+  const dispatch = useDispatch()
+  const handleSubmit = async (e)=>{
+          e.preventDefault() ;
+          console.log('save pe click ho gya')
+          const data =await new FormData(form.current) ;
+          data.append("content",editorData)
+          await dispatch(createInterview(data));
+  }
   return (
     <ProfileLayout>
       <div className={classes.root}>
@@ -51,7 +61,7 @@ function AddInterView() {
           <h1>Add InterView</h1>
         </div>
         <div>
-          <div className={classes.interViewForm}>
+          <form className={classes.interViewForm} ref={form}>
             <div className={classes.row}>
               <div>
                 <h1 style={{ fontSize: "20px" }} className={classes.label}>
@@ -61,8 +71,24 @@ function AddInterView() {
                   style={{ outline: "none", content: "upload" }}
                   type="text"
                   className={classes.input}
+                  name="title"
                 />
               </div>
+
+            </div>
+            <div className={classes.row}>
+              <div>
+                <h1 style={{ fontSize: "20px" }} className={classes.label}>
+                  Company
+                </h1>
+                <input
+                  style={{ outline: "none", content: "upload" }}
+                  type="text"
+                  className={classes.input}
+                  name="company"
+                />
+              </div>
+              
             </div>
             <div className={classes.row}>
               <div>
@@ -74,6 +100,7 @@ function AddInterView() {
                   className={classes.input}
                   rows={4}
                   cols={70}
+                  name="description"
                 />
               </div>
             </div>
@@ -85,6 +112,7 @@ function AddInterView() {
                 <input
                   style={{ outline: "none", content: "upload" }}
                   type="file"
+                  name="image"
                 />
               </div>
             </div>
@@ -98,7 +126,7 @@ function AddInterView() {
             </div>
             <div className={classes.row} style={{ textAlign: "center" }}>
               <div>
-                <h1
+                <button
                   style={{
                     fontSize: "20px",
                     fontColor: "#508df9",
@@ -106,12 +134,13 @@ function AddInterView() {
                     marginTop: "1rem",
                   }}
                   className={classes.label}
+                  onClick={handleSubmit}
                 >
                   Post
-                </h1>
+                </button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </ProfileLayout>

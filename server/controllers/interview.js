@@ -15,13 +15,14 @@ const createInterview = async (req, res) => {
             description,
             content,
             image: { 
-                data: fs.readFileSync(path.join(__dirname, '../public/uploads/' + req.file.filename))
+                data: fs.readFileSync(path.join(__dirname, '../public/uploads/' + req.file.filename)),
+                contentType:'http://localhost:3001/static/uploads/'+req.filepath
             },
             isApproved: true,
         })
         await Interview.save()
         console.log(Interview)
-        res.status(200).send({Interview})
+        res.status(200).send(Interview)
     }
     catch(err) {
         console.log(err);
@@ -50,6 +51,23 @@ const findInterviewByUser = async (req, res) => {
             'user.username': req.body.username
         })
         res.status(200).send({list: listByUsers})
+    }
+    catch(err) {
+        res.status(400).send(err);
+    }
+}
+
+const findMyInterviews = async (req, res) => {
+    const user = req.user
+    if(!user){
+        res.status(401).send('Log in to see your interviews')
+    }
+    try {
+        const interviews = await InterviewExp.find({
+            'user': req.user._id
+        })
+        console.log(interviews)
+        res.status(200).send(interviews)
     }
     catch(err) {
         res.status(400).send(err);
@@ -98,5 +116,6 @@ const DeleteInterview = async (req, res) => {
 
 module.exports = {
     getForm, createInterview, findInterviews,
-    findInterviewByUser, findInterviewByCompany, UpdateInterview
+    findInterviewByUser, findInterviewByCompany, UpdateInterview,
+    findMyInterviews
 };

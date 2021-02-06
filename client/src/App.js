@@ -48,10 +48,10 @@ function App() {
             path="/profile/interviews/create"
             component={AddInterView}
           ></Route>
-          <Route exact path = "/create">
+          <Route exact path = "/profile/questions/create">
             <QuestionForm/>
           </Route>
-          <Route exact path = "/interviews">
+          <Route exact path = "/profile/myInterviews">
             <InterviewPage/>
           </Route>
         </Switch>

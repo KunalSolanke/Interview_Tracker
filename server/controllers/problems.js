@@ -12,7 +12,6 @@ const getTopics = async (req, res) => {
 };
 
 
-
 const getTopicQuestions = async (req, res) => {
   const { topicName } = req.params;
   console.log(topicName);
@@ -27,6 +26,44 @@ const getTopicQuestions = async (req, res) => {
   }
 };
 
+
+const addProblem = async (req,res)=>{
+  const user = req.user
+  if(!user){
+    res.status(401).send('You are not authenticated')
+  }
+  let {url,title,topics,description,difficulty} = req.body
+  console.log(req.body)
+  if(topics!=""){
+    topics.trim();
+    topics.toLowerCase()
+    topics = topics.split(",") 
+  }
+  try{
+    console.log(topics)
+      topics = await Promise.all(topics.map(async (topic)=>{
+        let inst =null
+        if(inst = await Topic.findOne({title:topic})){
+          return inst._id;
+        }
+        inst = await Topic.create({
+          title:topic
+        })
+        return inst._id;
+      }))
+      console.log(topics)
+      const problem = await Question.create({
+        url,title,topics,description,difficulty
+      })
+      user.questions = [...user.questions,problem]
+      await user.save();
+      res.status(201).send(problem)
+  }
+  catch(err){
+    console.log(err.message)
+    res.status(400).send(err.message)
+  }
+}
 
 
 /* And filtering */
@@ -111,5 +148,6 @@ module.exports ={
     getTopicQuestions,
     getProbelmsFromTopics,
     AndgetProblems,
-    OrgetProblems
+    OrgetProblems,
+    addProblem
 }

@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedSelects() {
+export default function CustomizedSelects({name}) {
   const classes = useStyles();
   const [age, setAge] = React.useState('');
   const handleChange = (event) => {
@@ -66,7 +66,8 @@ export default function CustomizedSelects() {
           id="demo-customized-select-native"
           value={age}
           onChange={handleChange}
-          input={<BootstrapInput />}
+          name={name}
+          input={<BootstrapInput name={name}/>}
         >
           <option aria-label="None" value=""/>
           <option value={1}>Easy</option>
