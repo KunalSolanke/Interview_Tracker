@@ -87,7 +87,7 @@ function BaseLayout() {
               to="/practice"
               className={classes.navLink}
             >
-              practice
+              Practice
             </NavLink>
             <NavLink
               activeClassName={classes.activeLink}

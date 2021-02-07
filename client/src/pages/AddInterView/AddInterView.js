@@ -4,6 +4,8 @@ import ProfileLayout from "../../layouts/ProfileLayout";
 import Editor from "../../components/Editor/Editor";
 import {createInterview} from '../../store/actions/dashoard'
 import {useSelector,useDispatch} from "react-redux"
+import {convertToRaw} from 'draft-js' ;
+import draftToHtml from 'draftjs-to-html';
 const useStyles = makeStyles({
   sectionHead: {
     fontSize: "18px",
@@ -51,7 +53,7 @@ function AddInterView() {
           e.preventDefault() ;
           console.log('save pe click ho gya')
           const data =await new FormData(form.current) ;
-          data.append("content",editorData)
+          data.append("content",draftToHtml(convertToRaw(editorData.getCurrentContent())))
           await dispatch(createInterview(data));
   }
   return (

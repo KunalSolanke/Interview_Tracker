@@ -5,7 +5,6 @@ import axios from "axios";
 
 
 
-
 export const addQuestionRequest = () => {
   return {
     type: dashboardActions.ADD_QUESTION_REQUEST,
@@ -28,6 +27,19 @@ export const getInterviewsRequest = () => {
 export const getInterviewsSuccess = (data) => {
   return {
     type: dashboardActions.GET_INTERVIEW_SUCCESS,
+    payload: data,
+  };
+};
+
+export const getMyQuestionsRequest = () => {
+  return {
+    type: dashboardActions.GETMY_QUESTIONS_REQUEST,
+  };
+};
+
+export const getMyQuestionsSuccess = (data) => {
+  return {
+    type: dashboardActions.GETMY_QUESTIONS_SUCCESS,
     payload: data,
   };
 };
@@ -90,7 +102,7 @@ export const getInterviews = ()=>{
             }
             try{
             axios.defaults.headers["Authorization"]=`Token ${token}` ;
-            const response = await axios.get("http://localhost:3001/interviews/mine")
+            const response = await axios.get("http://localhost:3001/accounts/profile/interviews")
             console.log('interviews res is ',response)
             dispatch(getInterviewsSuccess(response.data))
             }
@@ -98,6 +110,28 @@ export const getInterviews = ()=>{
                 console.log(err) ;
                 dispatch(requestFail(err))
             }
+  }
+}
+
+
+export const getMyQuestions = ()=>{
+  return async (dispatch,getState)=>{
+      dispatch(getMyQuestionsRequest()) ;
+      console.log('entering here')
+      const token = localStorage.getItem("token")
+      if(!token){
+          return ;
+      }
+      try{
+      axios.defaults.headers["Authorization"]=`Token ${token}` ;
+      const response = await axios.get("http://localhost:3001/accounts/profile/questions")
+      console.log('interviews res is ',response)
+      dispatch(getMyQuestionsSuccess(response.data))
+      }
+      catch(err){
+          console.log(err.message) ;
+          dispatch(requestFail(err))
+      }
 }
 }
 

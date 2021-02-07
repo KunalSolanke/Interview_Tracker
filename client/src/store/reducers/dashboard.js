@@ -12,7 +12,6 @@ const initialState = {
 }
 
 
-
 const addQuestionRequest = (state,action) => {
     return UpdatedObj (state,{
         loading : true ,
@@ -22,7 +21,8 @@ const addQuestionRequest = (state,action) => {
 
 const addQuestionSuccess = (state,action) => {
     return UpdatedObj (state,{
-        profile : action.payload
+        profile : action.payload,
+        loading : false,
     })
 }
 
@@ -35,9 +35,26 @@ const getInterViewRequest = (state,action) => {
 
 const getInterViewSuccess = (state,action) => {
     return UpdatedObj (state,{
-        interviews : action.payload
+        interviews : action.payload,
+        loading : false,
     })
 }
+
+const getQuestionsRequest = (state,action) => {
+    return UpdatedObj (state,{
+        loading : true ,
+        error : null ,
+    })
+}
+
+const getQuestionsSuccess = (state,action) => {
+    return UpdatedObj (state,{
+        questions : action.payload,
+        loading : false,
+    })
+}
+
+
 const createInterviewRequest = (state,action) => {
     return UpdatedObj (state,{
         loading : true ,
@@ -47,7 +64,8 @@ const createInterviewRequest = (state,action) => {
 
 const createInteviewSuccess = (state,action) => {
     return UpdatedObj (state,{
-        profile : action.payload
+        profile : action.payload,
+        loading : false,
     })
 }
 
@@ -69,6 +87,8 @@ const reducer = (state = initialState, action) => {
         case actionTypes.ADD_QUESTION_SUCCESS : return addQuestionSuccess(state,action)
         case actionTypes.GET_INTERVIEW_REQUEST: return getInterViewRequest(state,action)
         case actionTypes.GET_INTERVIEW_SUCCESS : return getInterViewSuccess(state,action)
+        case actionTypes.GETMY_QUESTIONS_REQUEST: return getQuestionsRequest(state,action)
+        case actionTypes.GETMY_QUESTIONS_SUCCESS : return getQuestionsSuccess(state,action)
         case actionTypes.CREATE_INTERVIEW_REQUEST: return createInterviewRequest(state,action)
         case actionTypes.CREATE_INTERVIEW_SUCCESS : return createInteviewSuccess(state,action)
         case actionTypes.REQUEST_FAIL :return dashboardFail(state,action)

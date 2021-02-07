@@ -1,0 +1,22 @@
+.single-comment {
+    margin-bottom: 35px;
+    display: flex;
+    align-items: flex-start;
+}
+
+h3 {
+    margin: 8px 0 0;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.cmt {
+   width: 50px;
+   height: 50px;
+   margin-right: 20px;
+}
+
+.cmt-name {
+    margin: 0;
+    font-size: 12px;
+}

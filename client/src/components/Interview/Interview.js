@@ -1,6 +1,6 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles'
-
+import {Link} from 'react-router-dom'
 const useStyles = makeStyles({
     root:{
         width:'95%',
@@ -8,7 +8,9 @@ const useStyles = makeStyles({
         marginTop:'30px',
         marginBottom:'50px',
         padding:'15px 25px 15px 15px',
-        maxHeight:'400px'
+        minHeight:'350px',
+        maxHeight:'350px',
+        borderRadius :"10px"
     },
     top:{
         width:'97%',
@@ -29,11 +31,12 @@ const useStyles = makeStyles({
         width:'70%'
     },
     title:{
-        fontSize:'30px'
+        fontSize:'25px'
     },
     content:{
-        fontSize:'20px',
-        marginTop:'15px'
+        fontSize:'18px',
+        marginTop:'15px',
+        
     },
     img:{
         
@@ -43,6 +46,7 @@ const useStyles = makeStyles({
 function Interview({interview}) {
     const classes = useStyles()
     return (
+        <Link to={`/interview/${interview._id}`}>
         <div className={classes.root}>
             <div className={classes.top}>
                 <div className={classes.image}>
@@ -61,6 +65,7 @@ function Interview({interview}) {
                 <pre><h1 align="center">likes 10      comments 24</h1></pre>
             </div>
         </div>
+        </Link>
     )
 }
 

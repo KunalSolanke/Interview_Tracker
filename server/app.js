@@ -26,8 +26,9 @@ const multer = require('multer');
     useNewUrlParser: true,
     useUnifiedTopology: true,
     retryWrites: true,
-    useFindAndModify: true,
+    useFindAndModify: false,
   });
+  
   await AdminBro.registerAdapter(AdminBroMongoose);
   
   const adminBro = new AdminBro({

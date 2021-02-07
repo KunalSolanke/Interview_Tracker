@@ -19,9 +19,10 @@ const getTopicQuestions = async (req, res) => {
     const topic = await Topic.findOne({ title: topicName });
     const questions = await Question.find({
       topics: mongoose.Types.ObjectId(topic._id),
-    });
-    res.status(200).send({ question_list: questions });
+    }).populate("topics").exec()
+    res.status(200).send(questions);
   } catch (err) {
+    console.log(err)
     res.status(400).send({ error: err.message });
   }
 };
@@ -130,11 +131,11 @@ const getProblems = async (req, res) => {
     );
     console.log(topics);
     const questions = await Question.find().where("topics").in(topics).exec();
-    res.status(200).send({ data: questions });
+    res.status(200).send(questions);
     return;
   }
   const problems = await Question.find({});
-  res.status(200).send({ data: problems });
+  res.status(200).send(questions);
 };
 
 const getProbelmsFromTopics = async (req, res) => {

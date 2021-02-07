@@ -10,7 +10,12 @@ import AddInterView from "./pages/AddInterView/AddInterView";
 import Practice from "./pages/Practice/Practice";
 import QuestionForm from "./pages/QuestionPage/QuestionForm";
 import InterviewPage from './pages/InterviewPage/InterviewPage'
-
+import InterviewDescPage from './pages/InterviewDesc/InterviewDescPage'
+import InterviewListPage from './pages/InterviewListPage/InterviewPage'
+import ProblemPage from './pages/ProblemPage/ProblemPage'
+import {useEffect} from 'react'
+import {useSelector,useDispatch} from 'react-redux'
+import MyQuestionsPage from './pages/MyProblemPage/ProblemPage'
 const useStyles = makeStyles({
   root: {
     width: "94%",
@@ -33,6 +38,8 @@ function App() {
         <BaseLayout />
         <Switch>
           <Route exact path="/practice" component={Practice}></Route>
+          <Route exact path="/interviews" component={InterviewListPage}></Route>
+          <Route exact path="/practice/:title" component={ProblemPage}></Route>
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/accounts/register">
             <Register />
@@ -53,6 +60,12 @@ function App() {
           </Route>
           <Route exact path = "/profile/myInterviews">
             <InterviewPage/>
+          </Route>
+          <Route exact path = "/interview/:pk">
+            <InterviewDescPage/>
+          </Route>
+          <Route exact path = "/profile/myQuestions">
+            <MyQuestionsPage/>
           </Route>
         </Switch>
       </BrowserRouter>

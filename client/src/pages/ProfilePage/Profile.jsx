@@ -32,7 +32,7 @@ const mystyles = makeStyles({
     },
     label:{
        fontWeight:'300' ,
-       fontSize:'23px'
+       fontSize:'20px'
     },
     avatar:{
         width:'100px',
@@ -67,7 +67,7 @@ function Profile() {
       <div className="profile-area">
         <div className="form-container">
           <div className={classes.form}>
-            <h1 style={{ fontSize: "30px" }} className="text">
+            <h1 style={{ fontSize: "25px" }} className="text">
               Update Profile
             </h1>
             <form
@@ -144,7 +144,7 @@ function Profile() {
                   style={{
                     margin: "20px auto",
                     color: "#508DF9",
-                    fontSize: "24px",
+                    fontSize: "20px",
                     outline: "none",
                   }}
                   type="submit"

@@ -110,8 +110,8 @@ export const authLogin = ({password,email})=>{
                 dispatch(authSuccess(response.data));
                 dispatch(getProfile(token))  
             }).catch(err=>{
-                console.log(err.response.data) ;
-                dispatch(authFail(err.response.data))
+                console.log(err) ;
+                dispatch(authFail(err))
             })
      }
 }
@@ -131,8 +131,8 @@ export const authRegister = ({username,email,password})=>{
                 dispatch(authSuccess(data)) ; 
                 dispatch(getProfile(token))  
             }).catch(err=>{
-                console.log(err.response.data) ;
-                dispatch(authFail(err.response.data))
+                console.log(err) ;
+                dispatch(authFail(err))
             })
     }
 }

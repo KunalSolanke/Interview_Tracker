@@ -15,7 +15,6 @@ const userSchema = mongoose.Schema({
         type: String,
     },
     image: {
-        data: Buffer,
         contentType: String,
     },
     bio: {
@@ -36,7 +35,7 @@ const userSchema = mongoose.Schema({
     questions: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Questions",
+        ref: "Question",
       },
     ]
 }, {

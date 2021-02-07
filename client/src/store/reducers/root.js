@@ -1,4 +1,4 @@
-import * as actionTypes from "../constants/topics";
+import * as actionTypes from "../constants/root";
 import { UpdatedObj } from "../UpdateObj";
 
 const initialState = {
@@ -6,6 +6,8 @@ const initialState = {
   questions: [],
   loading: false,
   topics: [],
+  interviews : [],
+  currInterview : null
 };
 
 const topicsRequest = (state, action) => {
@@ -45,6 +47,34 @@ const topicsGetQuestionsSuccess = (state, action) => {
   });
 };
 
+const getInterViewRequest = (state,action) => {
+    return UpdatedObj (state,{
+        loading : true ,
+        error : null ,
+    })
+}
+
+const getInterViewSuccess = (state,action) => {
+    return UpdatedObj (state,{
+        interviews : action.payload,
+        loading:false
+    })
+}
+
+const getInterViewByIdRequest = (state,action) => {
+    return UpdatedObj (state,{
+        loading : true ,
+        error : null ,
+    })
+}
+
+const getInterViewByIdSuccess = (state,action) => {
+    return UpdatedObj (state,{
+        currInterview : action.payload,
+        loading : false
+    })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.TOPICS_REQUEST:
@@ -57,6 +87,10 @@ const reducer = (state = initialState, action) => {
       return topicsGetQuestionsRequest(state, action);
     case actionTypes.TOPICS_GET_QUESTIONS_SUCCESS:
       return topicsGetQuestionsSuccess(state, action);
+    case actionTypes.GETALL_INTERVIEW_REQUEST: return getInterViewRequest(state,action)
+    case actionTypes.GETALL_INTERVIEW_SUCCESS : return getInterViewSuccess(state,action)
+    case actionTypes.GETCURR_INTERVIEW_REQUEST: return getInterViewByIdRequest(state,action)
+    case actionTypes.GETCURR_INTERVIEW_SUCCESS : return getInterViewByIdSuccess(state,action)
     default:
       return state;
   }

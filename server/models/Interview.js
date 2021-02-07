@@ -7,7 +7,6 @@ const interviewExpSchema = mongoose.Schema({
     }, 
 
     image: {
-        data: Buffer,
         contentType: String,
     },
 

@@ -15,7 +15,6 @@ const createInterview = async (req, res) => {
             description,
             content,
             image: { 
-                data: fs.readFileSync(path.join(__dirname, '../public/uploads/' + req.file.filename)),
                 contentType:'http://localhost:3001/static/uploads/'+req.filepath
             },
             isApproved: true,
@@ -37,7 +36,7 @@ const getForm = (req, res) => {
 const findInterviews = async (req, res) => {
     try {
         const list = await InterviewExp.find({});
-        res.status(200).send({list})
+        res.status(200).send(list)
     }
     catch(err) {
         res.status(400).send(err);
@@ -67,7 +66,7 @@ const findMyInterviews = async (req, res) => {
             'user': req.user._id
         })
         console.log(interviews)
-        res.status(200).send(interviews)
+        res.status(201).send(interviews)
     }
     catch(err) {
         res.status(400).send(err);
@@ -87,7 +86,17 @@ const findInterviewByCompany = async (req, res) => {
 }
 
 const getInterviewById = async (req, res) => {
-    
+    const interviewId = req.params.pk;
+    console.log('interview id is ',interviewId)
+    try{
+        const interview = await InterviewExp.findOne({_id:interviewId}).populate('user').exec();
+        res.status(200).send(interview)
+    }
+    catch(err){
+        console.log(err)
+        res.status(400).send(err.message)
+    }
+
 }
 
 const UpdateInterview = async (req, res) => {
@@ -117,5 +126,5 @@ const DeleteInterview = async (req, res) => {
 module.exports = {
     getForm, createInterview, findInterviews,
     findInterviewByUser, findInterviewByCompany, UpdateInterview,
-    findMyInterviews
+    findMyInterviews,getInterviewById
 };
