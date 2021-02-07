@@ -9,7 +9,7 @@ const jaadu1 = async (req,res)=>{
     await Promise.all(
         interviews.map(async i=>{
             if(i.image.contentType.includes('3001')){
-                i.image.contentType = host + i.image.contentType.replace('http://localhost:3001',host)
+                i.image.contentType = i.image.contentType.replace(`${host}${host}`,host)
                 await i.save()
             }
         })
@@ -23,7 +23,7 @@ const jaadu2 = async (req,res)=>{
     await Promise.all(
         interviews.map(async i=>{
             if(i.image&&i.image.contentType&&i.image.contentType.includes('localhost')){
-                i.image.contentType = host + i.image.contentType.replace('http://localhost:3001',host)
+                i.image.contentType = i.image.contentType.replace(`${host}${host}`,host)
                 await i.save()
             }
         })
