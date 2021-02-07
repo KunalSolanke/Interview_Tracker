@@ -1,5 +1,6 @@
 import * as dashboardActions from "../constants/dashboard.js";
 import axios from "axios";
+import baseUrl from '../../http/api'
 
 
 
@@ -76,7 +77,7 @@ export const addQuestion = (data)=>{
             try{
             axios.defaults.headers["Authorization"]=`Token ${token}` ;
             
-            const response = await axios.post("http://localhost:3001/problems/create",{
+            const response = await axios.post(`${baseUrl}/problems/create`,{
               title :data.get("title"),
               topics :data.get("topics"),
               url :data.get("url"),
@@ -102,7 +103,7 @@ export const getInterviews = ()=>{
             }
             try{
             axios.defaults.headers["Authorization"]=`Token ${token}` ;
-            const response = await axios.get("http://localhost:3001/accounts/profile/interviews")
+            const response = await axios.get(`${baseUrl}/accounts/profile/interviews`)
             console.log('interviews res is ',response)
             dispatch(getInterviewsSuccess(response.data))
             }
@@ -124,7 +125,7 @@ export const getMyQuestions = ()=>{
       }
       try{
       axios.defaults.headers["Authorization"]=`Token ${token}` ;
-      const response = await axios.get("http://localhost:3001/accounts/profile/questions")
+      const response = await axios.get(`${baseUrl}/accounts/profile/questions`)
       console.log('interviews res is ',response)
       dispatch(getMyQuestionsSuccess(response.data))
       }
@@ -147,7 +148,7 @@ export const createInterview = (data)=>{
             try{
             axios.defaults.headers["Authorization"]=`Token ${token}` ;
             
-            const response = await axios.post("http://localhost:3001/interviews/create",data)
+            const response = await axios.post(`${baseUrl}/interviews/create`,data)
             dispatch(createInterviewSuccess(response.data))
             }
             catch(err){

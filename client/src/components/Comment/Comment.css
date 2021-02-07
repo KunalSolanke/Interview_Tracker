@@ -10,6 +10,13 @@ h3 {
     font-size: 20px;
 }
 
+.profile {
+    border-radius: 100%;
+    width: 90px;
+    height: 90px;
+    border:2px solid #508DF9;
+}
+
 .cmt {
    width: 50px;
    height: 50px;
@@ -18,5 +25,5 @@ h3 {
 
 .cmt-name {
     margin: 0;
-    font-size: 12px;
+    font-size: 16px;
 }
