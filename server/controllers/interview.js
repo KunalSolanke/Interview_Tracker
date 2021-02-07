@@ -105,7 +105,6 @@ const UpdateInterview = async (req, res) => {
 };
 
 const DeleteInterview = async (req, res) => {
-<<<<<<< HEAD
     try {
         const Delete = await InterviewExp.findByIdAndDelete(req.user._id)
         res.status(200).send("")
@@ -156,23 +155,3 @@ module.exports = {
     getComments
 };
 
-=======
-  try {
-    const Delete = await InterviewExp.findByIdAndDelete(req.user._id);
-    res.status(200).send("");
-  } catch (err) {
-    res.status(400).send(err);
-  }
-};
-
-module.exports = {
-  getForm,
-  createInterview,
-  findInterviews,
-  findInterviewByUser,
-  findInterviewByCompany,
-  UpdateInterview,
-  findMyInterviews,
-  getInterviewById,
-};
->>>>>>> badc44653cbb077e5f4672015766b1c4f68a17ca
