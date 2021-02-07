@@ -1,13 +1,14 @@
 import React from 'react'
 import './Comment.css'
 
-function Comment() {
+function Comment({comment}) {
+    console.log(comment.description)
     return (
         <div className="single-comment">
-            <img className="profile cmt" src="" alt=""/>
+            <img className="profile cmt" src={comment.user.image?.contentType} alt="No iamge"/>
             <div>
-                <p className="cmt-name">Pushkar</p>
-                <h3>Nice job ,It was an eye-opener</h3>
+                <p className="cmt-name">{comment.user.first_name||comment.user.username}</p>
+                <h3>{comment.description}</h3>
             </div>
         </div>
     )

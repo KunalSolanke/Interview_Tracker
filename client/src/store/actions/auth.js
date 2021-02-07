@@ -1,5 +1,6 @@
 import * as authActions from '../constants/auth.js'
 import axios from 'axios'
+import baseUrl from '../../http/api'
 
 export const authStart = () => {
     return {
@@ -68,7 +69,7 @@ export const getProfile = ()=>{
                 return ;
             }
             axios.defaults.headers["Authorization"]=`Token ${token}` ;
-            axios.get("http://localhost:3001/accounts/profile").then(response=>{
+            axios.get(`${baseUrl}/accounts/profile`).then(response=>{
                 console.log(response)
                 dispatch(getProfileSuccess(response.data))
             }).catch(err=>{
@@ -90,7 +91,7 @@ export const updateProfile = (data)=>{
                 return ;
             }
             axios.defaults.headers["Authorization"]=`Token ${token}` ;
-            axios.post("http://localhost:3001/accounts/profile",data).then(response=>{
+            axios.post(`${baseUrl}/accounts/profile`,data).then(response=>{
                 console.log(response)
                 dispatch(getProfileSuccess(response.data))
             }).catch(err=>{
@@ -104,7 +105,7 @@ export const updateProfile = (data)=>{
 export const authLogin = ({password,email})=>{
     return (dispatch) =>{
             dispatch(authStart()) ;
-            axios.post("http://localhost:3001/accounts/login",{email,password}).then(response=>{
+            axios.post(`${baseUrl}/accounts/login`,{email,password}).then(response=>{
                 let token = response.data.token;
                 localStorage.setItem("token",token)
                 dispatch(authSuccess(response.data));
@@ -121,7 +122,7 @@ export const authLogin = ({password,email})=>{
 export const authRegister = ({username,email,password})=>{
     return (dispatch) =>{
             dispatch(authStart()) ;
-            axios.post("http://localhost:3001/accounts/signup",{username,email,password}).then(response=>{
+            axios.post(`${baseUrl}/accounts/signup`,{username,email,password}).then(response=>{
                    let token = response.data.token;
                    console.log("sennding post req....",response.data)
                 localStorage.setItem("token",token)

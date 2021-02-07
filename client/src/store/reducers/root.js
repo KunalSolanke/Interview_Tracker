@@ -7,7 +7,8 @@ const initialState = {
   loading: false,
   topics: [],
   interviews : [],
-  currInterview : null
+  currInterview : null,
+  comments : []
 };
 
 const topicsRequest = (state, action) => {
@@ -75,6 +76,37 @@ const getInterViewByIdSuccess = (state,action) => {
     })
 }
 
+
+const getCommentRequest = (state,action) => {
+  return UpdatedObj (state,{
+      loading : true ,
+      error : null ,
+  })
+}
+
+const getCommentSuccess = (state,action) => {
+  return UpdatedObj (state,{
+      comments : action.payload,
+      loading : false
+  })
+}
+
+const createCommentRequest = (state,action) => {
+  return UpdatedObj (state,{
+      loading : true ,
+      error : null ,
+  })
+}
+
+const createCommentSuccess = (state,action) => {
+  return UpdatedObj (state,{
+      comments: [action.payload,...state.comments],
+      loading : false,
+  })
+}
+
+
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.TOPICS_REQUEST:
@@ -91,6 +123,10 @@ const reducer = (state = initialState, action) => {
     case actionTypes.GETALL_INTERVIEW_SUCCESS : return getInterViewSuccess(state,action)
     case actionTypes.GETCURR_INTERVIEW_REQUEST: return getInterViewByIdRequest(state,action)
     case actionTypes.GETCURR_INTERVIEW_SUCCESS : return getInterViewByIdSuccess(state,action)
+    case actionTypes.GET_COMMENT_REQUEST: return getCommentRequest(state,action)
+    case actionTypes.GET_COMMENT_SUCCESS : return getCommentSuccess(state,action)
+    case actionTypes.POST_COMMENT_REQUEST: return createCommentRequest(state,action)
+    case actionTypes.POST_COMMENT_SUCCESS : return createCommentSuccess(state,action)
     default:
       return state;
   }

@@ -13,4 +13,5 @@ router.post("/listByUsers", controller.findInterviewByUser);
 router.post("/listByCompany", controller.findInterviewByCompany);
 router.post("/Update", controller.UpdateInterview);
 router.get("/mine",controller.findMyInterviews)
+router.route("/comments/:pk").post(controller.postComment).get(controller.getComments)
 module.exports = router;

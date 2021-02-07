@@ -2,6 +2,9 @@ const InterviewExp  = require('../models/Interview');
 const fs = require('fs');
 const { isAbsolute } = require('path');
 const path = require('path');
+const Comment = require('../models/Comment');
+const { Mongoose } = require('mongoose');
+
 
 const createInterview = async (req, res) => {
     console.log(req.body)
@@ -121,10 +124,44 @@ const DeleteInterview = async (req, res) => {
     }
 }
 
+const postComment = async (req,res) => {
+    const data = req.body.desc
+    console.log(data)
+    const {pk} = req.params
+    try{
+        const comment = await Comment.create({
+            user:req.user._id,
+            interview :pk,
+            description:data
+        })
+        console.log(comment)
+        res.status(201).send(comment)
+    }
+    catch(err){
+        res.status(400).send(err.message)
+    }
+}
+
+const getComments = async (req,res)=>{
+    const {pk} = req.params
+    try{
+        const comments = await Comment.find({
+            interview:pk
+        }).populate('user').exec()
+        console.log(comments)
+        res.status(200).send(comments)
+    }
+    catch(err){
+        console.log(err)
+        res.status(400).send(err.message)
+    }
+}
 
 
 module.exports = {
     getForm, createInterview, findInterviews,
     findInterviewByUser, findInterviewByCompany, UpdateInterview,
-    findMyInterviews,getInterviewById
+    findMyInterviews,getInterviewById,postComment,
+    getComments
 };
+
