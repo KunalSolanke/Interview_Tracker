@@ -101,7 +101,7 @@ var upload = multer({
         file.fieldname + "-" + Date.now() + path.extname(file.originalname);
       cb(null, filename);
       req.filepath = filename;
-      req.fileurl = `${process.env.BLOB_URL}/${process.env.AZURE_CONTAINER_NAME}/${filename}`;
+      req.fileurl = `${process.env.AZURE_BLOB_URL}/${process.env.AZURE_CONTAINER_NAME}/${filename}`;
     },
   }),
   limits: { fileSize: 5000000 },
