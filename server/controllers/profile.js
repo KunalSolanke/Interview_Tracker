@@ -62,7 +62,7 @@ const updateProfile = async (req, res) => {
     await User.findByIdAndUpdate(user._id, req.body);
     if (req.file) {
       user.image = {
-        contentType: req.file.location,
+        contentType: req.fileurl,
       };
       await user.save();
     }

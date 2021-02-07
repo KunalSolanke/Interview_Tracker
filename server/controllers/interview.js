@@ -15,7 +15,7 @@ const createInterview = async (req, res) => {
       description,
       content,
       image: {
-        contentType: req.file.location,
+        contentType: req.fileurl,
       },
       isApproved: true,
     });
