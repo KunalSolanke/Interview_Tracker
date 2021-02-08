@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import navbarImg from "../assets/navbar_image.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink,useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import {authLogout,getProfile} from '../store/actions/auth'
@@ -59,16 +59,19 @@ function BaseLayout() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
   const classes = useStyles();
+  const history = useHistory();
   useEffect(() => {
     (async()=>{
       if(localStorage.getItem("token")&&!authState.profile){
         await dispatch(getProfile()) ;
       }
   })()
-
-    
   }, [])
 
+  const handleLogout = (e)=>{
+    //window.location.pathname = "/"
+    dispatch(authLogout())
+  }
 
 
   return (
@@ -108,9 +111,8 @@ function BaseLayout() {
               <NavLink
                 activeClassName={classes.activeLink}
                 className={classes.navLink}
-                to="#"
-                onClick = {()=>{dispatch(authLogout())}}
-              >
+                to="/"
+                onClick = {handleLogout}>
                 Logout
               </NavLink>
               </>

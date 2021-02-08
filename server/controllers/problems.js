@@ -56,7 +56,7 @@ const addProblem = async (req,res)=>{
       const problem = await Question.create({
         url,title,topics,description,difficulty
       })
-      user.questions = [...user.questions,problem]
+      user.questions = [problem,...user.questions]
       await user.save();
       res.status(201).send(problem)
   }

@@ -21,7 +21,7 @@ const addQuestionRequest = (state,action) => {
 
 const addQuestionSuccess = (state,action) => {
     return UpdatedObj (state,{
-        profile : action.payload,
+        questions : [action.payload,...state.questions],
         loading : false,
     })
 }
@@ -64,7 +64,7 @@ const createInterviewRequest = (state,action) => {
 
 const createInteviewSuccess = (state,action) => {
     return UpdatedObj (state,{
-        profile : action.payload,
+        interviews : [action.payload,state.interviews],
         loading : false,
     })
 }

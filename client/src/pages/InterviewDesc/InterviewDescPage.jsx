@@ -3,19 +3,23 @@ import Comment from '../../components/Comment/Comment'
 import './interviewdesc.css'
 import {useEffect} from 'react'
 import {useSelector,useDispatch} from 'react-redux'
-import {withRouter,useParams} from 'react-router-dom'
+import {withRouter,useParams,useHistory} from 'react-router-dom'
 import {getInterviewById,getComments,postComment} from '../../store/actions/root'
 import parse from 'html-react-parser'
 import Loading from '../../components/Loading/Loading'
 
-function InterviewDescPage({history}) {
+function InterviewDescPage() {
    // console.log('history is ',history)
     //const interviewId = history.params.match.pk
     const {pk} = useParams()
     const dispatch = useDispatch()
     const root = useSelector(state => state.root)
     console.log("root is ",root)
+    const history = useHistory();
     useEffect(()=>{
+        if(!localStorage.getItem('token')){
+            history.push('/accounts/login')
+        }
         const fun = async ()=>{
             if(!(root.currInterview&&root.currInterview._id==pk)){
                 await dispatch(getInterviewById(pk))
