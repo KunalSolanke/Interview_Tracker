@@ -31,7 +31,7 @@
 // }
 // module.exports = upload
 
-const getUrl = (filename) => {
+const awsgetUrl = (filename) => {
   S3_BUCKET = process.env.S3_BUCKET;
   return `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`;
 };

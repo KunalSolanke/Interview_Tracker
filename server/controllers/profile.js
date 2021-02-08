@@ -58,18 +58,18 @@ const updateProfile = async (req, res) => {
   console.log("token is ", token);
   try {
     let user = req.user;
-    console.log(req.body);
     await User.findByIdAndUpdate(user._id, req.body);
+
     if (req.file) {
       user.image = {
-        contentType: req.file.location,
+        contentType: req.file.url,
       };
       await user.save();
     }
     user = await User.findById(user._id);
-    console.log(user);
     res.status(200).send(user);
   } catch (err) {
+    console.log(err);
     res.status(401).send(err.message);
   }
 };
