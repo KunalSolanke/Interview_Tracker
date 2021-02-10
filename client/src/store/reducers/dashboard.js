@@ -8,7 +8,8 @@ const initialState = {
     starred :[],
     interviews :[],
     questions :[],
-    currentInterview : null
+    currentInterview : null,
+    starredQuestions :[],
 }
 
 
@@ -69,6 +70,34 @@ const createInteviewSuccess = (state,action) => {
     })
 }
 
+const addToStarredRequest = (state,action) => {
+    return UpdatedObj (state,{
+        loading : true ,
+        error : null ,
+    })
+}
+
+const addToStarredSuccess = (state,action) => {
+    return UpdatedObj (state,{
+        starredQuestions:action.payload,
+        loading : false,
+    })
+}
+
+const getStarredRequest = (state,action) => {
+    return UpdatedObj (state,{
+        loading : true ,
+        error : null ,
+    })
+}
+
+const getStarredSuccess = (state,action) => {
+    return UpdatedObj (state,{
+        starredQuestions:action.payload,
+        loading : false,
+    })
+}
+
 
 
 const dashboardFail = (state,action) => {
@@ -91,6 +120,10 @@ const reducer = (state = initialState, action) => {
         case actionTypes.GETMY_QUESTIONS_SUCCESS : return getQuestionsSuccess(state,action)
         case actionTypes.CREATE_INTERVIEW_REQUEST: return createInterviewRequest(state,action)
         case actionTypes.CREATE_INTERVIEW_SUCCESS : return createInteviewSuccess(state,action)
+        case actionTypes.ADD_TO_STARRED_REQUEST: return addToStarredRequest(state,action)
+        case actionTypes.ADD_TO_STARRED_SUCCESS : return addToStarredSuccess(state,action)
+        case actionTypes.GET_STARRED_REQUEST: return getStarredRequest(state,action)
+        case actionTypes.GET_STARRED_SUCCESS : return getStarredSuccess(state,action)
         case actionTypes.REQUEST_FAIL :return dashboardFail(state,action)
         default  : return state
     }

@@ -41,6 +41,12 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Question",
       },
+    ],
+    starredQuestions: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Question",
+          },
     ]
 }, {
     timestamps: true

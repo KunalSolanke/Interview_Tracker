@@ -6,11 +6,13 @@ import {getTopicQuestions} from '../../store/actions/root'
 import {useParams,useHistory} from 'react-router-dom'
 import './ProblemPage.css'
 import Loading from '../../components/Loading/Loading'
+import {getStarred} from '../../store/actions/dashoard'
 
 export default function ProblemPage() {
   const dispatch = useDispatch();
   const problems = useSelector((state) => state.root.questions);
   const root = useSelector((state) => state.root);
+  const dashboard = useSelector((state)=>state.dashboard)
   const { title } = useParams();
   const history = useHistory();
   useEffect(() => {
@@ -20,6 +22,11 @@ export default function ProblemPage() {
     dispatch(getTopicQuestions(title));
   }, []);
   
+  useEffect(()=>{
+    if(dashboard.starredQuestions.length==0){
+      dispatch(getStarred())
+    }
+  },[])
 
   useDispatch(() => {}, [problems]);
 

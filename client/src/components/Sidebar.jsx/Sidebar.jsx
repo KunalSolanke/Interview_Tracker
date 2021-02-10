@@ -21,7 +21,7 @@ function Sidebar() {
                         Add Interviews
                     </div>
                 </NavLink>
-                <NavLink to="/profile/interview/starred" activeClassName>
+                <NavLink to="/profile/starred" activeClassName>
                     <div className="value">
                         Starred
                     </div>

@@ -1,0 +1,88 @@
+/* import ChevronRightIcon from '@material-ui/icons/ChevronRight'; */
+@import url('https://fonts.googleapis.com/css2?family=Cuprum:ital,wght@0,400;0,500;0,600;1,700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    margin: 0;
+}
+
+/* top container  */
+.top-container {
+    background-color: #fff;
+    padding: 1% 10%;
+    font-family: 'Montserrat';
+}
+
+
+ol {
+    list-style-type: none;
+    display: inline;
+    padding: 0;
+}
+
+.listItem {
+    display: inline;
+    padding-right: 4px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #e4e4e4;
+}
+
+.chevron {
+    padding-right: 4px;
+    color: #e4e4e4;
+}
+
+.topicName {
+    margin: 4px 0;
+    font-size: 32px;
+    color:black ;
+}
+.topicName >span {
+    color : #2272FF;
+    font-size : "36px";
+}
+
+/* bottom container  */
+.bot-container {
+    /* background-color: #c6eaff; */
+    padding: 1% 10%;
+    height: 1000px;
+    font-family: 'Montserrat';
+}
+
+.content-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5%;
+}
+
+.content-list {
+    width: 75%;
+}
+
+.filter {
+    width: 20%;
+    font-family: 'Cuprum';
+}
+
+  /* Filter  */
+
+  h3 {
+      margin: 0;
+      color: #4a4d4e;
+      font-weight: 600;
+  }
+
+  .check-list {
+      margin-top: 3%;
+      font-weight: 400;
+      line-height: 1.8;
+  }
+
+  hr {
+      margin: 10% 0;
+      /* width: 70%; */
+      border: 0;
+      height: 0.5px;
+      background-color: #c7c7c7;
+  }

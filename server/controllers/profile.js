@@ -13,6 +13,7 @@ const getProfile = async (req, res) => {
     console.log(user);
     res.status(200).send(user);
   } catch (err) {
+    console.log(err.message)
     res.status(401).send(err.message);
   }
 };
@@ -74,9 +75,59 @@ const updateProfile = async (req, res) => {
   }
 };
 
+const getStarredQuestions = async (req,res)=>{
+  const user = req.user
+  const starredQuestions = user.starredQuestions
+  res.status(201).send(starredQuestions)
+}
+
+const addToStarred = async (req,res)=>{
+  const user = req.user;
+  console.log(user,req.body);
+  const {link,check} = req.body
+  const question = await (await Question.findOne({url:link}))
+  console.log('is id ',question._id)
+  try{
+    const starredquestions = user.starredQuestions
+    console.log('stq ',starredquestions)
+    if(check){
+      res.status(201).send(user.starredQuestions)
+    }
+    else if(starredquestions&&starredquestions.includes(question._id)){
+      // it means already starred so make it unstarred
+      console.log('ques exists alraedy')
+      let newlist = []
+      for(let ques of starredquestions){
+        console.log(ques,question._id)
+        if(!(ques.toString()==question._id.toString())){
+          console.log('enterd because ',ques,question._id)
+          console.log(question)
+          newlist.push(ques);
+        }
+      }
+      console.log('newlist is ',newlist)
+      user.starredQuestions = newlist;
+      await user.save();
+      res.status(200).send(user.starredQuestions)
+    }
+    else{
+      user.starredQuestions = [question._id,...user.starredQuestions];
+      await user.save();
+      console.log(user.starredQuestions)
+      res.status(200).send(user.starredQuestions)
+    }
+  }
+  catch(err){
+    console.log(err)
+    res.status(400).send(err)
+  }
+}
+
 module.exports = {
   getProfile,
   updateProfile,
   getMyInterviews,
   getMyQuestions,
+  addToStarred,
+  getStarredQuestions
 };
