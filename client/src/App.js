@@ -17,6 +17,8 @@ import {useEffect} from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import MyQuestionsPage from './pages/MyProblemPage/ProblemPage'
 import axios from 'axios'
+import StarredPage from './pages/StarredQuesPage/StarredPage'
+
 const useStyles = makeStyles({
   root: {
     width: "94%",
@@ -67,6 +69,9 @@ function App() {
           </Route>
           <Route exact path = "/profile/myQuestions">
             <MyQuestionsPage/>
+          </Route>
+          <Route exact path = "/profile/starred">
+            <StarredPage/>
           </Route>
         </Switch>
       </BrowserRouter>
