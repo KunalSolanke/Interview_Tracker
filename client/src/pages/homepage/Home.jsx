@@ -10,8 +10,7 @@ import herobg from '../../assets/hero_bg.png'
 import Carousel from '../../components/Carousel/Carousel';
 import InterViewTile from './InterViewTile';
 
-
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container :{
       maxWidth : "1500px",
       margin : "10px auto"
@@ -20,20 +19,30 @@ const useStyles = makeStyles({
       position:"absolute",
       bottom : 0,
       right : 0,
-      height : '80vh',
-      objectFit :"cover"
+      height : '50vh',
+      objectFit :"cover",
+      [theme.breakpoints.down("965")]: {
+          display: "none",
+    },
   },
   landingSection :{
       minHeight : '90vh',
       marginTop : "-20px",
       padding:"1rem",
       position : 'relative',
-      OverflowY:"hidden"
+      OverflowY:"hidden",
+      [theme.breakpoints.down("965")]: {
+          marginTop: "25px",
+    },
+      
   },
   landingBottom :{
       position :"absolute",
           bottom : 0 ,
-          left : 5
+          left : 5,
+          [theme.breakpoints.down("965")]: {
+              display: "none",
+        },
   },
   heroTitle :{
       fontWeight : "900",
@@ -200,7 +209,7 @@ rights:{
 }
 
 
-});
+}));
 
 const data ={
     title : "SDG Profile Intern at amazon",
