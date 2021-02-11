@@ -18,6 +18,7 @@ import {useSelector,useDispatch} from 'react-redux'
 import MyQuestionsPage from './pages/MyProblemPage/ProblemPage'
 import axios from 'axios'
 import StarredPage from './pages/StarredQuesPage/StarredPage'
+import StarInterviews from './pages/StarredInterviews/StarInterviews'
 
 const useStyles = makeStyles({
   root: {
@@ -72,6 +73,9 @@ function App() {
           </Route>
           <Route exact path = "/profile/starred">
             <StarredPage/>
+          </Route>
+          <Route exact path = "/profile/starredInterviews">
+            <StarInterviews/>
           </Route>
         </Switch>
       </BrowserRouter>

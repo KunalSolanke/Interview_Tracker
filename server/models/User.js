@@ -47,6 +47,12 @@ const userSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Question",
           },
+    ],
+    starredInterviews: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "InterviewExp",
+          },
     ]
 }, {
     timestamps: true

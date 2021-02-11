@@ -65,9 +65,10 @@ export default function Problem({problem}) {
   }
   useEffect(()=>{
     console.log(dashboard.starredQuestions)
-    let condition = dashboard.starredQuestions.includes(problem?._id?.toString())
+    let list = dashboard.starredQuestions.filter(ques=>ques._id==problem._id)
+    let condition = list.length==0;
     //console.log(dashboard.starredQuestions,'and problem is ',problem._id.toString())
-    if(condition){
+    if(!condition){
       setIsStarred(true);
     }
     else{
@@ -123,7 +124,7 @@ export default function Problem({problem}) {
         <Divider />
         <AccordionActions style={{display:'flex',justifyContent:'space-between',cursor:'pointer'}} className={classes.bottomSection}>
          {
-           (IsStarred)?<BookmarkIcon onClick={handleBookmark}/>:<BookmarkBorderIcon onClick={handleBookmark}/>
+           (IsStarred)?<BookmarkIcon color="primary" onClick={handleBookmark}/>:<BookmarkBorderIcon onClick={handleBookmark}/>
          }
           <Button size="small" color="primary">
             Solve
