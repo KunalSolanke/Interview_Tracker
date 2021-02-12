@@ -335,7 +335,7 @@ class Registration extends Component {
               buttonText="Login"
               onSuccess={this.responseGoogle}
               onFailure={this.onFailure}
-              cookiePolicy={config.google.clientId}
+              cookiePolicy={config.google.cookiePolicy}
             />
             <GitHubLogin
               clientId={config.github.clientId}
