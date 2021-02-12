@@ -133,7 +133,7 @@ function BaseLayout() {
 
   const handleLogout = (e) => {
     //window.location.pathname = "/"
-    dispatch(authLogout());
+    dispatch(logout());
   };
 
   const navSlide = () => {

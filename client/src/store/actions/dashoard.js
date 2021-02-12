@@ -275,7 +275,7 @@ export const createInterview = (data) => {
     try {
       axios.defaults.headers["Authorization"] = `Token ${token}`;
 
-      const response = await axios.post(`${baseUrl}/interviews/create`, data);
+      const response = await axios.post(`/interviews/create`, data);
       dispatch(createInterviewSuccess(response.data));
     } catch (err) {
       console.log(err);
