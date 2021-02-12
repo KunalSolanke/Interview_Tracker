@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
       padding: "60px 0",
       position: "absolute",
       right: "0px",
-      height: "80vh",
+      height: "84vh",
       top: "17vh",
       backgroundColor: "#2272FF",
       flexDirection: "column",
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
         color: "#fff",
       },
       margin: "0",
-      fontSize: "23px",
+      fontSize: "18px",
     }
   },
   
@@ -87,6 +87,9 @@ const useStyles = makeStyles((theme) => ({
   },
   activeLink: {
     color: "#2272FF",
+    [theme.breakpoints.down("650")]: {
+      color: "#fff",
+    }
   },
   burger: {
     display: "none",
@@ -131,6 +134,7 @@ function BaseLayout() {
   const classes = useStyles();
   const history = useHistory();
   const burgerNode = useRef(null);
+  const burger2 = useRef(null)
   const line1Node = useRef(null);
   const line2Node = useRef(null);
   const line3Node = useRef(null);
@@ -157,6 +161,9 @@ function BaseLayout() {
       link.style.animation = link.style.animation ? '' : `navLinkFade 0.6s ease forwards ${index / 7 + 0.3}s`;
     })
 
+    let node2 = burger2.current;
+    node2.classList.toggle("cross");
+
     let nodeline1 = line1Node.current;
     nodeline1.classList.toggle(classes.line1Tog);
 
@@ -179,7 +186,9 @@ function BaseLayout() {
               <h1 className={classes.logo}>InterviewTrack</h1>
             </NavLink>
           </div>
-          <div className={classes.navLinks} ref={burgerNode}>
+          <div className={classes.navLinks} ref={burgerNode} onClick={() => {
+                  burger2.current.click();
+              }}>
             <NavLink
               activeClassName={classes.activeLink}
               to="/practice"
@@ -231,7 +240,7 @@ function BaseLayout() {
             )}
 
           </div>
-          <div className={classes.burger} onClick={navSlide}>
+          <div className={classes.burger} onClick={navSlide} ref={burger2}>
             <div className={classes.line1} ref={line1Node}></div>
             <div className={classes.line2} ref={line2Node}></div>
             <div className={classes.line3} ref={line3Node}></div>

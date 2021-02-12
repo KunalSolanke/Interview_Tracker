@@ -18,6 +18,7 @@ import {useSelector,useDispatch} from 'react-redux'
 import MyQuestionsPage from './pages/MyProblemPage/ProblemPage'
 import axios from 'axios'
 import StarredPage from './pages/StarredQuesPage/StarredPage'
+import './app.css';
 
 const useStyles = makeStyles({
   root: {
