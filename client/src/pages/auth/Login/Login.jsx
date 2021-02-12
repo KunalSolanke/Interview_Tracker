@@ -31,6 +31,7 @@ import { GoogleLogin } from "react-google-login";
 import GitHubLogin from "react-github-login";
 import MicrosoftLogin from "react-microsoft-login";
 import {withRouter} from 'react-router-dom'
+import config from '../../../config/social_auth'
 
 
 class Login extends Component {
@@ -194,9 +195,9 @@ class Login extends Component {
           </form>
 
           <Separator data="OR" />
-          <div className="social-login">
+          <div className="social-login" style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
             <GoogleLogin
-              clientId="495698794919-ra10r1v99lf1202f0eg617nbsjl4r614.apps.googleusercontent.com"
+              clientId={config.google.clientId}
               render={(renderProps) => (
                 <button
                   onClick={renderProps.onClick}
@@ -208,23 +209,23 @@ class Login extends Component {
               buttonText="Login"
               onSuccess={this.responseGoogle}
               onFailure={this.onFailure}
-              cookiePolicy={"single_host_origin"}
+              cookiePolicy={config.google.clientId}
             />
             <GitHubLogin
-              clientId="f134f0ff4de45ff0db85"
+              clientId={config.github.clientId}
               onSuccess={this.onGithubSuccess}
               onFailure={this.onFailure}
               buttonText=""
-               redirectUri="" 
+               redirectUri={config.github.redirectUri}
             >
               <img src="https://img.icons8.com/ios-glyphs/52/000000/github.png" />
             </GitHubLogin>
             <MicrosoftLogin
-              clientId={"79135825-5661-415a-a8ba-c9075b8dcc6a"}
-              validateAuthority={false }
-              redirectUri="http://localhost:3000/"
+              clientId={config.outlook.clientId}
+              validateAuthority={config.outlook.validateAuthority}
+              redirectUri={config.outlook.redirectUri}
               authCallback={this.azureAuthHandler}
-              tenantUrl="https://login.microsoftonline.com/850aa78d-94e1-4bc6-9cf3-8c11b530701c"
+              tenantUrl={config.outlook.tenantUrl}
             >
               <img src="https://img.icons8.com/color/48/000000/microsoft-outlook-2019--v2.png" />
             </MicrosoftLogin>
