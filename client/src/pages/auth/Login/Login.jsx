@@ -195,7 +195,7 @@ class Login extends Component {
           </form>
 
           <Separator data="OR" />
-          <div className="social-login" style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+          <div className="social-login" style={{display:"flex",justifyContent:"space-evenly",alignItems:"center",width:"100%"}}>
             <GoogleLogin
               clientId={config.google.clientId}
               render={(renderProps) => (
