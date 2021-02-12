@@ -97,21 +97,21 @@ function Profile() {
               </div>
               <div className={classes.row}>
                 <div className="first-name">
-                  <h1 className={classes.label}>First Name</h1>
+                  <h1 className={classes.label}>Name</h1>
                   <input
                     className={classes.input}
                     type="text"
-                    name="first_name"
-                    defaultValue={profile?.first_name}
+                    name="fullName"
+                    defaultValue={profile?.fullName}
                   />
                 </div>
                 <div className="last-name">
-                  <h1 className={classes.label}>Last Name</h1>
+                  <h1 className={classes.label}>Year</h1>
                   <input
                     className={classes.input}
                     type="text"
-                    name="last_name"
-                    defaultValue={profile?.last_name}
+                    name="year"
+                    defaultValue={profile?.year}
                   />
                 </div>
               </div>
@@ -167,7 +167,7 @@ function Profile() {
               style={{ fontWeight: 400, marginTop: "12px" }}
               className={classes.label}
             >
-              {profile?.first_name||profile?.last_name?`${profile.first_name} ${profile.last_name}` : profile?.username}
+              {profile?.fullName?profile?.fullName: profile?.username}
             </h1>
           </div>
           <div

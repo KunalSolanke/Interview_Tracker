@@ -94,7 +94,7 @@ export default function Problem({problem}) {
             <Typography variant="caption">
               Solve question here
               <br />
-              <a href={problem.link} className={classes.link}>
+              <a href={problem.url} target="blank"className={classes.link}>
                 Solve
               </a>
             </Typography>

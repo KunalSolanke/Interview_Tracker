@@ -22,7 +22,7 @@ import VisibilityTwoToneIcon from "@material-ui/icons/VisibilityTwoTone";
 import VisibilityOffTwoToneIcon from "@material-ui/icons/VisibilityOffTwoTone";
 import axios from "axios";
 import { connect } from "react-redux";
-import { authLogin } from "../../../store/actions/auth";
+import { authLogin,socialAuth } from "../../../store/actions/auth";
 import "./animation.js";
 import "./styles.css";
 import BasicInput from "../../../components/Input/Input";
@@ -32,18 +32,6 @@ import GitHubLogin from "react-github-login";
 import MicrosoftLogin from "react-microsoft-login";
 import {withRouter} from 'react-router-dom'
 
-export const authHandler = (props) => {
-  const authHandler = (err, data) => {
-    console.log(err, data);
-  };
-};
-
-const onSuccess = (response) => console.log(response);
-const onFailure = (response) => console.error(response);
-
-const responseGoogle = (response) => {
-  console.log(response);
-};
 
 class Login extends Component {
   state = {
@@ -60,11 +48,34 @@ class Login extends Component {
     });
   };
 
+  azureAuthHandler =async (err, data) => {
+    console.log(err, data);
+    let token = JSON.stringify({access_token: data.idToken.rawIdToken})
+    await this.props.socialAuth(token,"outlook")
+  };
+ 
+
+ onGithubSuccess = async (response) => {
+   console.log(response);
+   
+    await this.props.socialAuth(response,"github")
+ }
+ onFailure = (response) => console.error(response);
+  responseGoogle = async (response) => {
+    console.log(response);
+    let token = this.getToken(response)
+    await this.props.socialAuth(token,"google")
+  };
+
   handleChange = (name) => (e) => {
     this.setState({
       [name]: e.target.value,
     });
   };
+
+  getToken = (response)=>{
+    return JSON.stringify({access_token: response.accessToken}, null,2)
+  }
 
   validateEmail(str) {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(str))
@@ -90,7 +101,7 @@ class Login extends Component {
     if (!this.validateEmail(this.state.email)) {
       this.setState({
         errorOpen: true,
-        error: "Invalid email formay",
+        error: "Invalid email format",
       });
       return false;
     } else if (this.state.password.length < 6) {
@@ -185,7 +196,7 @@ class Login extends Component {
           <Separator data="OR" />
           <div className="social-login">
             <GoogleLogin
-              clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+              clientId="495698794919-ra10r1v99lf1202f0eg617nbsjl4r614.apps.googleusercontent.com"
               render={(renderProps) => (
                 <button
                   onClick={renderProps.onClick}
@@ -195,21 +206,25 @@ class Login extends Component {
                 </button>
               )}
               buttonText="Login"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
+              onSuccess={this.responseGoogle}
+              onFailure={this.onFailure}
               cookiePolicy={"single_host_origin"}
             />
             <GitHubLogin
-              clientId="ac56fad434a3a3c1561e"
-              onSuccess={onSuccess}
-              onFailure={onFailure}
+              clientId="f134f0ff4de45ff0db85"
+              onSuccess={this.onGithubSuccess}
+              onFailure={this.onFailure}
               buttonText=""
+               redirectUri="" 
             >
               <img src="https://img.icons8.com/ios-glyphs/52/000000/github.png" />
             </GitHubLogin>
             <MicrosoftLogin
-              clientId={"My client id"}
-              authCallback={authHandler}
+              clientId={"79135825-5661-415a-a8ba-c9075b8dcc6a"}
+              validateAuthority={false }
+              redirectUri="http://localhost:3000/"
+              authCallback={this.azureAuthHandler}
+              tenantUrl="https://login.microsoftonline.com/850aa78d-94e1-4bc6-9cf3-8c11b530701c"
             >
               <img src="https://img.icons8.com/color/48/000000/microsoft-outlook-2019--v2.png" />
             </MicrosoftLogin>
@@ -254,7 +269,8 @@ class Login extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    Login: (user) => dispatch(authLogin(user)),
+    Login: async (user) => await dispatch(authLogin(user)),
+    socialAuth : async (data,provider)=>await dispatch(socialAuth(data,provider))
   };
 };
 

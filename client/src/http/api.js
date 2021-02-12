@@ -1,3 +1,18 @@
-const baseUrl = 'https://interview-tracker-iitg.herokuapp.com'
+import axios from "axios";
+const env = "dev";
+const baseURL =
+  env == "dev"
+    ? "http://localhost:3001"
+    : "https://interview-tracker-iitg.herokuapp.com";
 
-export default baseUrl;
+const axiosInstance = axios.create({
+  baseURL: baseURL,
+  withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    credentials: "include",
+  },
+});
+
+export default axiosInstance;

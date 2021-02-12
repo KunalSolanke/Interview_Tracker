@@ -1,9 +1,9 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import navbarImg from "../assets/navbar_image.svg";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import {authLogout,getProfile} from '../store/actions/auth'
+import { logout } from "../store/actions/auth";
 
 const useStyles = makeStyles({
   navLinks: {
@@ -59,17 +59,7 @@ function BaseLayout() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
   const classes = useStyles();
-  useEffect(() => {
-    (async()=>{
-      if(localStorage.getItem("token")&&!authState.profile){
-        await dispatch(getProfile()) ;
-      }
-  })()
-
-    
-  }, [])
-
-
+  useEffect(() => {}, [authState.username, localStorage.getItem("username")]);
 
   return (
     <div style={{ position: "relative", OverflowX: "hidden" }}>
@@ -96,43 +86,44 @@ function BaseLayout() {
             >
               Interviews
             </NavLink>
-            {authState.profile ? (
+            {authState.username || localStorage.getItem("username") ? (
               <>
-              <NavLink
-                activeClassName={classes.activeLink}
-                to="/profile"
-                className={classes.navLink}
-              >
-                {authState.profile.username}
-              </NavLink>
-              <NavLink
-                activeClassName={classes.activeLink}
-                className={classes.navLink}
-                to="#"
-                onClick = {()=>{dispatch(authLogout())}}
-              >
-                Logout
-              </NavLink>
+                <NavLink
+                  activeClassName={classes.activeLink}
+                  to="/profile"
+                  className={classes.navLink}
+                >
+                  {authState.username || localStorage.getItem("username")}
+                </NavLink>
+                <NavLink
+                  activeClassName={classes.activeLink}
+                  className={classes.navLink}
+                  to="#"
+                  onClick={() => {
+                    dispatch(logout());
+                  }}
+                >
+                  Logout
+                </NavLink>
               </>
             ) : (
               <>
-              <NavLink
-                activeClassName={classes.activeLink}
-                to="/accounts/login"
-                className={classes.navLink}
-              >
-                Login
-              </NavLink>
-              <NavLink
-                activeClassName={classes.activeLink}
-                to="/accounts/register"
-                className={classes.navLink}
-              >
-                Register
-              </NavLink>
+                <NavLink
+                  activeClassName={classes.activeLink}
+                  to="/accounts/login"
+                  className={classes.navLink}
+                >
+                  Login
+                </NavLink>
+                <NavLink
+                  activeClassName={classes.activeLink}
+                  to="/accounts/register"
+                  className={classes.navLink}
+                >
+                  Register
+                </NavLink>
               </>
             )}
-
           </div>
         </nav>
       </div>
