@@ -16,6 +16,7 @@ router.route('/profile/interviews').get(profile.getMyInterviews)
 router.post('/profile',upload.single('image'),profile.updateProfile)
 router.get('/profile/questions',profile.getMyQuestions)
 router.route('/profile/starred').post(profile.addToStarred).get(profile.getStarredQuestions)
+router.route('/profile/starredInterviews').post(profile.addToStarredInterviews).get(profile.getStarredInterviews)
 
 
 module.exports = router;

@@ -92,6 +92,33 @@ export const getStarredSuccess = (data)=>{
   }
 }
 
+
+export const starredInterviewsRequest = () => {
+  return {
+    type: dashboardActions.STARRED_INTERVIEW_REQUEST,
+  };
+};
+
+export const starredInterviewsSuccess = (data) => {
+  return {
+    type: dashboardActions.STARRED_INTERVIEW_SUCCESS,
+    payload: data,
+  };
+};
+
+export const getStarredInterviewsRequest = ()=>{
+  return {
+    type:dashboardActions.GET_STARRED_INTERVIEW_REQUEST,
+  };
+};
+
+export const getStarredInterviewsSuccess = (data)=>{
+  return {
+    type:dashboardActions.GET_STARRED_INTERVIEW_SUCCESS,
+    payload:data
+  }
+}
+
 export const addtoStarred = (link,check=false)=>{
   return async (dispatch,getState) =>{
           dispatch(addToStarredRequest()) ;
@@ -125,6 +152,49 @@ export const getStarred = ()=>{
           axios.defaults.headers["Authorization"]=`Token ${token}` ;
           const response = await axios.get(`${baseUrl}/accounts/profile/starred`)
           dispatch(getStarredSuccess(response.data))
+          }
+          catch(err){
+              console.log(err);
+              dispatch(requestFail(err))
+          }
+  }
+}
+
+export const starredInterviews = (pk,check=false)=>{
+  return async (dispatch,getState) =>{
+          dispatch(starredInterviewsRequest()) ;
+          console.log('entering here')
+          const token = localStorage.getItem("token")
+          if(!token){
+              return ;
+          }
+          try{
+          axios.defaults.headers["Authorization"]=`Token ${token}` ;
+          console.log(pk)
+          const response = await axios.post(`${baseUrl}/accounts/profile/starredInterviews`,{pk,check})
+          console.log('data is ',response.data)
+          dispatch(starredInterviewsSuccess(response.data))
+          }
+          catch(err){
+              console.log(err);
+              dispatch(requestFail(err))
+          }
+  }
+}
+
+export const getStarredInterviews = ()=>{
+  return async (dispatch,getState) =>{
+          dispatch(getStarredInterviewsRequest()) ;
+          console.log('entering here')
+          const token = localStorage.getItem("token")
+          if(!token){
+              return;
+          }
+          try{
+          axios.defaults.headers["Authorization"]=`Token ${token}` ;
+          const response = await axios.get(`${baseUrl}/accounts/profile/starredInterviews`)
+          console.log('data is ',response.data)
+          dispatch(getStarredInterviewsSuccess(response.data))
           }
           catch(err){
               console.log(err);

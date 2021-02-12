@@ -50,7 +50,7 @@ function Interview({interview}) {
         <div className={classes.root}>
             <div className={classes.top}>
                 <div className={classes.image}>
-                    <img className={classes.img} src={interview.image.contentType}/>
+                    <img className={classes.img} src={interview.image?.contentType}/>
                 </div>
                 <div className={classes.description}>
                     <h1 className={classes.title}>

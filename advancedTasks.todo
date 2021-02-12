@@ -1,1 +1,3 @@
 ☐ Since on clicking the starred option, every problem component is re rendering, so optimise that
+☐ Slight bug in comments ---> picture does not appear until we reload
+☐ Starred Interview backend optimisation
