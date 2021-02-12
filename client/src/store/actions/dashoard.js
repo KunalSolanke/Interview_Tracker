@@ -60,6 +60,144 @@ export const requestFail = (data) => {
   };
 };
 
+export const addToStarredRequest = () => {
+  return {
+    type: dashboardActions.ADD_TO_STARRED_REQUEST,
+  };
+};
+
+export const addToStarredSuccess = (data) => {
+  return {
+    type: dashboardActions.ADD_TO_STARRED_SUCCESS,
+    payload: data,
+  };
+};
+
+export const getStarredRequest = () => {
+  return {
+    type: dashboardActions.GET_STARRED_REQUEST,
+  };
+};
+
+export const getStarredSuccess = (data) => {
+  return {
+    type: dashboardActions.GET_STARRED_SUCCESS,
+    payload: data,
+  };
+};
+
+export const starredInterviewsRequest = () => {
+  return {
+    type: dashboardActions.STARRED_INTERVIEW_REQUEST,
+  };
+};
+
+export const starredInterviewsSuccess = (data) => {
+  return {
+    type: dashboardActions.STARRED_INTERVIEW_SUCCESS,
+    payload: data,
+  };
+};
+
+export const getStarredInterviewsRequest = () => {
+  return {
+    type: dashboardActions.GET_STARRED_INTERVIEW_REQUEST,
+  };
+};
+
+export const getStarredInterviewsSuccess = (data) => {
+  return {
+    type: dashboardActions.GET_STARRED_INTERVIEW_SUCCESS,
+    payload: data,
+  };
+};
+
+export const addtoStarred = (link, check = false) => {
+  return async (dispatch, getState) => {
+    dispatch(addToStarredRequest());
+    console.log("entering here");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    try {
+      axios.defaults.headers["Authorization"] = `Token ${token}`;
+      console.log(link);
+      const response = await axios.post(`/accounts/profile/starred`, {
+        link,
+        check,
+      });
+      dispatch(addToStarredSuccess(response.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(requestFail(err));
+    }
+  };
+};
+
+export const getStarred = () => {
+  return async (dispatch, getState) => {
+    dispatch(getStarredRequest());
+    console.log("entering here");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    try {
+      axios.defaults.headers["Authorization"] = `Token ${token}`;
+      const response = await axios.get(`/accounts/profile/starred`);
+      dispatch(getStarredSuccess(response.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(requestFail(err));
+    }
+  };
+};
+
+export const starredInterviews = (pk, check = false) => {
+  return async (dispatch, getState) => {
+    dispatch(starredInterviewsRequest());
+    console.log("entering here");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    try {
+      axios.defaults.headers["Authorization"] = `Token ${token}`;
+      console.log(pk);
+      const response = await axios.post(`/accounts/profile/starredInterviews`, {
+        pk,
+        check,
+      });
+      console.log("data is ", response.data);
+      dispatch(starredInterviewsSuccess(response.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(requestFail(err));
+    }
+  };
+};
+
+export const getStarredInterviews = () => {
+  return async (dispatch, getState) => {
+    dispatch(getStarredInterviewsRequest());
+    console.log("entering here");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    try {
+      axios.defaults.headers["Authorization"] = `Token ${token}`;
+      const response = await axios.get(`/accounts/profile/starredInterviews`);
+      console.log("data is ", response.data);
+      dispatch(getStarredInterviewsSuccess(response.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(requestFail(err));
+    }
+  };
+};
+
 export const addQuestion = (data) => {
   return async (dispatch, getState) => {
     dispatch(addQuestionRequest());
@@ -137,7 +275,7 @@ export const createInterview = (data) => {
     try {
       axios.defaults.headers["Authorization"] = `Token ${token}`;
 
-      const response = await axios.post(`/interviews/create`, data);
+      const response = await axios.post(`${baseUrl}/interviews/create`, data);
       dispatch(createInterviewSuccess(response.data));
     } catch (err) {
       console.log(err);

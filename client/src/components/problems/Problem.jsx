@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -12,7 +10,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Chip from "@material-ui/core/Chip";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
+import {addtoStarred} from '../../store/actions/dashoard'
+import {useDispatch,useSelector} from 'react-redux'
+import {useState,useEffect} from 'react'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,12 +50,31 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       textDecoration: "underline",
     },
-  },
+  }
 }));
 
 export default function Problem({problem}) {
   const classes = useStyles();
-
+  const dispatch = useDispatch()
+  const dashboard = useSelector(state=>state.dashboard)
+  const [IsStarred,setIsStarred] = useState(false)
+  const handleBookmark = async ()=>{
+    setIsStarred((prev)=>!prev)
+    await dispatch(addtoStarred(problem.url))
+    console.log('starred becomes ',dashboard.starredQuestions)
+  }
+  useEffect(()=>{
+    console.log(dashboard.starredQuestions)
+    let list = dashboard.starredQuestions.filter(ques=>ques._id==problem._id)
+    let condition = list.length==0;
+    //console.log(dashboard.starredQuestions,'and problem is ',problem._id.toString())
+    if(!condition){
+      setIsStarred(true);
+    }
+    else{
+      setIsStarred(false);
+    }
+  },[dashboard.starredQuestions])
   return (
     <div className={classes.root}>
       <Accordion>
@@ -63,7 +84,7 @@ export default function Problem({problem}) {
           id="panel1c-header"
         >
           <div className={classes.column}>
-            <Typography className={classes.heading}>{problem.title}</Typography>
+            <Typography className={classes.heading}>{problem?.title}</Typography>
           </div>
           <div className={classes.column}>
             <Typography className={classes.secondaryHeading}>
@@ -78,7 +99,7 @@ export default function Problem({problem}) {
             </Typography>
           </div>
           <div className={classes.column}>
-            {problem.topics &&
+            {problem?.topics &&
               problem.topics?.map((topic) => {
                 return (
                   <Chip
@@ -101,10 +122,16 @@ export default function Problem({problem}) {
           </div>
         </AccordionDetails>
         <Divider />
-        <AccordionActions>
-          <Button size="small" color="primary">
-            Solve
+        <AccordionActions style={{display:'flex',justifyContent:'space-between',cursor:'pointer'}} className={classes.bottomSection}>
+         {
+           (IsStarred)?<BookmarkIcon color="primary" onClick={handleBookmark}/>:<BookmarkBorderIcon onClick={handleBookmark}/>
+         }
+         <a href={problem?.url} target="blank" className={classes.link}>
+                <Button size="small" color="primary">
+                  Solve
           </Button>
+              </a>
+          
         </AccordionActions>
       </Accordion>
     </div>

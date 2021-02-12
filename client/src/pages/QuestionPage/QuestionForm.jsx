@@ -5,6 +5,7 @@ import ProfileLayout from "../../layouts/ProfileLayout";
 import Select from '../../components/Select/Select'
 import { addQuestion } from "../../store/actions/dashoard";
 import { useSelector, useDispatch } from "react-redux";
+import {useHistory} from 'react-router-dom'
 
 
 const mystyles = makeStyles({
@@ -54,6 +55,8 @@ function QuestionForm() {
     const classes = mystyles();
     const dispatch = useDispatch();
     const form = useRef(null);
+    const history = useHistory();
+
     const handleSubmit = async (e) => {
       e.preventDefault();
       console.log("save pe click ho gya");
@@ -61,6 +64,7 @@ function QuestionForm() {
       console.log('Yaha aay kya mai')
       console.log('data is ', data.get('topics'))
       await dispatch(addQuestion(data));
+      history.push('/profile/myQuestions')
     };
   return (
     <ProfileLayout>

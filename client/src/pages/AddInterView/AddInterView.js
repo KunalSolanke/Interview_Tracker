@@ -6,6 +6,8 @@ import {createInterview} from '../../store/actions/dashoard'
 import {useSelector,useDispatch} from "react-redux"
 import {convertToRaw} from 'draft-js' ;
 import draftToHtml from 'draftjs-to-html';
+import { useHistory } from "react-router-dom";
+
 const useStyles = makeStyles({
   sectionHead: {
     fontSize: "18px",
@@ -49,12 +51,14 @@ function AddInterView() {
   const form = useRef(null) ;
   const profile = useSelector(state => state.auth.profile)
   const dispatch = useDispatch()
+  const history = useHistory();
   const handleSubmit = async (e)=>{
           e.preventDefault() ;
           console.log('save pe click ho gya')
           const data =await new FormData(form.current) ;
           data.append("content",draftToHtml(convertToRaw(editorData.getCurrentContent())))
           await dispatch(createInterview(data));
+          history.push('/profile/myInterviews')
   }
   return (
     <ProfileLayout>

@@ -70,9 +70,9 @@ export default function CustomizedSelects({name}) {
           input={<BootstrapInput name={name}/>}
         >
           <option aria-label="None" value=""/>
-          <option value={1}>Easy</option>
-          <option value={2}>Medium</option>
-          <option value={3}>Hard</option>
+          <option value={"Easy"}>Easy</option>
+          <option value={"Medium"}>Medium</option>
+          <option value={"Hard"}>Hard</option>
         </NativeSelect>
       </FormControl>
     </div>
