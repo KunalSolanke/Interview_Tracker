@@ -8,7 +8,8 @@ const initialState = {
   topics: [],
   interviews : [],
   currInterview : null,
-  comments : []
+  comments : [],
+  companies:[]
 };
 
 const topicsRequest = (state, action) => {
@@ -60,6 +61,20 @@ const getInterViewSuccess = (state,action) => {
         interviews : action.payload,
         loading:false
     })
+}
+
+const getComapniesRequest = (state,action) => {
+  return UpdatedObj (state,{
+      loading : true ,
+      error : null ,
+  })
+}
+
+const getCompaniesSuccess = (state,action) => {
+  return UpdatedObj (state,{
+      companies : action.payload,
+      loading:false
+  })
 }
 
 const getInterViewByIdRequest = (state,action) => {
@@ -121,6 +136,8 @@ const reducer = (state = initialState, action) => {
       return topicsGetQuestionsSuccess(state, action);
     case actionTypes.GETALL_INTERVIEW_REQUEST: return getInterViewRequest(state,action)
     case actionTypes.GETALL_INTERVIEW_SUCCESS : return getInterViewSuccess(state,action)
+    case actionTypes.GETALL_COMPANIES_REQUEST: return getCommentRequest(state,action)
+    case actionTypes.GETALL_COMPANIES_SUCCESS : return getCompaniesSuccess(state,action)
     case actionTypes.GETCURR_INTERVIEW_REQUEST: return getInterViewByIdRequest(state,action)
     case actionTypes.GETCURR_INTERVIEW_SUCCESS : return getInterViewByIdSuccess(state,action)
     case actionTypes.GET_COMMENT_REQUEST: return getCommentRequest(state,action)

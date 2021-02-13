@@ -194,6 +194,13 @@ function BaseLayout() {
             >
               Interviews
             </NavLink>
+            <NavLink
+              activeClassName={classes.activeLink}
+              to="/companies"
+              className={classes.navLink}
+            >
+              Companies
+            </NavLink>
             {authState.profile ? (
               <>
               <NavLink

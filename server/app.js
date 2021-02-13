@@ -10,6 +10,7 @@ const {
   usersRouter,
   problemRouter,
   interview,
+  company
 } = require("./routes");
 require("dotenv").config();
 const { User, Question, Topic, InterviewExp } = require("./models");
@@ -97,6 +98,7 @@ const multer = require("multer");
   app.use("/accounts", usersRouter);
   app.use("/problems", problemRouter);
   app.use("/interviews", interview);
+  app.use("/companies",company)
 
   // error handler
   app.use(function (err, req, res, next) {

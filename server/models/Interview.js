@@ -11,8 +11,8 @@ const interviewExpSchema = mongoose.Schema({
     },
 
     company: {
-        type: String,
-        required: false
+        type: mongoose.Schema.Types.ObjectId,
+        ref : "Company"
     },
 
     title: {
