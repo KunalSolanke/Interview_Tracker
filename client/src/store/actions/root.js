@@ -1,6 +1,5 @@
 import * as rootActions from "../constants/root.js";
-import axios from "axios";
-import baseUrl from "../../http/api";
+import axios from "../../http/api";
 
 export const topicsRequest = () => {
   return {
@@ -105,7 +104,7 @@ export const getComments = (pk) => {
   return async (dispatch, getState) => {
     dispatch(getCommentByIdRequest());
     try {
-      const response = await axios.get(`${baseUrl}/interviews/comments/${pk}`);
+      const response = await axios.get(`/interviews/comments/${pk}`);
       dispatch(getCommentByIdSuccess(response.data));
     } catch (err) {
       console.log(err);
@@ -118,10 +117,7 @@ export const postComment = (pk, desc) => {
   return async (dispatch, getState) => {
     dispatch(postCommentRequest());
     try {
-      const response = await axios.post(
-        `${baseUrl}/interviews/comments/${pk}`,
-        { desc }
-      );
+      const response = await axios.post(`/interviews/comments/${pk}`, { desc });
       dispatch(postCommentSuccess(response.data));
     } catch (err) {
       console.log(err);
@@ -134,7 +130,7 @@ export const getTopicQuestions = (title) => {
   return async (dispatch, getState) => {
     dispatch(topicsGetQuestionsRequest());
     try {
-      const response = await axios.get(`${baseUrl}/problems/topics/${title}`);
+      const response = await axios.get(`/problems/topics/${title}`);
       dispatch(topicsGetQuestionsSuccess(response.data));
     } catch (err) {
       console.log(err);
@@ -147,7 +143,7 @@ export const getTopics = () => {
   return (dispatch) => {
     dispatch(topicsRequest());
     axios
-      .get(`${baseUrl}/problems/topics/`)
+      .get(`/problems/topics/`)
       .then((response) => {
         console.log(response);
         dispatch(topicsSuccess(response.data.topic_list));
@@ -165,8 +161,8 @@ export const getInterviews = (company = null) => {
     console.log("entering here");
     try {
       let response = null;
-      if (!company) response = await axios.get(`${baseUrl}/interviews/list`);
-      else response = await axios.get(`${baseUrl}/companies/interviews/${company}`)
+      if (!company) response = await axios.get(`/interviews/list`);
+      else response = await axios.get(`/companies/interviews/${company}`)
       console.log("interviews res is ", response);
       dispatch(getInterviewsSuccess(response.data));
     } catch (err) {
@@ -188,7 +184,7 @@ export const getInterviewById = (interviewId) => {
     try {
       // axios.defaults.headers["Authorization"]=`Token ${token}` ;
       console.log("going to make a request");
-      const response = await axios.get(`${baseUrl}/interviews/${interviewId}`);
+      const response = await axios.get(`/interviews/${interviewId}`);
       console.log("interview is ", response);
       dispatch(getInterviewByIdSuccess(response.data));
     } catch (err) {
@@ -203,7 +199,7 @@ export const getComapnies = () => {
     dispatch(getCompaniesRequest());
     console.log("entering here");
     try {
-      const response = await axios.get(`${baseUrl}/companies/list`);
+      const response = await axios.get(`/companies/list`);
       console.log("interviews res is ", response);
       dispatch(getCompaniesSuccess(response.data));
     } catch (err) {

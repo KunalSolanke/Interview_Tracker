@@ -115,7 +115,7 @@ export default function Problem({problem}) {
             <Typography variant="caption">
               Solve question here
               <br />
-              <a href={problem?.link} className={classes.link}>
+              <a href={problem.url} target="blank"className={classes.link}>
                 Solve
               </a>
             </Typography>
@@ -126,9 +126,12 @@ export default function Problem({problem}) {
          {
            (IsStarred)?<BookmarkIcon color="primary" onClick={handleBookmark}/>:<BookmarkBorderIcon onClick={handleBookmark}/>
          }
-          <Button size="small" color="primary">
-            Solve
+         <a href={problem?.url} target="blank" className={classes.link}>
+                <Button size="small" color="primary">
+                  Solve
           </Button>
+              </a>
+          
         </AccordionActions>
       </Accordion>
     </div>

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
       position:"absolute",
       bottom : 0,
       right : 0,
-      height : '50vh',
+      height : '74vh',
       objectFit :"cover",
       [theme.breakpoints.down("965")]: {
           display: "none",
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
       position : 'relative',
       OverflowY:"hidden",
       [theme.breakpoints.down("965")]: {
-          marginTop: "25px",
+          marginTop: "1px",
     },
       
   },
@@ -78,11 +78,19 @@ const useStyles = makeStyles((theme) => ({
     },
      "&>p":{
             width : "50%",
-            minWidth : "400px"
-        }
+            minWidth : "400px",
+            [theme.breakpoints.down("650")]: {
+                minWidth: "300px"
+            }
+        },
+
   },
   interViewSection :{
-      marginTop :"60px"
+      marginTop :"60px",
+      [theme.breakpoints.down("650")]: {
+          margin: 0,
+          padding: "1rem",
+      }
   },
   icarousel :{
       marginTop : "6rem",
@@ -92,6 +100,9 @@ const useStyles = makeStyles((theme) => ({
           width : "46vw",
           minWidth : "400px",
           overflow : "hideen"
+      },
+      [theme.breakpoints.down("650")]: {
+          marginTop : "4rem",
       }
   },
   quotes:{
@@ -99,7 +110,14 @@ const useStyles = makeStyles((theme) => ({
         top : 20 ,
           left : 20,
           transform : "translate(-80%,-50%)",
-          zIndex : 10
+          zIndex : 10,
+
+          [theme.breakpoints.down("650")]: {
+            height: "10vh",
+            transform : "translate(-50%,-50%)",
+            top: 10,
+            left: 25,
+        }
   },
   phead:{
       "&>h1":{
@@ -112,7 +130,11 @@ const useStyles = makeStyles((theme) => ({
     },
 },
 practiceSection:{
-    marginTop : "5rem"
+    marginTop : "5rem",
+    [theme.breakpoints.down("650")]: {
+        margin: 0,
+        padding: "1rem",
+    }
 },
 pBody:{
     marginTop : "2rem"
@@ -129,7 +151,11 @@ practiceImage:{
 footer:{
     marginTop : "8rem",
     backgroundColor:"#659CFC",
-    height:"45vh"
+    // height:"50vh",
+    [theme.breakpoints.down("650")]: {
+        margin: 0,
+        padding: "1rem",
+    }
 },
 aimDiv:{
     maxWidth : 600,
@@ -152,7 +178,10 @@ socialLinks:{
        },
        "&>img:hover":{
                transform :"scale(1.3,1.3)"
-           }
+           },
+           [theme.breakpoints.down("650")]: {
+               
+        }
    }
 },
 formDiv :{
@@ -186,7 +215,10 @@ cInput:{
    width : "80%",
    maxWidth : "600px",
    minWidth : "360px",
-    color :"white"
+    color :"white",
+    [theme.breakpoints.down("650")]: {
+        minWidth: "320px",
+    }
 },
 formSend:{
    backgroundColor:"#508DF9",

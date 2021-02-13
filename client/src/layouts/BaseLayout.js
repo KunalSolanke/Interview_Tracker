@@ -1,11 +1,10 @@
-import React,{useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import navbarImg from "../assets/navbar_image.svg";
-import { NavLink,useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import {authLogout,getProfile} from '../store/actions/auth';
-import './keyframe.css'
-
+import { logout } from "../store/actions/auth";
+import "./keyframe.css";
 
 const useStyles = makeStyles((theme) => ({
   navLinks: {
@@ -18,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "10px auto",
     [theme.breakpoints.down("650")]: {
       margin: "0",
-    }
+    },
   },
   navBar: {
     display: "flex",
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
       padding: "60px 0",
       position: "absolute",
       right: "0px",
-      height: "80vh",
+      height: "84vh",
       top: "17vh",
       backgroundColor: "#2272FF",
       flexDirection: "column",
@@ -45,12 +44,11 @@ const useStyles = makeStyles((theme) => ({
       opacity: 0,
       transform: "translateX(100%)",
       transition: "transform 0.5s ease-in, opacity 0.5s ease-in",
-    }
+    },
   },
   navActive: {
     opacity: 1,
     transform: "translateX(0%)",
-
   },
   navLink: {
     marginLeft: "30px",
@@ -65,10 +63,10 @@ const useStyles = makeStyles((theme) => ({
         color: "#fff",
       },
       margin: "0",
-      fontSize: "23px",
-    }
+      fontSize: "18px",
+    },
   },
-  
+
   landingBottom: {
     position: "absolute",
     bottom: 50,
@@ -78,7 +76,6 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: "-40px",
     right: "-30px",
-    
   },
   logo: {
     fontWeight: "700",
@@ -87,6 +84,9 @@ const useStyles = makeStyles((theme) => ({
   },
   activeLink: {
     color: "#2272FF",
+    [theme.breakpoints.down("650")]: {
+      color: "#fff",
+    },
   },
   burger: {
     display: "none",
@@ -104,48 +104,37 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("650")]: {
       display: "block",
     },
-
   },
 
-  line2Tog : {
-      opacity: 0,
-    
+  line2Tog: {
+    opacity: 0,
   },
-  
 
-  line1Tog : {
+  line1Tog: {
     transform: "rotate(-45deg) translate(-5px, 6px)",
   },
-  
 
   line3Tog: {
     transform: "rotate(45deg) translate(-5px, -6px)",
-  }
-
+  },
 }));
-
 
 function BaseLayout() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
   const classes = useStyles();
+  useEffect(() => {}, [authState.username, localStorage.getItem("username")]);
   const history = useHistory();
   const burgerNode = useRef(null);
+  const burger2 = useRef(null);
   const line1Node = useRef(null);
   const line2Node = useRef(null);
   const line3Node = useRef(null);
-  useEffect(() => {
-    (async()=>{
-      if(localStorage.getItem("token")&&!authState.profile){
-        await dispatch(getProfile()) ;
-      }
-  })()
-  }, [])
 
-  const handleLogout = (e)=>{
+  const handleLogout = (e) => {
     //window.location.pathname = "/"
-    dispatch(authLogout())
-  }
+    dispatch(logout());
+  };
 
   const navSlide = () => {
     let node = burgerNode.current;
@@ -153,9 +142,13 @@ function BaseLayout() {
     let navLinks = document.querySelectorAll(classes.navLink);
 
     node.childNodes.forEach((link, index) => {
+      link.style.animation = link.style.animation
+        ? ""
+        : `navLinkFade 0.6s ease forwards ${index / 7 + 0.3}s`;
+    });
 
-      link.style.animation = link.style.animation ? '' : `navLinkFade 0.6s ease forwards ${index / 7 + 0.3}s`;
-    })
+    let node2 = burger2.current;
+    node2.classList.toggle("cross");
 
     let nodeline1 = line1Node.current;
     nodeline1.classList.toggle(classes.line1Tog);
@@ -165,9 +158,7 @@ function BaseLayout() {
 
     let nodeline3 = line3Node.current;
     nodeline3.classList.toggle(classes.line3Tog);
-  }
-  
-
+  };
 
   return (
     <div style={{ position: "relative", OverflowX: "hidden" }}>
@@ -179,7 +170,13 @@ function BaseLayout() {
               <h1 className={classes.logo}>InterviewTrack</h1>
             </NavLink>
           </div>
-          <div className={classes.navLinks} ref={burgerNode}>
+          <div
+            className={classes.navLinks}
+            ref={burgerNode}
+            onClick={() => {
+              burger2.current.click();
+            }}
+          >
             <NavLink
               activeClassName={classes.activeLink}
               to="/practice"
@@ -201,44 +198,47 @@ function BaseLayout() {
             >
               Companies
             </NavLink>
-            {authState.profile ? (
+            { 
+            authState.username || localStorage.getItem("username") ? (
               <>
-              <NavLink
-                activeClassName={classes.activeLink}
-                to="/profile"
-                className={classes.navLink}
-              >
-                {authState.profile.username}
-              </NavLink>
-              <NavLink
-                activeClassName={classes.activeLink}
-                className={classes.navLink}
-                to="/"
-                onClick = {handleLogout}>
-                Logout
-              </NavLink>
+                <NavLink
+                  activeClassName={classes.activeLink}
+                  to="/profile"
+                  className={classes.navLink}
+                >
+                  {authState.username || localStorage.getItem("username")}
+                </NavLink>
+                <NavLink
+                  activeClassName={classes.activeLink}
+                  className={classes.navLink}
+                  to="#"
+                  onClick={() => {
+                    dispatch(logout());
+                  }}
+                >
+                  Logout
+                </NavLink>
               </>
             ) : (
               <>
-              <NavLink
-                activeClassName={classes.activeLink}
-                to="/accounts/login"
-                className={classes.navLink}
-              >
-                Login
-              </NavLink>
-              <NavLink
-                activeClassName={classes.activeLink}
-                to="/accounts/register"
-                className={classes.navLink}
-              >
-                Register
-              </NavLink>
+                <NavLink
+                  activeClassName={classes.activeLink}
+                  to="/accounts/login"
+                  className={classes.navLink}
+                >
+                  Login
+                </NavLink>
+                <NavLink
+                  activeClassName={classes.activeLink}
+                  to="/accounts/register"
+                  className={classes.navLink}
+                >
+                  Register
+                </NavLink>
               </>
             )}
-
           </div>
-          <div className={classes.burger} onClick={navSlide}>
+          <div className={classes.burger} onClick={navSlide} ref={burger2}>
             <div className={classes.line1} ref={line1Node}></div>
             <div className={classes.line2} ref={line2Node}></div>
             <div className={classes.line3} ref={line3Node}></div>
