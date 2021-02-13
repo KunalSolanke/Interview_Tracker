@@ -145,6 +145,7 @@ export const getStarred = () => {
     }
     try {
       axios.defaults.headers["Authorization"] = `Token ${token}`;
+      console.log("request checker")
       const response = await axios.get(`/accounts/profile/starred`);
       dispatch(getStarredSuccess(response.data));
     } catch (err) {
