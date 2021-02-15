@@ -45,6 +45,8 @@ const login = async (req, res) => {
     res.cookie("refresh_token", refreshToken, {
       httpOnly: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
+      SameSite: "none",
+      secure: true,
     });
     res.status(200).send({
       token: accessToken,
@@ -72,6 +74,8 @@ const refresh = async (req, res) => {
       res.cookie("refresh_token", refreshToken, {
         httpOnly: true,
         maxAge: 7 * 24 * 60 * 60 * 1000,
+        SameSite: "none",
+        secure: true,
       });
       user.refreshTokens = user.refreshTokens.concat([refreshToken]);
       await user.save();
