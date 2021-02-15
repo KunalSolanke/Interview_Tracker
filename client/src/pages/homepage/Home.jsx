@@ -73,16 +73,24 @@ const useStyles = makeStyles((theme) => ({
         fontSize : "32px",
         "&>span":{
             color : "#2272FF",
-            fontSize :"40px"     
+            fontSize :"40px",
+            [theme.breakpoints.down("650")]: {
+                fontSize: "35px"
+            }  
         },
+        [theme.breakpoints.down("650")]: {
+            fontSize: "28px",
+        }
     },
      "&>p":{
             width : "50%",
             minWidth : "400px",
             [theme.breakpoints.down("650")]: {
-                minWidth: "300px"
+                minWidth: "350px",
+                fontSize: "14px"
             }
         },
+    
 
   },
   interViewSection :{
@@ -113,10 +121,10 @@ const useStyles = makeStyles((theme) => ({
           zIndex : 10,
 
           [theme.breakpoints.down("650")]: {
-            height: "10vh",
+            height: "8vh",
             transform : "translate(-50%,-50%)",
-            top: 10,
-            left: 25,
+            top: 5,
+            left: 20,
         }
   },
   phead:{
@@ -125,8 +133,14 @@ const useStyles = makeStyles((theme) => ({
         fontSize : "32px",
         "&>span":{
             color : "#2272FF",
-            fontSize :"40px"     
+            fontSize :"40px",
+            [theme.breakpoints.down("650")]: {
+                fontSize: "35px",
+            }   
         },
+        [theme.breakpoints.down("650")]: {
+            fontSize: "28px",
+        }
     },
 },
 practiceSection:{
@@ -143,6 +157,9 @@ pBody:{
 pContent:{
    fontWeight : "400",
    fontSize : "18px",
+   [theme.breakpoints.down("650")]: {
+    fontSize: "14px",
+}
 },
 practiceImage:{
     width:"100%",

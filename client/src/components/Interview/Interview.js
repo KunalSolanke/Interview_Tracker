@@ -1,69 +1,86 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles'
-import {Link} from 'react-router-dom'
-const useStyles = makeStyles({
+import {Link} from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase';
+
+const useStyles = makeStyles((theme) => ({
     root:{
-        width:'95%',
-        backgroundColor:'#F0F4FA',
-        marginTop:'30px',
-        marginBottom:'50px',
-        padding:'15px 25px 15px 15px',
-        minHeight:'350px',
-        maxHeight:'350px',
-        borderRadius :"10px"
+        flexGrow: 1,
+        marginBottom: "1rem",
     },
-    top:{
-        width:'97%',
-        margin:'20px auto 10px auto',
-        display:'flex',
-        justifyContent:'space-between',
+    paper:{
+        padding: theme.spacing(2),
+        margin: 'auto',
+        [theme.breakpoints.down("650")]: {
+            maxWidth: 500,
+        },
+        backgroundColor: '#F0F4FA',
     },
+   
     bottom:{
         width:'97%',
-        margin:'10px auto 20px auto',
+        margin:'10px auto 10px auto',
     },
     image:{
-        width:'30%',
-        marginRight:'45px',
         backgroundColor:'grey'
     },
-    description:{
-        width:'70%'
-    },
     title:{
-        fontSize:'25px'
+        fontSize:'25px',
+        [theme.breakpoints.down("650")]: {
+            fontSize: '20px'
+        },
     },
     content:{
         fontSize:'18px',
         marginTop:'15px',
-        
+        [theme.breakpoints.down("650")]: {
+            fontSize: '14px'
+        },
     },
-    img:{
-        
+    img: {
+        width: "100%",
+        height: "100%",
+        objectFit: "contain",
+        objectPosition: "center",
     }
-})
+}));
 
 function Interview({interview}) {
     const classes = useStyles()
     return (
         <Link to={`/interview/${interview._id}`}>
         <div className={classes.root}>
-            <div className={classes.top}>
-                <div className={classes.image}>
-                    <img className={classes.img} src={interview.image?.contentType}/>
-                </div>
-                <div className={classes.description}>
-                    <h1 className={classes.title}>
-                        {interview.title}
-                    </h1>
-                    <p className={classes.content}>
-                     {interview.description}
-                    </p>
-                </div>
-            </div>
-            <div className={classes.bottom}>
-                <pre><h1 align="center">likes 10      comments 24</h1></pre>
-            </div>
+            
+
+            <Paper className={classes.paper}>
+                <Grid container spacing={4} className={classes.contianer}>
+                    <Grid item md={4}>
+                        <img className={classes.img} alt="complex" src={interview.image?.contentType} />
+                    </Grid>
+                    <Grid item xs={12} md={8} sm container>
+                        <Grid item xs container direction="column" spacing={2}>
+                            <Grid item xs>
+                                <h1 className={classes.title}>
+                                        {interview.title}
+                                </h1>
+                                <Typography className={classes.content}>
+                                    {interview.description}
+                                </Typography>                        
+                                
+                            </Grid>
+                            <Grid item>
+                                <div className={classes.bottom}>
+                                    <pre><h1 align="center">likes 10    comments 24</h1></pre>
+                                </div>
+                            </Grid>
+                        </Grid>
+                        
+                    </Grid>
+                </Grid>
+            </Paper>
         </div>
         </Link>
     )

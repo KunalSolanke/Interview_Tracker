@@ -16,7 +16,7 @@ export const register = theme => ({
     [theme.breakpoints.up(400 + theme.spacing(2))]: {
       width: 500,
       marginLeft: "auto",
-      marginRight: "auto"
+      marginRight: "auto",
     }
   },
   paper: {
@@ -31,7 +31,7 @@ export const register = theme => ({
     // "&:hover": {
     //   boxShadow: "0px 24px 36px rgba(131,153,167,0.99)"
     // },
-    zIndex:100
+    zIndex: 0
   },
   avatar: {
     marginTop: 20,

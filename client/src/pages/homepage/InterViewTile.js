@@ -1,13 +1,18 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     padding: "3rem 5rem 1rem 5rem",
     backgroundColor: "#FAFAFA",
     borderRadius: "20px",
     minWidth: "400px",
     width: "46vw",
+    [theme.breakpoints.down("650")]: {
+      width: "40vw",
+      padding: "30px 10px 20px 10px",
+      minWidth: "320px",
+    }
   },
   tileHead: {
     display: "flex",
@@ -18,6 +23,9 @@ const useStyles = makeStyles({
       "&>h1": {
         fontWeight: "700",
         fontSize: "18px",
+        [theme.breakpoints.down("650")]: {
+          fontSize: "16px",
+        }
       },
       "&>p": {
         fontWeight: "300",
@@ -37,11 +45,19 @@ const useStyles = makeStyles({
     width: "100%",
     height: "300px",
     objectFit: "cover",
+    [theme.breakpoints.down("650")]: {
+      height: "200px",
+      marginBottom: "1rem",
+    }
+    
   },
   iDescription: {
     "&>p": {
       fontWeight: "300",
       fontSize: "16px",
+      [theme.breakpoints.down("650")]: {
+        fontSize: "13px",
+      }
     },
   },
   bottom: {
@@ -49,8 +65,11 @@ const useStyles = makeStyles({
     color: "#508DF9",
     textAlign: "center",
     fontSize: "14px",
+    [theme.breakpoints.down("650")]: {
+      margin: "1rem 0 0"
+    }
   },
-});
+}));
 function InterViewTile({ data }) {
   const classes = useStyles();
   return (

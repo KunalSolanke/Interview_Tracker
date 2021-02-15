@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     padding: "1rem",
+    [theme.breakpoints.down("650")]: {
+      // paddingBottom: 0,
+    }
   },
   navLinks: {
     display: "flex",
@@ -37,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       right: "0px",
       height: "84vh",
-      top: "17vh",
+      top: "16vh",
       backgroundColor: "#2272FF",
       flexDirection: "column",
       alignItems: "center",
@@ -78,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: "-40px",
     right: "-30px",
+    [theme.breakpoints.down("650")]: {
+      height: "22vh",
+    }
     
   },
   logo: {
@@ -123,6 +129,16 @@ const useStyles = makeStyles((theme) => ({
 
   line3Tog: {
     transform: "rotate(45deg) translate(-5px, -6px)",
+  },
+
+  navHorLine: {
+    backgroundColor: "#508DF9",
+    width: "100%",
+    height: "3px",
+    marginTop: "53px",
+    [theme.breakpoints.down("650")]: {
+      marginTop: "30px",
+    }
   }
 
 }));
@@ -138,6 +154,7 @@ function BaseLayout() {
   const line1Node = useRef(null);
   const line2Node = useRef(null);
   const line3Node = useRef(null);
+
   useEffect(() => {
     (async()=>{
       if(localStorage.getItem("token")&&!authState.profile){
@@ -181,7 +198,13 @@ function BaseLayout() {
       <img src={navbarImg} className={classes.navImg} />
       <div className={classes.container}>
         <nav className={classes.navBar}>
-          <div className={classes.logoDiv}>
+          <div className={classes.logoDiv} onClick={() => {
+                  let cross = document.getElementsByClassName("cross");
+                  console.log(cross);
+                  if(cross.length){
+                  burger2.current.click();
+                }
+              }}>
             <NavLink to="/">
               <h1 className={classes.logo}>InterviewTrack</h1>
             </NavLink>
@@ -247,14 +270,7 @@ function BaseLayout() {
           </div>
         </nav>
       </div>
-      <div
-        style={{
-          backgroundColor: "#508DF9",
-          width: "100%",
-          height: "3px",
-          marginTop: "53px",
-        }}
-      ></div>
+      <div className={classes.navHorLine}></div>
     </div>
   );
 }
