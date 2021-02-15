@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Login from "./pages/auth/Login/Login";
 import Register from "./pages/auth/Registration/Registration";
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,17 +9,19 @@ import Profile from "./pages/ProfilePage/Profile";
 import AddInterView from "./pages/AddInterView/AddInterView";
 import Practice from "./pages/Practice/Practice";
 import QuestionForm from "./pages/QuestionPage/QuestionForm";
-import InterviewPage from './pages/InterviewPage/InterviewPage'
-import InterviewDescPage from './pages/InterviewDesc/InterviewDescPage'
-import InterviewListPage from './pages/InterviewListPage/InterviewPage'
-import ProblemPage from './pages/ProblemPage/ProblemPage'
-import {useEffect} from 'react'
-import {useSelector,useDispatch} from 'react-redux'
-import MyQuestionsPage from './pages/MyProblemPage/ProblemPage'
-import axios from 'axios'
-import StarredPage from './pages/StarredQuesPage/StarredPage'
-import './app.css';
-import StarInterviews from './pages/StarredInterviews/StarInterviews'
+import InterviewPage from "./pages/InterviewPage/InterviewPage";
+import InterviewDescPage from "./pages/InterviewDesc/InterviewDescPage";
+import InterviewListPage from "./pages/InterviewListPage/InterviewPage";
+import ProblemPage from "./pages/ProblemPage/ProblemPage";
+import { useSelector, useDispatch } from "react-redux";
+import MyQuestionsPage from "./pages/MyProblemPage/ProblemPage";
+import axios from "axios";
+import StarredPage from "./pages/StarredQuesPage/StarredPage";
+import "./app.css";
+import StarInterviews from "./pages/StarredInterviews/StarInterviews";
+import { authCheckState } from "./store/actions/auth";
+import Loading from "./components/Loading/Loading";
+import { useDipatch } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -37,7 +39,17 @@ const useStyles = makeStyles({
 
 function App() {
   const classes = useStyles();
-  return (
+  const dispatch = useDispatch();
+  const [loading, setloading] = useState(true);
+  useEffect(() => {
+    (async () => {
+      await dispatch(authCheckState());
+      setloading(false);
+    })();
+  }, []);
+  return loading ? (
+    <Loading />
+  ) : (
     <div className={`App ${classes.app}`}>
       <BrowserRouter>
         <BaseLayout />
@@ -60,23 +72,23 @@ function App() {
             path="/profile/interviews/create"
             component={AddInterView}
           ></Route>
-          <Route exact path = "/profile/questions/create">
-            <QuestionForm/>
+          <Route exact path="/profile/questions/create">
+            <QuestionForm />
           </Route>
-          <Route exact path = "/profile/myInterviews">
-            <InterviewPage/>
+          <Route exact path="/profile/myInterviews">
+            <InterviewPage />
           </Route>
-          <Route exact path = "/interview/:pk">
-            <InterviewDescPage/>
+          <Route exact path="/interview/:pk">
+            <InterviewDescPage />
           </Route>
-          <Route exact path = "/profile/myQuestions">
-            <MyQuestionsPage/>
+          <Route exact path="/profile/myQuestions">
+            <MyQuestionsPage />
           </Route>
-          <Route exact path = "/profile/starred">
-            <StarredPage/>
+          <Route exact path="/profile/starred">
+            <StarredPage />
           </Route>
-          <Route exact path = "/profile/starredInterviews">
-            <StarInterviews/>
+          <Route exact path="/profile/starredInterviews">
+            <StarInterviews />
           </Route>
         </Switch>
       </BrowserRouter>

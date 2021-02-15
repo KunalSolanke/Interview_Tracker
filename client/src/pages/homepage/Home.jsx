@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import {Grid} from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import {makeStyles} from '@material-ui/core/styles'
@@ -9,7 +9,7 @@ import quotes from "../../assets/quotes.png";
 import herobg from '../../assets/hero_bg.png'
 import Carousel from '../../components/Carousel/Carousel';
 import InterViewTile from './InterViewTile';
-
+import {getTopInterviews} from "../../store/actions/root"
 const useStyles = makeStyles((theme) => ({
   container :{
       maxWidth : "1500px",
@@ -254,10 +254,15 @@ const data ={
 }
 export default function Home() {
     const dispatch = useDispatch() ;
-    const authState = useSelector(state => state.auth) ;
+    const root= useSelector(state => state.root) ;
     const classes = useStyles() ;
 
-    
+    useEffect(() => {
+       dispatch(getTopInterviews())
+    }, [])
+    useEffect(() => {
+        
+    }, [root.topInterviews])
     return (
         <div>
               <div className={classes.landingSection}>
@@ -296,7 +301,7 @@ export default function Home() {
                     <div className ={classes.icarousel}>
                         <div style={{position:"relative"}}>
                             <img src={quotes} className={classes.quotes} />
-                          <Carousel tiles ={[(<InterViewTile key={1} data={data}/>),(<InterViewTile key={2} data={data}/>),(<InterViewTile key={3} data={data}/>)]} />
+                          <Carousel tiles ={root.topInterviews?root.topInterviews.map((e,i)=><InterViewTile key={i} data={e} />):[]} />
                       </div>
                     </div>
                 </div>

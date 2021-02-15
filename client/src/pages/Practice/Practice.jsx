@@ -37,7 +37,7 @@ function Practice() {
     },[]) ;
 
 
-    return (
+    return (!root.loading?(
         <div className={classes.container}>
             <div className = {classes.ihead}>
                         <h1><span>IP</span>ractice</h1>
@@ -46,18 +46,17 @@ function Practice() {
                         </p>
             </div>
             <div className ={classes.topics}>
-                {!root.loading?
-                (<Grid container spacing={100}> 
+               
+                <Grid container spacing={100}> 
                     {
                         root?.topics?.map(el=>{
                 
                                 return (<Grid item xs={12} sm={6} md={4} style={{marginBottom : "3rem"}}><Card topic={el}  /></Grid>)
                         })
                     }
-                 </Grid>):
-                 <Loading/>}
+                 </Grid>)
             </div>
-        </div>
+        </div>):  <Loading/>
     )
 }
 

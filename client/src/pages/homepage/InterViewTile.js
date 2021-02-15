@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -54,22 +55,35 @@ const useStyles = makeStyles({
 function InterViewTile({ data }) {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <div className={classes.tileHead}>
-        <img src={data.user.pic} alt="profile"></img>
-        <div>
-          <h1>{data.title}</h1>
-          <p>{data.created_at}</p>
+    <Link
+      to={{
+        pathname: `/interview/${data?.title.split(" ").join("-")}`,
+        state: {
+          pk: data?._id,
+        },
+      }}
+    >
+      <div className={classes.root}>
+        <div className={classes.tileHead}>
+          <img src={data.user?.image.contentType} alt="profile"></img>
+          <div>
+            <h1>{data.title}</h1>
+            <p>{data.created_at}</p>
+          </div>
+        </div>
+        <img
+          className={classes.interViewImage}
+          alt="image"
+          src={data.image?.contentType}
+        ></img>
+        <div className={classes.iDescription}>
+          <p>{data.description}</p>
+        </div>
+        <div className={classes.bottom}>
+          <p>Read More</p>
         </div>
       </div>
-      <img className={classes.interViewImage} alt="image" src={data.pic}></img>
-      <div className={classes.iDescription}>
-        <p>{data.description}</p>
-      </div>
-      <div className={classes.bottom}>
-        <p>Read More</p>
-      </div>
-    </div>
+    </Link>
   );
 }
 

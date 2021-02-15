@@ -61,7 +61,6 @@ const login = async (req, res) => {
 
 const refresh = async (req, res) => {
   try {
-    console.log(req.cookies);
     let token = req.cookies["refresh_token"];
     let user = await User.findByRefreshToken(token);
     if (user) {
@@ -74,16 +73,20 @@ const refresh = async (req, res) => {
         httpOnly: true,
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
-
+      user.refreshTokens = user.refreshTokens.concat([refreshToken]);
+      await user.save();
       res.status(200).send({
         token: accessToken,
         expiry: 3600,
+        username: user.username,
+        email: user.email,
       });
     } else {
       throw new Error("user not found");
     }
   } catch (err) {
     console.log(err);
+    res.clearCookie("refresh_token");
     res.status(400);
     res.send("failed");
   }

@@ -12,11 +12,12 @@ export default function ProblemPage() {
   const dispatch = useDispatch();
   const problems = useSelector((state) => state.root.questions);
   const root = useSelector((state) => state.root);
+  const auth = useSelector((state) => state.auth);
   const dashboard = useSelector((state)=>state.dashboard)
   const { title } = useParams();
   const history = useHistory();
   useEffect(() => {
-    if(!localStorage.getItem("token")){
+    if(!auth.token){
       history.push("/accounts/login")
     }
     dispatch(getTopicQuestions(title));

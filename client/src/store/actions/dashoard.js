@@ -116,7 +116,7 @@ export const addtoStarred = (link, check = false) => {
   return async (dispatch, getState) => {
     dispatch(addToStarredRequest());
     console.log("entering here");
-    const token = localStorage.getItem("token");
+    const token = await getState().auth.token;
     if (!token) {
       return;
     }
@@ -139,7 +139,7 @@ export const getStarred = () => {
   return async (dispatch, getState) => {
     dispatch(getStarredRequest());
     console.log("entering here");
-    const token = localStorage.getItem("token");
+    const token = await getState().auth.token;
     if (!token) {
       return;
     }
@@ -158,7 +158,7 @@ export const starredInterviews = (pk, check = false) => {
   return async (dispatch, getState) => {
     dispatch(starredInterviewsRequest());
     console.log("entering here");
-    const token = localStorage.getItem("token");
+    const token = await getState().auth.token;
     if (!token) {
       return;
     }
@@ -182,7 +182,7 @@ export const getStarredInterviews = () => {
   return async (dispatch, getState) => {
     dispatch(getStarredInterviewsRequest());
     console.log("entering here");
-    const token = localStorage.getItem("token");
+    const token = await getState().auth.token;
     if (!token) {
       return;
     }
@@ -202,7 +202,7 @@ export const addQuestion = (data) => {
   return async (dispatch, getState) => {
     dispatch(addQuestionRequest());
     console.log("entering here");
-    const token = localStorage.getItem("token");
+    const token = await getState().auth.token;
     if (!token) {
       return;
     }
@@ -228,7 +228,7 @@ export const getInterviews = () => {
   return async (dispatch, getState) => {
     dispatch(getInterviewsRequest());
     console.log("entering here");
-    const token = localStorage.getItem("token");
+    const token = await getState().auth.token;
     if (!token) {
       return;
     }
@@ -248,7 +248,7 @@ export const getMyQuestions = () => {
   return async (dispatch, getState) => {
     dispatch(getMyQuestionsRequest());
     console.log("entering here");
-    const token = localStorage.getItem("token");
+    const token = await getState().auth.token;
     if (!token) {
       return;
     }
@@ -268,7 +268,7 @@ export const createInterview = (data) => {
   return async (dispatch, getState) => {
     dispatch(createInterviewRequest());
     console.log("entering here");
-    const token = localStorage.getItem("token");
+    const token = await getState().auth.token;
     if (!token) {
       return;
     }

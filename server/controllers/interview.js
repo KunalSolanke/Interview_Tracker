@@ -123,6 +123,7 @@ const postComment = async (req, res) => {
       interview: pk,
       description: data,
     });
+    await comment.populate("user").execPopulate();
     console.log(comment);
     res.status(201).send(comment);
   } catch (err) {
@@ -145,7 +146,19 @@ const getComments = async (req, res) => {
     res.status(400).send(err.message);
   }
 };
-
+const getTopInterviews = async (req, res) => {
+  try {
+    const interviews = await InterviewExp.find({})
+      .sort({ "likedBy.length": 1 })
+      .limit(3)
+      .populate("user")
+      .exec();
+    res.status(200).send(interviews);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send(err.message);
+  }
+};
 module.exports = {
   getForm,
   createInterview,
@@ -157,4 +170,5 @@ module.exports = {
   getInterviewById,
   postComment,
   getComments,
+  getTopInterviews,
 };

@@ -80,6 +80,18 @@ const userSchema = mongoose.Schema(
         type: String,
       },
     ],
+    starredQuestions: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Question",
+      },
+    ],
+    starredInterviews: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "InterviewExp",
+      },
+    ],
   },
   {
     timestamps: true,
@@ -125,6 +137,7 @@ userSchema.statics.findByCredentials = async function (email, password) {
 };
 
 userSchema.statics.upsertAzureUser = async function (token, cb) {
+  console.log(token);
   var that = this;
   let user = await this.findOne({
     "azureProvider.id": token.oid,
@@ -137,8 +150,8 @@ userSchema.statics.upsertAzureUser = async function (token, cb) {
   }
   if (!user) {
     var newUser = await new that({
-      fullName: token.name,
-      email: token.preferred_username || token.email,
+      fullName: token.name || token.preferred_username || null,
+      email: token.preferred_username || token.email || null,
       azureProvider: {
         id: token.oid,
       },
@@ -197,20 +210,24 @@ userSchema.statics.upsertGoogleUser = async function (
   profile,
   cb
 ) {
+  let emails = [];
+  if (profile.emails) {
+    emails = profile.emails.map((e) => e.value);
+  }
+
+  console.log(profile);
   var that = this;
   let user = await this.findOne({
     "googleProvider.id": profile.id,
   });
 
   if (!user) {
-    user = await this.findOne({
-      email: profile.emails[0].value,
-    });
+    user = await this.findOne({}).where("email").in(emails);
   }
   if (!user) {
     var newUser = new that({
-      fullName: profile.displayName,
-      email: profile.emails[0].value,
+      fullName: profile.displayName || null,
+      email: profile.emails[0].value || profile.email || null,
       googleProvider: {
         id: profile.id,
         token: accessToken,
@@ -234,21 +251,25 @@ userSchema.statics.upsertGithubUser = async function (
   profile,
   cb
 ) {
+  let emails = [];
+  if (profile.emails) {
+    emails = profile.emails.map((e) => e.value);
+  }
+
+  console.log(profile);
   var that = this;
   let user = await this.findOne({
     "githubProvider.id": profile.id,
   });
 
   if (!user) {
-    user = await this.findOne({
-      email: profile.emails[0].value,
-    });
+    user = await this.findOne({}).where("email").in(emails);
   }
   if (!user) {
     var newUser = new that({
-      fullName: profile.displayName,
-      email: profile.emails[0].value,
-      googleProvider: {
+      fullName: profile.displayName || profile.username || null,
+      email: profile.emails[0].value || profile.email || null,
+      githubProvider: {
         id: profile.id,
         token: accessToken,
       },
@@ -269,6 +290,7 @@ userSchema.statics.findByRefreshToken = async function (token) {
   try {
     let { _id } = await jwt.verify(token, process.env.JWT_REFRESH_KEY);
     let user = await this.findById(_id);
+    console.log(user.refreshTokens, token);
     if (user.refreshTokens.includes(token)) {
       return user;
     } else {

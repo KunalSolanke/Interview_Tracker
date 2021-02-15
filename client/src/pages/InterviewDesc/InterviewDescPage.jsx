@@ -19,11 +19,13 @@ import {getStarredInterviews,starredInterviews} from '../../store/actions/dashoa
 function InterviewDescPage() {
   // console.log('history is ',history)
   //const interviewId = history.params.match.pk
-  const { pk } = useParams();
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
   const root = useSelector((state) => state.root);
   console.log("root is ", root);
   const history = useHistory();
+   const { pk } = history.location.state;
+   console.log("pk is",pk)
   const dashboard = useSelector((state) => state.dashboard);
   const [IsStarred, setIsStarred] = useState(false);
   const handleBookmark = async () => {
@@ -31,8 +33,9 @@ function InterviewDescPage() {
     await dispatch(starredInterviews(pk));
     console.log("starred becomes ", dashboard.starredInterviews);
   };
+  const [commentsLoading, setcommentsLoading] = useState(false)
   useEffect(() => {
-    if(!localStorage.getItem("token")){
+    if(!auth.token){
       history.push("/accounts/login")
     }
     if(dashboard.starredQuestions.length==0){
@@ -54,8 +57,9 @@ function InterviewDescPage() {
       setIsStarred(false);
     }
   }, [dashboard.starredInterviews]);
+
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    if (!auth.token) {
       history.push("/accounts/login");
     }
     const fun = async () => {
@@ -70,12 +74,14 @@ function InterviewDescPage() {
   useEffect(() => {
     console.log(root.currInterview);
   }, [root.currInterview]);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const desc = document.querySelector("#desc").value;
-    dispatch(postComment(pk, desc));
+    setcommentsLoading(true) ;
+    await dispatch(postComment(pk, desc));
+    setcommentsLoading(false) ;
   };
-  return !root.loading ? (
+  return !root.loading || commentsLoading ? (
     <>
       <div className="main">
         <div
@@ -145,6 +151,7 @@ function InterviewDescPage() {
         </div>
         <div class="comments">
           <h2 class="comment-heading">Comments</h2>
+         
           <div class="comment-list">
             {root.comments?.map((c) => {
               return <Comment comment={c} />;

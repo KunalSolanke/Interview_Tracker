@@ -329,7 +329,7 @@ class Registration extends Component {
                   onClick={renderProps.onClick}
                   disabled={renderProps.disabled}
                 >
-                  <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
+                  <img src="https://img.icons8.com/color/48/000000/google-logo.png" className={classes.socialButton}/>
                 </button>
               )}
               buttonText="Login"
@@ -344,7 +344,7 @@ class Registration extends Component {
               buttonText=""
                redirectUri={config.github.redirectUri}
             >
-              <img src="https://img.icons8.com/ios-glyphs/52/000000/github.png" />
+              <img src="https://img.icons8.com/ios-glyphs/52/000000/github.png" className={classes.socialButton}/>
             </GitHubLogin>
             <MicrosoftLogin
               clientId={config.outlook.clientId}
@@ -353,7 +353,7 @@ class Registration extends Component {
               authCallback={this.azureAuthHandler}
               tenantUrl={config.outlook.tenantUrl}
             >
-              <img src="https://img.icons8.com/color/48/000000/microsoft-outlook-2019--v2.png" />
+              <img src="https://img.icons8.com/color/48/000000/microsoft-outlook-2019--v2.png" className={classes.socialButton}/>
             </MicrosoftLogin>
           </div>
           {this.state.error ? (

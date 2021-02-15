@@ -5,7 +5,7 @@ const textLight = "#eaf2f4";
 const textDark = "#0D0D0D";
 const borderLight = "rgba(206,212,218, .993)";
 
-export const register = theme => ({
+export const register = (theme) => ({
   main: {
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(4),
@@ -16,8 +16,8 @@ export const register = theme => ({
     [theme.breakpoints.up(400 + theme.spacing(2))]: {
       width: 500,
       marginLeft: "auto",
-      marginRight: "auto"
-    }
+      marginRight: "auto",
+    },
   },
   paper: {
     position: "relative",
@@ -26,12 +26,12 @@ export const register = theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    background:'white',
-    border:'1px solid #ededed',
+    background: "white",
+    border: "1px solid #ededed",
     // "&:hover": {
     //   boxShadow: "0px 24px 36px rgba(131,153,167,0.99)"
     // },
-    zIndex:100
+    zIndex: 100,
   },
   avatar: {
     marginTop: 20,
@@ -39,17 +39,17 @@ export const register = theme => ({
     background: "white",
     width: "100px",
     height: "100px",
-    boxShadow: "0px 0px 12px rgba(131,153,167,0.19)"
+    boxShadow: "0px 0px 12px rgba(131,153,167,0.19)",
   },
 
   icon: {
     width: "80px",
     height: "80px",
-    color: "#22A6F1"
+    color: "#22A6F1",
   },
 
   form: {
-    margin: theme.spacing(2)
+    margin: theme.spacing(2),
   },
   labels: {
     padding: `${theme.spacing(1)}px ${theme.spacing(4)}px`,
@@ -58,7 +58,7 @@ export const register = theme => ({
     fontFamily: "PT Mono, monospace",
     fontWeight: 800,
     opacity: 1,
-    color: `black`
+    color: `black`,
   },
 
   inputs: {
@@ -72,16 +72,16 @@ export const register = theme => ({
     borderRadius: "8px",
     border: "2.4px solid black",
     boxShadow: "1px 2px 20px rgba(169,198,217,0.29457423) ",
-    borderColor: 'grey',
-    backgroundColor:'#F3F7F7',
+    borderColor: "grey",
+    backgroundColor: "#F3F7F7",
 
     "&:hover": {
-      background: "rgba(169,198,217,0.36457423) "
-    }
+      background: "rgba(169,198,217,0.36457423) ",
+    },
   },
 
   button: {
-    color: 'green',
+    color: "green",
     background: "#2272FF",
     position: "relative",
     fontWeight: 400,
@@ -102,33 +102,33 @@ export const register = theme => ({
       bottom: 0,
       left: 0,
       right: 0,
-      opacity: 1
+      opacity: 1,
     },
     "&::before": {
       borderBottom: "2px solid rgba(255,255,255,.58)",
       borderTop: "2px solid rgba(255,255,255,.58)",
-      transform: "scale(0,1)"
+      transform: "scale(0,1)",
     },
     "&::after": {
       borderLeft: "3px solid rgba(255,255,255,.58)",
       borderRight: "3px solid rgba(255,255,255,.58)",
-      transform: "scale(1,0)"
+      transform: "scale(1,0)",
     },
     "&:hover::before": {
       transform: "scale(1,1)",
-      transition: "transform cubic-bezier(0.85,.36,.8,.42) 0.3s"
+      transition: "transform cubic-bezier(0.85,.36,.8,.42) 0.3s",
     },
     "&:hover::after": {
       transform: "scale(1,1)",
-      transition: "transform cubic-bezier(0.85,.36,.8,.42) .2s"
+      transition: "transform cubic-bezier(0.85,.36,.8,.42) .2s",
     },
     "&::first-letter": {
-      color: orange
+      color: orange,
     },
     "&:hover": {
       background: "rgba(169,198,217,0.8)",
-      color: textLight
-    }
+      color: textLight,
+    },
   },
   error: {
     border: `1.2px solid ${red[900]}`,
@@ -139,14 +139,20 @@ export const register = theme => ({
     fontFamily: "Raleway, sans-serif",
     display: "flex",
     alignItems: "center",
-    paddingBottom: theme.spacing(3)
+    paddingBottom: theme.spacing(3),
   },
 
   passwordEye: {
     color: "rgba(131,153,167,0.9)",
-    opacity: 0.7
+    opacity: 0.7,
   },
-  MuiButtonLabel:{
-    color:'green',
-  }
+  MuiButtonLabel: {
+    color: "green",
+  },
+  socialButton: {
+    transition: "all .1s ease-in",
+    "&:hover": {
+      transform: "scale(1.2,1.2)",
+    },
+  },
 });

@@ -123,7 +123,7 @@ function BaseLayout() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
   const classes = useStyles();
-  useEffect(() => {}, [authState.username, localStorage.getItem("username")]);
+  useEffect(() => {}, [authState.username]);
   const history = useHistory();
   const burgerNode = useRef(null);
   const burger2 = useRef(null);
@@ -191,25 +191,26 @@ function BaseLayout() {
             >
               Interviews
             </NavLink>
-            {authState.username || localStorage.getItem("username") ? (
+            {authState.username ? (
               <>
                 <NavLink
                   activeClassName={classes.activeLink}
                   to="/profile"
                   className={classes.navLink}
                 >
-                  {authState.username || localStorage.getItem("username")}
+                  {authState.username}
                 </NavLink>
-                <NavLink
+                <div
                   activeClassName={classes.activeLink}
                   className={classes.navLink}
                   to="#"
                   onClick={() => {
                     dispatch(logout());
+                    history.push("/accounts/login");
                   }}
                 >
                   Logout
-                </NavLink>
+                </div>
               </>
             ) : (
               <>

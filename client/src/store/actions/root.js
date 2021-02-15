@@ -74,6 +74,19 @@ export const getCommentByIdSuccess = (data) => {
   };
 };
 
+export const getTopInterviewsRequest = () => {
+  return {
+    type: rootActions.GETTOP_INTERVIEW_REQUEST,
+  };
+};
+
+export const getTopInterviewsSuccess = (data) => {
+  return {
+    type: rootActions.GETTOP_INTERVIEW_SUCCESS,
+    payload: data,
+  };
+};
+
 export const postCommentRequest = () => {
   return {
     type: rootActions.POST_COMMENT_REQUEST,
@@ -105,10 +118,10 @@ export const postComment = (pk, desc) => {
     dispatch(postCommentRequest());
     try {
       const response = await axios.post(`/interviews/comments/${pk}`, { desc });
-      dispatch(postCommentSuccess(response.data));
+      await dispatch(postCommentSuccess(response.data));
     } catch (err) {
       console.log(err);
-      dispatch(requestFail(err));
+      await dispatch(requestFail(err));
     }
   };
 };
@@ -162,12 +175,12 @@ export const getInterviewById = (interviewId) => {
     console.log("berfore");
     dispatch(getInterviewByIdRequest());
     console.log("entering here");
-    // const token = localStorage.getItem("token")
-    // if(!token){
-    //     return ;
-    // }
+    const token = await getState().auth.token;
+    if (!token) {
+      return;
+    }
     try {
-      // axios.defaults.headers["Authorization"]=`Token ${token}` ;
+      axios.defaults.headers["Authorization"] = `Token ${token}`;
       console.log("going to make a request");
       const response = await axios.get(`/interviews/${interviewId}`);
       console.log("interview is ", response);
@@ -175,6 +188,22 @@ export const getInterviewById = (interviewId) => {
     } catch (err) {
       console.log(err);
       dispatch(requestFail(err));
+    }
+  };
+};
+
+export const getTopInterviews = (interviewId) => {
+  return async (dispatch, getState) => {
+    console.log("berfore");
+    await dispatch(getTopInterviewsRequest());
+
+    try {
+      const response = await axios.get(`/interviews/top`);
+      console.log("interview is ", response);
+      await dispatch(getTopInterviewsSuccess(response.data));
+    } catch (err) {
+      console.log(err);
+      await dispatch(requestFail(err));
     }
   };
 };
