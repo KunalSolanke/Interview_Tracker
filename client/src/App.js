@@ -20,6 +20,7 @@ import axios from 'axios'
 import StarredPage from './pages/StarredQuesPage/StarredPage'
 import './app.css';
 import StarInterviews from './pages/StarredInterviews/StarInterviews'
+import Companies from './pages/Companies/CompaniesPage'
 
 const useStyles = makeStyles({
   root: {
@@ -77,6 +78,12 @@ function App() {
           </Route>
           <Route exact path = "/profile/starredInterviews">
             <StarInterviews/>
+          </Route>
+          <Route exact path = "/companies">
+            <Companies/>
+          </Route>
+          <Route exact path = "/companies/interviews/:company">
+            <InterviewListPage/>
           </Route>
         </Switch>
       </BrowserRouter>

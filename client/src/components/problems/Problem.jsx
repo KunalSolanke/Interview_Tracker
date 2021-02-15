@@ -65,7 +65,7 @@ export default function Problem({problem}) {
   }
   useEffect(()=>{
     console.log(dashboard.starredQuestions)
-    let list = dashboard.starredQuestions.filter(ques=>ques._id==problem._id)
+    let list = dashboard.starredQuestions?.filter(ques=>ques._id==problem._id)
     let condition = list.length==0;
     //console.log(dashboard.starredQuestions,'and problem is ',problem._id.toString())
     if(!condition){
@@ -115,7 +115,7 @@ export default function Problem({problem}) {
             <Typography variant="caption">
               Solve question here
               <br />
-              <a href={problem?.link} className={classes.link}>
+              <a href={problem.url} target="blank"className={classes.link}>
                 Solve
               </a>
             </Typography>
@@ -126,9 +126,12 @@ export default function Problem({problem}) {
          {
            (IsStarred)?<BookmarkIcon color="primary" onClick={handleBookmark}/>:<BookmarkBorderIcon onClick={handleBookmark}/>
          }
-          <Button size="small" color="primary">
-            Solve
+         <a href={problem?.url} target="blank" className={classes.link}>
+                <Button size="small" color="primary">
+                  Solve
           </Button>
+              </a>
+          
         </AccordionActions>
       </Accordion>
     </div>

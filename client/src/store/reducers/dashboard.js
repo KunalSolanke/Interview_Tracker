@@ -66,7 +66,7 @@ const createInterviewRequest = (state,action) => {
 
 const createInteviewSuccess = (state,action) => {
     return UpdatedObj (state,{
-        interviews : [action.payload,state.interviews],
+        interviews : [action.payload,...state.interviews],
         loading : false,
     })
 }

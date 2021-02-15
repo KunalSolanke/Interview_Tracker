@@ -32,19 +32,7 @@ import GitHubLogin from "react-github-login";
 import MicrosoftLogin from "react-microsoft-login";
 import {useDispatch} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-
-export const authHandler = (props) => {
-  const authHandler = (err, data) => {
-    console.log(err, data);
-  };
-};
-
-const onSuccess = (response) => console.log(response);
-const onFailure = (response) => console.error(response);
-
-const responseGoogle = (response) => {
-  console.log(response);
-};
+import config from '../../../config/social_auth'
 
 
 
@@ -65,11 +53,35 @@ class Registration extends Component {
     });
   };
 
+  azureAuthHandler =async (err, data) => {
+    console.log(err, data);
+    let token = JSON.stringify({access_token: data.idToken.rawIdToken})
+    await this.props.socialAuth(token,"outlook")
+  };
+ 
+
+ onGithubSuccess = async (response) => {
+   console.log(response);
+   
+    await this.props.socialAuth(response,"github")
+ }
+ onFailure = (response) => console.error(response);
+  responseGoogle = async (response) => {
+    console.log(response);
+    let token = this.getToken(response)
+    await this.props.socialAuth(token,"google")
+  };
+
   handleChange = (name) => (e) => {
     this.setState({
       [name]: e.target.value,
     });
   };
+
+  getToken = (response)=>{
+    return JSON.stringify({access_token: response.accessToken}, null,2)
+  }
+
 
  
 
@@ -309,9 +321,9 @@ class Registration extends Component {
           </form>
 
           <Separator data="OR" />
-          <div className="social-login">
-            <GoogleLogin
-              clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+          <div className="social-login" style={{display:"flex",justifyContent:"space-evenly",alignItems:"center",width:"100%"}}>
+           <GoogleLogin
+              clientId={config.google.clientId}
               render={(renderProps) => (
                 <button
                   onClick={renderProps.onClick}
@@ -321,21 +333,25 @@ class Registration extends Component {
                 </button>
               )}
               buttonText="Login"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
-              cookiePolicy={"single_host_origin"}
+              onSuccess={this.responseGoogle}
+              onFailure={this.onFailure}
+              cookiePolicy={config.google.cookiePolicy}
             />
             <GitHubLogin
-              clientId="ac56fad434a3a3c1561e"
-              onSuccess={onSuccess}
-              onFailure={onFailure}
+              clientId={config.github.clientId}
+              onSuccess={this.onGithubSuccess}
+              onFailure={this.onFailure}
               buttonText=""
+               redirectUri={config.github.redirectUri}
             >
               <img src="https://img.icons8.com/ios-glyphs/52/000000/github.png" />
             </GitHubLogin>
             <MicrosoftLogin
-              clientId={"My client id"}
-              authCallback={authHandler}
+              clientId={config.outlook.clientId}
+              validateAuthority={config.outlook.validateAuthority}
+              redirectUri={config.outlook.redirectUri}
+              authCallback={this.azureAuthHandler}
+              tenantUrl={config.outlook.tenantUrl}
             >
               <img src="https://img.icons8.com/color/48/000000/microsoft-outlook-2019--v2.png" />
             </MicrosoftLogin>

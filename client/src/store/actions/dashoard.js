@@ -1,10 +1,5 @@
 import * as dashboardActions from "../constants/dashboard.js";
-import axios from "axios";
-import baseUrl from '../../http/api'
-
-
-
-
+import axios from "../../http/api";
 
 export const addQuestionRequest = () => {
   return {
@@ -58,7 +53,6 @@ export const createInterviewSuccess = (data) => {
   };
 };
 
-
 export const requestFail = (data) => {
   return {
     type: dashboardActions.REQUEST_FAIL,
@@ -79,19 +73,18 @@ export const addToStarredSuccess = (data) => {
   };
 };
 
-export const getStarredRequest = ()=>{
+export const getStarredRequest = () => {
   return {
-    type:dashboardActions.GET_STARRED_REQUEST,
+    type: dashboardActions.GET_STARRED_REQUEST,
   };
 };
 
-export const getStarredSuccess = (data)=>{
+export const getStarredSuccess = (data) => {
   return {
-    type:dashboardActions.GET_STARRED_SUCCESS,
-    payload:data
-  }
-}
-
+    type: dashboardActions.GET_STARRED_SUCCESS,
+    payload: data,
+  };
+};
 
 export const starredInterviewsRequest = () => {
   return {
@@ -106,193 +99,188 @@ export const starredInterviewsSuccess = (data) => {
   };
 };
 
-export const getStarredInterviewsRequest = ()=>{
+export const getStarredInterviewsRequest = () => {
   return {
-    type:dashboardActions.GET_STARRED_INTERVIEW_REQUEST,
+    type: dashboardActions.GET_STARRED_INTERVIEW_REQUEST,
   };
 };
 
-export const getStarredInterviewsSuccess = (data)=>{
+export const getStarredInterviewsSuccess = (data) => {
   return {
-    type:dashboardActions.GET_STARRED_INTERVIEW_SUCCESS,
-    payload:data
-  }
-}
+    type: dashboardActions.GET_STARRED_INTERVIEW_SUCCESS,
+    payload: data,
+  };
+};
 
-export const addtoStarred = (link,check=false)=>{
-  return async (dispatch,getState) =>{
-          dispatch(addToStarredRequest()) ;
-          console.log('entering here')
-          const token = localStorage.getItem("token")
-          if(!token){
-              return ;
-          }
-          try{
-          axios.defaults.headers["Authorization"]=`Token ${token}` ;
-          console.log(link)
-          const response = await axios.post(`${baseUrl}/accounts/profile/starred`,{link,check})
-          dispatch(addToStarredSuccess(response.data))
-          }
-          catch(err){
-              console.log(err);
-              dispatch(requestFail(err))
-          }
-  }
-}
-
-export const getStarred = ()=>{
-  return async (dispatch,getState) =>{
-          dispatch(getStarredRequest()) ;
-          console.log('entering here')
-          const token = localStorage.getItem("token")
-          if(!token){
-              return;
-          }
-          try{
-          axios.defaults.headers["Authorization"]=`Token ${token}` ;
-          const response = await axios.get(`${baseUrl}/accounts/profile/starred`)
-          dispatch(getStarredSuccess(response.data))
-          }
-          catch(err){
-              console.log(err);
-              dispatch(requestFail(err))
-          }
-  }
-}
-
-export const starredInterviews = (pk,check=false)=>{
-  return async (dispatch,getState) =>{
-          dispatch(starredInterviewsRequest()) ;
-          console.log('entering here')
-          const token = localStorage.getItem("token")
-          if(!token){
-              return ;
-          }
-          try{
-          axios.defaults.headers["Authorization"]=`Token ${token}` ;
-          console.log(pk)
-          const response = await axios.post(`${baseUrl}/accounts/profile/starredInterviews`,{pk,check})
-          console.log('data is ',response.data)
-          dispatch(starredInterviewsSuccess(response.data))
-          }
-          catch(err){
-              console.log(err);
-              dispatch(requestFail(err))
-          }
-  }
-}
-
-export const getStarredInterviews = ()=>{
-  return async (dispatch,getState) =>{
-          dispatch(getStarredInterviewsRequest()) ;
-          console.log('entering here')
-          const token = localStorage.getItem("token")
-          if(!token){
-              return;
-          }
-          try{
-          axios.defaults.headers["Authorization"]=`Token ${token}` ;
-          const response = await axios.get(`${baseUrl}/accounts/profile/starredInterviews`)
-          console.log('data is ',response.data)
-          dispatch(getStarredInterviewsSuccess(response.data))
-          }
-          catch(err){
-              console.log(err);
-              dispatch(requestFail(err))
-          }
-  }
-}
-
-
-
-export const addQuestion = (data)=>{
-    return async (dispatch,getState) =>{
-            dispatch(addQuestionRequest()) ;
-            console.log('entering here')
-            const token = localStorage.getItem("token")
-            if(!token){
-                return ;
-            }
-            try{
-            axios.defaults.headers["Authorization"]=`Token ${token}` ;
-            
-            const response = await axios.post(`${baseUrl}/problems/create`,{
-              title :data.get("title"),
-              topics :data.get("topics"),
-              url :data.get("url"),
-              description :data.get("description"),
-              difficulty :data.get("difficulty"),
-            })
-            dispatch(addQuestionSuccess(response.data))
-            }
-            catch(err){
-                console.log(err) ;
-                dispatch(requestFail(err))
-            }
+export const addtoStarred = (link, check = false) => {
+  return async (dispatch, getState) => {
+    dispatch(addToStarredRequest());
+    console.log("entering here");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
     }
-}
-
-export const getInterviews = ()=>{
-        return async (dispatch,getState)=>{
-            dispatch(getInterviewsRequest()) ;
-            console.log('entering here')
-            const token = localStorage.getItem("token")
-            if(!token){
-                return ;
-            }
-            try{
-            axios.defaults.headers["Authorization"]=`Token ${token}` ;
-            const response = await axios.get(`${baseUrl}/accounts/profile/interviews`)
-            console.log('interviews res is ',response)
-            dispatch(getInterviewsSuccess(response.data))
-            }
-            catch(err){
-                console.log(err) ;
-                dispatch(requestFail(err))
-            }
-  }
-}
-
-
-export const getMyQuestions = ()=>{
-  return async (dispatch,getState)=>{
-      dispatch(getMyQuestionsRequest()) ;
-      console.log('entering here')
-      const token = localStorage.getItem("token")
-      if(!token){
-          return ;
-      }
-      try{
-      axios.defaults.headers["Authorization"]=`Token ${token}` ;
-      const response = await axios.get(`${baseUrl}/accounts/profile/questions`)
-      console.log('interviews res is ',response)
-      dispatch(getMyQuestionsSuccess(response.data))
-      }
-      catch(err){
-          console.log(err.message) ;
-          dispatch(requestFail(err))
-      }
-}
-}
-
-
-export const createInterview = (data)=>{
-    return async (dispatch,getState) =>{
-            dispatch(createInterviewRequest());
-            console.log('entering here')
-            const token = localStorage.getItem("token")
-            if(!token){
-                return;
-            }
-            try{
-            axios.defaults.headers["Authorization"]=`Token ${token}` ;
-            
-            const response = await axios.post(`${baseUrl}/interviews/create`,data)
-            dispatch(createInterviewSuccess(response.data))
-            }
-            catch(err){
-                console.log(err) ;
-                dispatch(requestFail(err))
-            }
+    try {
+      axios.defaults.headers["Authorization"] = `Token ${token}`;
+      console.log(link);
+      const response = await axios.post(`/accounts/profile/starred`, {
+        link,
+        check,
+      });
+      dispatch(addToStarredSuccess(response.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(requestFail(err));
     }
-}
+  };
+};
+
+export const getStarred = () => {
+  return async (dispatch, getState) => {
+    dispatch(getStarredRequest());
+    console.log("entering here");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    try {
+      axios.defaults.headers["Authorization"] = `Token ${token}`;
+      console.log("request checker")
+      const response = await axios.get(`/accounts/profile/starred`);
+      dispatch(getStarredSuccess(response.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(requestFail(err));
+    }
+  };
+};
+
+export const starredInterviews = (pk, check = false) => {
+  return async (dispatch, getState) => {
+    dispatch(starredInterviewsRequest());
+    console.log("entering here");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    try {
+      axios.defaults.headers["Authorization"] = `Token ${token}`;
+      console.log(pk);
+      const response = await axios.post(`/accounts/profile/starredInterviews`, {
+        pk,
+        check,
+      });
+      console.log("data is ", response.data);
+      dispatch(starredInterviewsSuccess(response.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(requestFail(err));
+    }
+  };
+};
+
+export const getStarredInterviews = () => {
+  return async (dispatch, getState) => {
+    dispatch(getStarredInterviewsRequest());
+    console.log("entering here");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    try {
+      axios.defaults.headers["Authorization"] = `Token ${token}`;
+      const response = await axios.get(`/accounts/profile/starredInterviews`);
+      console.log("data is ", response.data);
+      dispatch(getStarredInterviewsSuccess(response.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(requestFail(err));
+    }
+  };
+};
+
+export const addQuestion = (data) => {
+  return async (dispatch, getState) => {
+    dispatch(addQuestionRequest());
+    console.log("entering here");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    try {
+      axios.defaults.headers["Authorization"] = `Token ${token}`;
+
+      const response = await axios.post(`/problems/create`, {
+        title: data.get("title"),
+        topics: data.get("topics"),
+        url: data.get("url"),
+        description: data.get("description"),
+        difficulty: data.get("difficulty"),
+      });
+      dispatch(addQuestionSuccess(response.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(requestFail(err));
+    }
+  };
+};
+
+export const getInterviews = () => {
+  return async (dispatch, getState) => {
+    dispatch(getInterviewsRequest());
+    console.log("entering here");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    try {
+      axios.defaults.headers["Authorization"] = `Token ${token}`;
+      const response = await axios.get(`/accounts/profile/interviews`);
+      console.log("interviews res is ", response);
+      dispatch(getInterviewsSuccess(response.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(requestFail(err));
+    }
+  };
+};
+
+export const getMyQuestions = () => {
+  return async (dispatch, getState) => {
+    dispatch(getMyQuestionsRequest());
+    console.log("entering here");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    try {
+      axios.defaults.headers["Authorization"] = `Token ${token}`;
+      const response = await axios.get(`/accounts/profile/questions`);
+      console.log("interviews res is ", response);
+      dispatch(getMyQuestionsSuccess(response.data));
+    } catch (err) {
+      console.log(err.message);
+      dispatch(requestFail(err));
+    }
+  };
+};
+
+export const createInterview = (data) => {
+  return async (dispatch, getState) => {
+    dispatch(createInterviewRequest());
+    console.log("entering here");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    try {
+      axios.defaults.headers["Authorization"] = `Token ${token}`;
+
+      const response = await axios.post(`/interviews/create`, data);
+      dispatch(createInterviewSuccess(response.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(requestFail(err));
+    }
+  };
+};

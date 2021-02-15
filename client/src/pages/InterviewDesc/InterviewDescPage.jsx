@@ -101,8 +101,8 @@ function InterviewDescPage() {
                   justifyContent: "space-between",
                 }}
               >
-                <div className="topIntro">
-                  <h1>SDE Interview at {root.currInterview?.company} </h1>
+                <div>
+                  <h1>SDE Interview at {root.currInterview?.company?.name} </h1>
                   <p>By {root.currInterview?.user?.username}</p>
                 </div>
                 <div className="star">
