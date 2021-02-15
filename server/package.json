@@ -20,7 +20,7 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "ejs-layouts": "0.0.1",
-    "express": "^4.16.4",
+    "express": "^4.17",
     "express-ejs-layouts": "^2.5.0",
     "express-formidable": "^1.2.0",
     "express-list-endpoints": "^5.0.0",
