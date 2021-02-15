@@ -47,6 +47,12 @@ const userSchema = mongoose.Schema(
         ref: "Question",
       },
     ],
+    starredQuestions: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Question"
+      }
+    ],
     facebookProvider: {
       type: {
         id: String,

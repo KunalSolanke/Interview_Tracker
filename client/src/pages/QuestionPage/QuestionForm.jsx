@@ -110,7 +110,7 @@ function QuestionForm() {
                   />
                 </div>
               </div>
-              <div className>
+              <div className={classes.row}>
                 <div className="difficulty">
                   <h1 className={classes.label}>Difficulty</h1>
                   <Select className={classes.input} name="difficulty"/>

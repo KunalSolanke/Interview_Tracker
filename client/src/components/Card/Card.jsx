@@ -9,7 +9,7 @@ import './Card.css'
 import { Link } from 'react-router-dom';
 import { deepPurple } from '@material-ui/core/colors';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
     maxWidth: 400,
@@ -17,21 +17,32 @@ const useStyles = makeStyles({
     minheight: '128px',
     color : "black",
     padding : "1rem 2rem",
-    borderRadius:"10px"
+    borderRadius:"10px",
+    [theme.breakpoints.down("650")]: {
+      padding: 0,
+  }
   },
   title: {
     fontSize: 32,
     fontWeight : 700,
     "&>span" :{
       color : "#2272FF",
-      fontSize: 34
+      fontSize: 34,
+      [theme.breakpoints.down("650")]: {
+        margin: 0,
+        fontSize: 30,
+    }
     },
-    marginBottom : ".3rem"
+    marginBottom : ".3rem",
+    [theme.breakpoints.down("650")]: {
+      margin: 0,
+      fontSize: 28,
+  }
   },
   subtitle: {
     fontSize: 16,
   },
-});
+}));
 
 export default function SimpleCard({topic}) {
   const classes = useStyles();

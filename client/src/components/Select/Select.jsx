@@ -15,6 +15,7 @@ const BootstrapInput = withStyles((theme) => ({
   },
   input: {
     borderRadius: 4,
+    minWidth:'100px',
     outline:'none',
     position: 'relative',
     backgroundColor:'#508DF9',
@@ -41,6 +42,7 @@ const BootstrapInput = withStyles((theme) => ({
       boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
     },
   },
+
 }))(InputBase);
 
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedSelects({name}) {
+export default function CustomizedSelects({name,list,title}) {
   const classes = useStyles();
   const [age, setAge] = React.useState('');
   const handleChange = (event) => {
@@ -69,10 +71,16 @@ export default function CustomizedSelects({name}) {
           name={name}
           input={<BootstrapInput name={name}/>}
         >
-          <option aria-label="None" value=""/>
+          <option aria-label="None" value={title} />
+          {
+          !list?<>
           <option value={"Easy"}>Easy</option>
           <option value={"Medium"}>Medium</option>
           <option value={"Hard"}>Hard</option>
+          </>:<>
+          {list.map(ele=>(<option value={ele.name}>{ele.name}</option>) )}
+          </>
+          }
         </NativeSelect>
       </FormControl>
     </div>

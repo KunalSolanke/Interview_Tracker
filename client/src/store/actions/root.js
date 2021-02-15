@@ -48,6 +48,19 @@ export const getInterviewsSuccess = (data) => {
   };
 };
 
+export const getCompaniesRequest = () => {
+  return {
+    type: rootActions.GETALL_COMPANIES_REQUEST,
+  };
+};
+
+export const getCompaniesSuccess = (data) => {
+  return {
+    type: rootActions.GETALL_COMPANIES_SUCCESS,
+    payload: data,
+  };
+};
+
 export const getInterviewByIdRequest = () => {
   return {
     type: rootActions.GETCURR_INTERVIEW_REQUEST,
@@ -155,12 +168,14 @@ export const getTopics = () => {
   };
 };
 
-export const getInterviews = () => {
+export const getInterviews = (company = null) => {
   return async (dispatch, getState) => {
     dispatch(getInterviewsRequest());
     console.log("entering here");
     try {
-      const response = await axios.get(`/interviews/list`);
+      let response = null;
+      if (!company) response = await axios.get(`/interviews/list`);
+      else response = await axios.get(`/companies/interviews/${company}`);
       console.log("interviews res is ", response);
       dispatch(getInterviewsSuccess(response.data));
     } catch (err) {
@@ -204,6 +219,21 @@ export const getTopInterviews = (interviewId) => {
     } catch (err) {
       console.log(err);
       await dispatch(requestFail(err));
+    }
+  };
+};
+
+export const getComapnies = () => {
+  return async (dispatch, getState) => {
+    dispatch(getCompaniesRequest());
+    console.log("entering here");
+    try {
+      const response = await axios.get(`/companies/list`);
+      console.log("interviews res is ", response);
+      dispatch(getCompaniesSuccess(response.data));
+    } catch (err) {
+      console.log(err);
+      dispatch(requestFail(err));
     }
   };
 };

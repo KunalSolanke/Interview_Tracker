@@ -100,7 +100,7 @@ function InterviewDescPage() {
               />
             </div>
             <div className="content-text">
-              <div
+              <div className="starFlex"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -108,15 +108,16 @@ function InterviewDescPage() {
                 }}
               >
                 <div>
-                  <h1>SDE Interview at {root.currInterview?.company} </h1>
+                  <h1>SDE Interview at {root.currInterview?.company?.name} </h1>
                   <p>By {root.currInterview?.user?.username}</p>
                 </div>
-                <div style={{ marginRight: "100px" }}>
+                <div className="star">
                   <Star IsStarred={IsStarred} handleBookmark={handleBookmark} />
                 </div>
               </div>
+              <h2>Overview</h2>
               <div className="overview divs">
-                <h2>Overview</h2>
+                
                 <p>{root.currInterview?.description}</p>
               </div>
               <h2>Experience</h2>

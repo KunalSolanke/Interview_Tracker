@@ -15,13 +15,13 @@ import InterviewListPage from "./pages/InterviewListPage/InterviewPage";
 import ProblemPage from "./pages/ProblemPage/ProblemPage";
 import { useSelector, useDispatch } from "react-redux";
 import MyQuestionsPage from "./pages/MyProblemPage/ProblemPage";
-import axios from "axios";
 import StarredPage from "./pages/StarredQuesPage/StarredPage";
 import "./app.css";
 import StarInterviews from "./pages/StarredInterviews/StarInterviews";
 import { authCheckState } from "./store/actions/auth";
 import Loading from "./components/Loading/Loading";
-import { useDipatch } from "react-redux";
+import "./app.css";
+import Companies from "./pages/Companies/CompaniesPage";
 
 const useStyles = makeStyles({
   root: {
@@ -89,6 +89,12 @@ function App() {
           </Route>
           <Route exact path="/profile/starredInterviews">
             <StarInterviews />
+          </Route>
+          <Route exact path="/companies">
+            <Companies />
+          </Route>
+          <Route exact path="/companies/interviews/:company">
+            <InterviewListPage />
           </Route>
         </Switch>
       </BrowserRouter>

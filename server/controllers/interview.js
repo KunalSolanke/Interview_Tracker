@@ -5,14 +5,19 @@ const path = require("path");
 const Comment = require("../models/Comment");
 const { Mongoose } = require("mongoose");
 const getUrl = require("../middlewares/s3upload");
+const Comapny = require("../models/Company");
+const Company = require("../models/Company");
+
 const createInterview = async (req, res) => {
   console.log(req.body);
   const { company, title, description, content } = req.body;
+  const companyDetails = await Company.findOne({name:company})
+  console.log('company is ->',companyDetails._id)
   try {
     console.log(req.user);
     const Interview = await new InterviewExp({
       user: req.user._id,
-      company,
+      company:companyDetails._id,
       title,
       description,
       content,
@@ -70,23 +75,13 @@ const findMyInterviews = async (req, res) => {
   }
 };
 
-const findInterviewByCompany = async (req, res) => {
-  try {
-    const listByCompany = await InterviewExp.find({
-      company: req.body.company,
-    });
-    res.status(200).send({ list: listByCompany });
-  } catch (err) {
-    res.status(400).send(err);
-  }
-};
-
 const getInterviewById = async (req, res) => {
   const interviewId = req.params.pk;
   console.log("interview id is ", interviewId);
   try {
     const interview = await InterviewExp.findOne({ _id: interviewId })
       .populate("user")
+      .populate("company")
       .exec();
     res.status(200).send(interview);
   } catch (err) {
@@ -164,7 +159,6 @@ module.exports = {
   createInterview,
   findInterviews,
   findInterviewByUser,
-  findInterviewByCompany,
   UpdateInterview,
   findMyInterviews,
   getInterviewById,

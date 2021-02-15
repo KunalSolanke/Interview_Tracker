@@ -31,7 +31,7 @@ export const register = (theme) => ({
     // "&:hover": {
     //   boxShadow: "0px 24px 36px rgba(131,153,167,0.99)"
     // },
-    zIndex: 100,
+    zIndex: 0,
   },
   avatar: {
     marginTop: 20,

@@ -10,6 +10,8 @@ const initialState = {
   currInterview: null,
   comments: [],
   topInterviews: [],
+  comments: [],
+  companies: [],
 };
 
 const topicsRequest = (state, action) => {
@@ -49,6 +51,20 @@ const topicsGetQuestionsSuccess = (state, action) => {
   });
 };
 
+const getTopInterViewRequest = (state, action) => {
+  return UpdatedObj(state, {
+    loading: true,
+    error: null,
+  });
+};
+
+const getTopInterViewSuccess = (state, action) => {
+  return UpdatedObj(state, {
+    topInterviews: action.payload,
+    loading: false,
+  });
+};
+
 const getInterViewRequest = (state, action) => {
   return UpdatedObj(state, {
     loading: true,
@@ -63,16 +79,16 @@ const getInterViewSuccess = (state, action) => {
   });
 };
 
-const getTopInterViewRequest = (state, action) => {
+const getComapniesRequest = (state, action) => {
   return UpdatedObj(state, {
     loading: true,
     error: null,
   });
 };
 
-const getTopInterViewSuccess = (state, action) => {
+const getCompaniesSuccess = (state, action) => {
   return UpdatedObj(state, {
-    topInterviews: action.payload,
+    companies: action.payload,
     loading: false,
   });
 };
@@ -151,6 +167,10 @@ const reducer = (state = initialState, action) => {
       return getTopInterViewRequest(state, action);
     case actionTypes.GETTOP_INTERVIEW_SUCCESS:
       return getTopInterViewSuccess(state, action);
+    case actionTypes.GETALL_COMPANIES_REQUEST:
+      return getComapniesRequest(state, action);
+    case actionTypes.GETALL_COMPANIES_SUCCESS:
+      return getCompaniesSuccess(state, action);
     default:
       return state;
   }

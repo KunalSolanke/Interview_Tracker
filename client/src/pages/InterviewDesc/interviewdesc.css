@@ -47,10 +47,11 @@ p {
     z-index: 100;
     padding-top: 20px;
     box-shadow: 0 4px 6px 4px rgb(0, 0, 0, 0.2);
+    
 }
 
 .content-img {
-    width: 10%;
+    width: 140px;
     padding: 20px;
 }
 
@@ -59,8 +60,16 @@ p {
     padding: 22px 0;
 }
 
+.star {
+    margin-right: 80px;
+}
+
 .divs {
     margin:0;
+}
+
+.overview {
+    margin-right: 120px;
 }
 
 .Experience {
@@ -131,4 +140,59 @@ p {
     padding: 40px 160px 20px;
     display: flex;
     flex-direction: column;
+ }
+
+ @media (max-width: 650px) {
+     .container-2 {
+         padding: 0 4%;
+     }
+    .cnt-content {
+        flex-direction: column;
+    }
+
+    .content-img {
+        width: 100%;
+    }
+
+    .Experience {
+        margin: 0 10px;
+    }
+
+    h2 {
+        margin: 35px 0 20px 8px;
+        font-weight: 500;
+    }
+
+    .overview {
+        margin: 0 10px;
+    }
+
+    .topIntro {
+        padding-left: 10px;
+    }
+
+    .content-text {
+        width: 100%;
+        padding-top: 0;
+    }
+
+    .star {
+        position: absolute;
+        top: 20px;
+        right: -50px;
+        transform: scale(0.8, 0.8);
+    }
+
+    .starFlex {
+        align-items: flex-start;
+    }
+
+    .profile {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .img-container {
+        height: 280px;
+    }
  }

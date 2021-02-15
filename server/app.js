@@ -11,6 +11,7 @@ const {
   usersRouter,
   problemRouter,
   interview,
+  company,
   socialRouter,
 } = require("./routes");
 const { User } = require("./models");
@@ -106,6 +107,7 @@ const mongoURI = process.env.MONGO_URI;
   app.use("/accounts", usersRouter);
   app.use("/problems", problemRouter);
   app.use("/interviews", interview);
+  app.use("/companies",company)
   app.use("/auth/social", socialRouter);
 
   // error handler

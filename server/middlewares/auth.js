@@ -4,7 +4,7 @@ const auth = async (req, res, next) => {
   const token = req.get("Authorization")
     ? req.get("Authorization").split(" ")[1]
     : null;
-  // console.log(token);
+  console.log(token);
   if (token) {
     let data = null;
     try {
