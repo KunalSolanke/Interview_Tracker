@@ -1,5 +1,5 @@
 import axios from "axios";
-export const env = "dev";
+export const env = "prod";
 const baseURL =
   env == "dev"
     ? "http://localhost:3001"
