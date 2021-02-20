@@ -9,7 +9,7 @@ module.exports = {
   sendToken: async function (req, res) {
     let user = req.user;
     res.setHeader("Cache-control", "private");
-    res.cookie("refresh_token", refreshToken, {
+    res.cookie("refresh_token", req.refreshToken, {
       httpOnly: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
       sameSite: "none",
