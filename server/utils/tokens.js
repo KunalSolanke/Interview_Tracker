@@ -9,9 +9,11 @@ module.exports = {
   sendToken: async function (req, res) {
     let user = req.user;
     res.setHeader("Cache-control", "private");
-    res.cookie("refresh_token", req.refreshToken, {
+    res.cookie("refresh_token", refreshToken, {
       httpOnly: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
+      sameSite: "none",
+      secure: true,
     });
     user.refreshTokens = user.refreshTokens.concat([req.refreshToken]);
     await user.save();
