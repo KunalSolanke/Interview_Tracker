@@ -31,7 +31,7 @@
    - Interviews based on companies
    - Add comments on interviews and star them
    - Add questions and interviews to starred
-   - Create user in an editor
+   - Create interview in an rich text editor
    - See starred questions,interviews and my quetions at ur dashboard
 
 
