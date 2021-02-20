@@ -84,7 +84,7 @@ const refresh = async (req, res) => {
       res.status(200).send({
         token: accessToken,
         expiry: 3600,
-        username: user.username,
+        username: user.username || user.fullName || user.email,
         email: user.email,
       });
     } else {

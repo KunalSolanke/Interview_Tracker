@@ -157,6 +157,7 @@ userSchema.statics.upsertAzureUser = async function (token, cb) {
   if (!user) {
     var newUser = await new that({
       fullName: token.name || token.preferred_username || null,
+      username: token.name || token.preferred_username || null,
       email: token.preferred_username || token.email || null,
       azureProvider: {
         id: token.oid,
@@ -233,6 +234,7 @@ userSchema.statics.upsertGoogleUser = async function (
   if (!user) {
     var newUser = new that({
       fullName: profile.displayName || null,
+      username: profile.displayName || null,
       email: profile.emails[0].value || profile.email || null,
       googleProvider: {
         id: profile.id,
@@ -274,6 +276,7 @@ userSchema.statics.upsertGithubUser = async function (
   if (!user) {
     var newUser = new that({
       fullName: profile.displayName || profile.username || null,
+      username :profile.displayName || profile.username || null,
       email: profile.emails[0].value || profile.email || null,
       githubProvider: {
         id: profile.id,

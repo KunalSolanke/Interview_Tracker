@@ -1,6 +1,6 @@
 # Interview Tracker
    Interview is a website aimed to help students,in preparing for the placements interview,by tracking the questions solved and providing interview experiencs of students from various backgrounds .
-
+   Figma link is [here]
    Project is at [here](https://interview-tracker.netlify.app/)
 
 
