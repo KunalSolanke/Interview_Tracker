@@ -107,7 +107,11 @@ const loginform = (req, res) => {
 };
 
 const logout = async (req, res) => {
-  res.clearCookie("refresh_token");
+  res.clearCookie("refresh_token",{
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      });
   let user = req.user;
   user.refreshTokens = user.refreshTokens.filter((t) => t != req.token);
   await user.save();
