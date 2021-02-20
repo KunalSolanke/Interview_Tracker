@@ -213,14 +213,14 @@ function BaseLayout() {
             >
               Companies
             </NavLink>
-            {authState.username ? (
+            {authState.token ? (
               <>
                 <NavLink
                   activeClassName={classes.activeLink}
                   to="/profile"
                   className={classes.navLink}
                 >
-                  {authState.username}
+                  {authState.username||authState.email}
                 </NavLink>
                 <div
                   activeClassName={classes.activeLink}
