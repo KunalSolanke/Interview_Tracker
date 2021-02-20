@@ -129,7 +129,7 @@ function BaseLayout() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
   const classes = useStyles();
-  useEffect(() => {}, [authState.username]);
+  useEffect(() => {}, [authState.token]);
   const history = useHistory();
   const burgerNode = useRef(null);
   const burger2 = useRef(null);
