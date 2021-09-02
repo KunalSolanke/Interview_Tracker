@@ -132,7 +132,7 @@ userSchema.statics.findByCredentials = async function (email, password) {
     });
   }
 
-  if (bycrpt.compare(password, user.password)) {
+  if (await bycrpt.compare(password, user.password)) {
     return user;
   }
   throw new Error({
